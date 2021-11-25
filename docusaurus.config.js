@@ -15,7 +15,7 @@ const config = {
   favicon: "img/favicon.ico",
   organizationName: "ducnguyen96", // Usually your GitHub org/user name.
   projectName: "ducnguyen96.github.io", // Usually your repo name.
-
+  deploymentBranch: "master",
   plugins: ["@docusaurus/plugin-ideal-image"],
 
   presets: [
