@@ -8,13 +8,13 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const config = {
   title: "Developer Roadmap",
   tagline: "",
-  url: "https://ducnguyen96.xyz",
+  url: "https://ducnguyen96.github.io",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   organizationName: "ducnguyen96", // Usually your GitHub org/user name.
-  projectName: "ducnguyen96", // Usually your repo name.
+  projectName: "ducnguyen96.github.io", // Usually your repo name.
 
   plugins: ["@docusaurus/plugin-ideal-image"],
 
