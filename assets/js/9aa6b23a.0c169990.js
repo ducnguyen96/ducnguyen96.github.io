@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96=self.webpackChunkducnguyen_96||[]).push([[999],{7098:function(a){a.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"/blog/tags/transaction","name":"transaction","count":1,"permalink":"/blog/tags/transaction"}')}}]);

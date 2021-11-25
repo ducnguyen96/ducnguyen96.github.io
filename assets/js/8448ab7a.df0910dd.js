@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96=self.webpackChunkducnguyen_96||[]).push([[238],{835:function(a){a.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"/blog/tags/rabbitmq","name":"rabbitmq","count":1,"permalink":"/blog/tags/rabbitmq"}')}}]);

@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://ducnguyen96.github.io/blog</id>
+    <title>Developer Roadmap Blog</title>
+    <updated>2021-10-07T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://ducnguyen96.github.io/blog"/>
+    <subtitle>Developer Roadmap Blog</subtitle>
+    <icon>https://ducnguyen96.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[RabbitMQ overview]]></title>
+        <id>what-is-rabbitmq</id>
+        <link href="https://ducnguyen96.github.io/blog/what-is-rabbitmq"/>
+        <updated>2021-10-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Nguồn//www.youtube.com/watch?v=GN0xHSk2P8Q]]></summary>
+        <content type="html"><![CDATA[<p>Nguồn: <a href="https://www.youtube.com/watch?v=GN0xHSk2P8Q">https://www.youtube.com/watch?v=GN0xHSk2P8Q</a></p><h2>Message Broker - Message Queue</h2><p>Trở lại với kiến trúc Monolithic, các components của app bó buộc chặt chẽ với nhau. Ví dụ với một ứng dụng bán lẻ, ta có một checkout service cần kết nối với inventory service thì thường sẽ được giải quyết bằng TCP connection, ngay khi checkout gửi message đến inventory thì nó cần ngay reply trước khi đến với tác vụ tiếp theo, hoặc tệ hơn nếu inventory crash thì nó sẽ cố gắng gửi request cho tới khi thiết lập connection, hoặc nếu có rất nhiều checkouts xảy ra cùng lúc thì inventory service không thể theo kịp.</p><ul><li>Decouple</li></ul><p>Và đó là lúc message queue được tạo ra, nó sẽ đứng giữa 2 service cần giao tiếp với nhau (chẳng hạn checkout service và inventory service). Lúc này checkout message sẽ gửi 1 message đến broker và thực hiện tác vụ khác ngay. Inventory sau khi đã sẵn sàng thì có thể consume message đó, process theo message và ngay lập tức consume message tiếp theo. MQ giúp tách biệt 2 service ra.</p><ul><li>Scalable</li></ul><p>Đồng thời nó cũng giúp scale app của bạn, ví dụ nếu số checkout tăng lên quá nhiều thì bạn có thể tăng số instances của inventory lên và số lượng message cho mỗi instance sẽ giảm xuống.</p><ul><li>Performant</li></ul><p>MQ có thể được đặt ở 1 máy riêng, nó có thể giảm tải cho các tác vụ mà hoàn thành bởi web app giúp app đạt performence tốt hơn.</p><h2>RabbitMQ</h2><p><img src="/img/blogs/rabbitmq.png" alt="rabbitmq"/></p><p>Là một triển khai của AMQP(Advanced Message Queueing Protocol) message model - 091.</p><p>Thay vì gửi message trực tiếp đến message queue, nó sẽ gửi đến một exchange. Một exchange có thể kết nối đến nhiều queue và mỗi queue có thể kết nối đến các services khác nhau.</p><p>Service gửi message đến exchange --&gt; exchange được kết nối với các queues qua các connections được gọi là bindings được ref bởi binding key. Các consumer sẽ subsribe đến các queues để lắng nghe message. RabbitMQ là hệ thống bao gồm exchange và các queue, RabbitMQ rất linh hoạt nhờ các loại exchanges khác nhau mà nó hỗ trợ.</p><ul><li>Fanout exchange: Message được gửi từ service sẽ được duplicate và gửi đến tất cả các queues.</li><li>Direct exchange: Message được gửi từ service chứa routing key, nó sẽ được map với binding key để chuyển tới queue.</li><li>Topic exchange: Giống với direct exchange nhưng nó có thể match từng phần (partial match) chẳng hạn &quot;ship.shoes&quot; và &quot;ship.any&quot;</li><li>Header exchange: Routing key sẽ bị bỏ qua và message được route theo header.</li><li>Default exchange: Routing key match với tên của queue.</li></ul><p>Cách gửi và nhận message trong RabbitMQ được defined bằng metadata là các key và loại exchange nên app và developer có thể control nhiều hơn.</p><ul><li>Cloudy friendly: Có thể deploy bằng container, deploy như 1 cluster.</li><li>Cross-language: Ví dụ có thể produce bằng Go và consume bằng JS, Python,...</li><li>Security: Support FASL, LDAP, TLS</li><li>Acks: Comsumer ack message giúp broker biết rằng consumer đã nhận được message, và loại bỏ nó ra khỏi queue. Điều này tránh tình trạng miss message hoặc loss message vì nếu consumer không ack thì message vẫn được giữ trong queue.</li><li>Greate management: Có management UI, CLI.</li><li>Plug-in: Có rất nhiều plug-ins được phát triển bởi cộng đồng opensource.</li></ul>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Một số thuật ngữ phổ biến mà mình găp xuyên suốt quá trình học tập và làm việc]]></title>
+        <id>mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec</id>
+        <link href="https://ducnguyen96.github.io/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec"/>
+        <updated>2021-09-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[1. Website Defacement là gì ?]]></summary>
+        <content type="html"><![CDATA[<h2>1. Website Defacement là gì ?</h2><p><strong>Website Defacement</strong> là một loại tấn công website mà nó thực hiện thay đổi giao diện của toàn bộ site hoặc chỉ 1 page. Cách thực hiện là chúng sẽ xâm nhập vào web server(bằng cách chẳng hạn như web shell) và thay thế site được host bằng site của chúng.</p><p>Mục đích: Phổ biến nhất là truyền bá thông tin nhằm kích động biểu tình chính trị hay tôn giáo.</p><h2>2. Backward compatibility là gì ?</h2><p><strong>Backward compatibility</strong> là khả năng tương thích ngược - một thuộc tính của hệ thống, sản phẩm hay công nghệ mà cho phép tương thích với một hệ thống cũ hơn.</p><p>Một khái niệm đối ngược là <strong>forward compatibility</strong>. Là một thiết kế mà hướng tới tương thích với các tiêu chuẩn hay sản phẩm mới trong tương lai.</p><h2>Same-origin policy là gì ?</h2><p><strong>Same-origin policy</strong> là một cơ chế bảo mật quan trọng để hạn chế việc 1 document hay 1 script được load mởi 1 origin có thể tương tác với resource của 1 origin khác. Hiểu đơn giản hơn nếu <code>https://abc.xyz </code> muốn load ảnh từ <code>https://cde.xyz</code> thì phải thêm cde.xyz là 1 origin trên header của site.</p><p>Nó giúp cô lập những documents khả nghi, giảm bớt nguy cơ bị tấn công.</p><h2>3. Man in the middle attack là gì ?</h2><p>Trong ngành mã hóa và bảo mật máy tính, <strong>man-in-the-middle</strong>, <strong>monster-in-the-middle</strong>, <strong>machine-in-the-middle</strong>, <strong>person-in-the-middle</strong> là một loại tấn công mà kẻ tấn công nghe lén hoặc là thay đổi giao tiếp giữa 2 bên mà họ tin rằng mình đang nói giao tiếp trực tiếp với nhau còn trên thực tế thì đang bị điều khiển bởi kẻ tấn công.</p><p>Ví dụ: Alice muốn giao tiếp với Bob. Mallory muốn ngăn chặn cuộc hội thoại để nghe trộm và cũng có thể đưa cho Bob những tin nhắn sai lệch.</p><p>Đầu tiên Alice sẽ hỏi public key của Bob. Nếu Bob gửi public key đến Alice và Mallory ngăn chặn được thì 1 cuộc tấn công bắt đầu. Mallory sẽ gửi cho Alice 1 tin nhắn giả mạo là từ Bob nhưng thay vì public key của Bob thì Mallory gửi public key của Mallory.</p><p>Alice tin đó là key của Bob nên đã mã hóa tin nhắn của Alice theo key kia và gửi lại cho Bob. 1 lần nữa thì Mallory lại chặn được tin nhắn này và giải mã tin nhắn đó, sau đó có thể thay đổi hay không thì tùy và lại 1 lần nữa mã hóa tin nhắn đó bằng key mà Bob cố gửi cho Alice. Khi Bob nhận được tin nhắn mới thì Bob tin rằng tin nhắn đó đến từ Alice.</p><h2>4. MIME types là gì ?</h2><p>Là một tiêu chuẩn để chỉ ra định dạng của tài liệu, file hay là 1 phân loại các bytes. Browsers sử dụng MIME type để quyết định cách xử lý 1 URL vậy nên việc servers gửi đúng MIME type trong Content-Type header rất là quan trọng. Nếu nó không được cấu hình đúng thì browser có thể hiểu sai nội dung files và sites sẽ không hoạt động chính xác, các file được tải về sẽ được sử lý sai.</p><p>MIME type đơn giản nhất chứa 1 <code>type</code> và 1 <code>subtype</code> đều là string và được nối với nhau bằng <code>/</code>: <code>type/subtype</code></p><p><strong>type</strong> thì đại diện cho phân loại chung của data chẳng hạn như <code>video</code> hoặc <code>text</code>. <strong>subtype</strong> thì chỉ rõ chính xác loại của data, chẳng hạn đối với <code>text</code> thì subtype là <code>plain</code> (plain text) hoặc <code>html</code> hoặc <code>calendar</code>.</p><p><strong>parameter</strong> là 1 thuộc tính không bắt buộc có thể thêm vào để cung cấp thêm chi tiết:</p><pre><code class="language-html">text/plain;charset=UTF-8
+</code></pre><h2>5. Click-jacking attack là gì ?</h2><p>Click-jacking là một thủ đoạn đánh lừa user click vào 1 đường link hay 1 button,... khác với cái mà user nghĩ. Điều này có thể sử dụng để đánh cắp xác minh đăng nhập hoặc để lấy quyền của user để cài đặt malware.</p>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Javascript in a nutshell]]></title>
+        <id>javascript-in-a-nutshell</id>
+        <link href="https://ducnguyen96.github.io/blog/javascript-in-a-nutshell"/>
+        <updated>2021-08-30T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Do bài viết có rất nhiều mục và dài nên bạn đọc nhìn vào Table Of Content (TOC) ở side-bar bên phải để đọc mục mình quan tâm nhé.]]></summary>
+        <content type="html"><![CDATA[<p>Do bài viết có rất nhiều mục và dài nên bạn đọc nhìn vào Table Of Content (TOC) ở side-bar bên phải để đọc mục mình quan tâm nhé.</p><p>Tham khảo: <a href="https://javascript.info">javascript.info</a></p><h2>Variables</h2><h3>var</h3><p><strong>&quot;var&quot; không có block scope</strong></p><pre><code class="language-javascript">if (true) {
+  var test = true; // dùng &quot;var&quot; thay &quot;let&quot;
+}
+
+alert(test); // true, var không có block scope nên nó được kéo ra khỏi block scope.
+</code></pre><p>Nếu một block nằm trong 1 function thì <code>var</code> sẽ trở thành biến <code>function-level</code></p><pre><code class="language-javascript">function sayHi() {
+  if (true) {
+    var phrase = &quot;Hello&quot;;
+  }
+
+  alert(phrase); // works
+}
+
+sayHi();
+alert(phrase); // ReferenceError: phrase is not defined
+</code></pre><p><strong>&quot;var&quot; chấp nhận khai báo lại</strong>
+Nếu chúng ta khai báo 1 biến với <code>let</code> 2 lần trong cùng 1 scope thì sẽ lỗi</p><pre><code class="language-javascript">let user;
+let user; // SyntaxError: &#x27;user&#x27; has already been declared
+</code></pre><p>Với var, chúng ta có thể khai báo lại bao nhiêu lần tùy ý.</p><pre><code class="language-javascript">var user = &quot;Pete&quot;;
+
+var user = &quot;John&quot;; // this &quot;var&quot; does nothing (already declared)
+// ...it doesn&#x27;t trigger an error
+
+alert(user); // John
+</code></pre><p><strong>&quot;var&quot; có thể khai báo sau khi sử dụng</strong></p><pre><code class="language-javascript">function sayHi() {
+  phrase = &quot;Hello&quot;;
+
+  alert(phrase);
+
+  var phrase;
+}
+sayHi();
+</code></pre><p>Đoạn code trên tương đương với</p><pre><code class="language-javascript">function sayHi() {
+  var phrase;
+
+  phrase = &quot;Hello&quot;;
+
+  alert(phrase);
+}
+sayHi();
+</code></pre><p>Đây được gọi là <code>hoisting</code> (kéo lên), vì tất cả <code>var</code> đều được kéo lên đầu của 1 hàm.
+<strong>Khai báo thì được kéo lên còn gán giá trị thì không</strong></p><pre><code class="language-javascript">function sayHi() {
+  alert(phrase);
+
+  var phrase = &quot;Hello&quot;;
+}
+
+sayHi();
+</code></pre><p>Đoạn code trên tương đương với</p><pre><code class="language-javascript">function sayHi() {
+  var phrase; // declaration works at the start...
+
+  alert(phrase); // undefined
+
+  phrase = &quot;Hello&quot;; // ...assignment - when the execution reaches it.
+}
+
+sayHi();
+</code></pre><h3>let</h3><p><strong>&quot;let&quot; có block scoped chứ không phải global scope hay local scope</strong></p><pre><code class="language-javascript">let greeting = &quot;say Hi&quot;;
+let times = 4;
+if (times &gt; 3) {
+  let hello = &quot;say Hello instead&quot;;
+  console.log(hello); // &quot;say Hello instead&quot;
+}
+console.log(hello); // hello is not defined
+</code></pre><p><strong>&quot;let&quot; cho phép gán lại giá trị, không cho phép khai báo lại</strong></p><pre><code class="language-javascript">let greeting = &quot;say Hi&quot;;
+console.log(greeting); //&quot;say Hi&quot;
+
+greeting = &quot;say Hello instead&quot;;
+console.log(greeting); //&quot;say Hello instead&quot;
+-----------------------------------------------------
+let greeting = &quot;say Hi&quot;;
+let greeting = &quot;say Hello instead&quot;; // error: Identifier &#x27;greeting&#x27; has been declared
+</code></pre><p><strong>&quot;let&quot; có hoisted không ?</strong>
+Tham khảo ở <a href="/blog/javascript-in-a-nutshell/#hoisted">đây</a></p><h3>const</h3><p><code>const</code> thì giống với <code>let</code> ở chỗ nó cũng có block scope và hoisting, tuy nhiên nó không thể gán lại giá trị của biến. Tuy nhiên đối với biến dạng reference (object, array, function) thì ta vẫn có thể cập nhật được giá trị thuộc tính của biến đó.</p><pre><code class="language-javascript">const greeting = {
+  message: &quot;Hello&quot;,
+  number: &quot;five&quot;,
+};
+greeting.message = &quot;say Hello instead&quot;;
+console.log(greeting); // {message:&quot;say Hello instead&quot;,number:&quot;five&quot;}
+</code></pre><h2>Hoisted</h2><p>Tất cả các khai báo trong javascript (var, let, const, function, function<!-- -->*<!-- -->, class) đều được <code>hoisted</code>. Có nghĩa là nếu một biến được khai báo trong 1 scope, thì trong scope đó, định danh của nó sẽ luôn trỏ đến biến đó. Xem ví dụ dưới đây:</p><pre><code class="language-javascript">x = &quot;global&quot;;
+// function scope:
+(function() {
+    x; // not &quot;global&quot;
+
+    var/let/… x;
+}());
+// block scope (not for `var`s):
+{
+    x; // not &quot;global&quot;
+
+    let/const/… x;
+}
+</code></pre><p>Ở trên ta có x được khai báo ở global scope, tuy nhiên ở trong function và block kia đều khai báo lại biến đó ở dưới cùng của block và nó được neo lên đầu, chính vì thế mà x không có giá trị là &quot;global&quot;.</p><h2>Loops</h2><h3>Labels for break/continue</h3><p>Đôi khi ta muốn break khỉ nhiều vòng lặp lồng nhau cùng lúc.</p><pre><code class="language-javascript">for (let i = 0; i &lt; 3; i++) {
+  for (let j = 0; j &lt; 3; j++) {
+    let input = prompt(`Value at coords (${i},${j})`, &quot;&quot;);
+
+    // what if we want to exit from here to Done (below)?
+  }
+}
+
+alert(&quot;Done!&quot;);
+</code></pre><p>Ví dụ chúng ta cần 1 cách để dừng xử lý khi người dùng cancel input. Break thông thường sẽ chỉ dừng 1 vòng lặp. Khi đó chúng ta sẽ cần đến label.</p><pre><code>outer: for (let i = 0; i &lt; 3; i++) {
+
+  for (let j = 0; j &lt; 3; j++) {
+
+    let input = prompt(`Value at coords (${i},${j})`, &#x27;&#x27;);
+
+    // if an empty string or canceled, then break out of both loops
+    if (!input) break outer; // (*)
+
+    // do something with the value...
+  }
+}
+alert(&#x27;Done!&#x27;);
+</code></pre><p>Ở đoạn code trên, <code>break outer</code> đã tìm lên và thấy 1 label với tên <code>outer</code> và break vòng lặp đó.</p><p>Chúng ta cũng có thể sử dụng label cho cả <code>continue</code>, lúc đó thì code sẽ thực hiện nhảy đến vòng lặp tiếp theo của loop đã được đánh nhãn.</p><h2>Functions</h2><h3>A Function Declaration can be called earlier than it is defined.</h3><pre><code class="language-javascript">sayHi(&quot;John&quot;); // Hello, John
+
+function sayHi(name) {
+  alert(`Hello, ${name}`);
+}
+</code></pre><pre><code class="language-javascript">sayHi(&quot;John&quot;); // error!
+
+let sayHi = function (name) {
+  // (*) no magic any more
+  alert(`Hello, ${name}`);
+};
+</code></pre><h3>Khi nào sử dụng Function Declaration vs Function Expression.</h3><p>Như một quy luật, khi khai báo 1 function thì đầu tiên ta cân nhắc sử dụng Function Declaration. Nó giúp chúng ta sắp xếp code dễ dàng hơn vì chúng ta có thể gọi nó trước khi nó được khai báo.</p><p>Nhưng nếu Function Declaration không phù hợp vì 1 số lý do hoặc chúng ta cần 1 khai báo có điều kiện thì khi đó nên sử dụng Function Expression.</p><pre><code class="language-javascript">let age = prompt(&quot;What is your age?&quot;, 18);
+
+let welcome =
+  age &lt; 18
+    ? function () {
+        alert(&quot;Hello!&quot;);
+      }
+    : function () {
+        alert(&quot;Greetings!&quot;);
+      };
+
+welcome(); // ok now
+</code></pre><h2>The JavaScript &quot;this&quot; keyword</h2><ul><li>In a method, this refers to the owner object.</li><li>Alone, this refers to the global object.</li><li>In a function, this refers to the global object.</li><li>In a function, in strict mode, this is undefined.</li><li>In an event, this refers to the element that received the event.</li><li>Methods like call(), and apply() can refer this to any object.</li></ul><h2>Object references and copying</h2><h3>Khi một biến được gán vào 1 object thì nó không lưu trữ object đó mà là &quot;địa chỉ bộ nhớ&quot; - nói cách khác là &quot;1 reference&quot; tới object.</h3><pre><code class="language-javascript">let user = {
+  name: &quot;John&quot;,
+};
+</code></pre><p>Object được lưu ở đâu đấy trong bộ nhớ và biến user có 1 reference tới nó.</p><p>Chúng ta có thể xem user như 1 tờ giấy có địa chỉ có object trên đó. Khi chúng ta thực hiện action lên object chẳng hạn như <code>user.name</code> thì JavaScript engine sẽ nhìn lên địa chỉ đó và tìm đến object thực sự trong bộ nhớ và thực hiện hành động lên đó.</p><h3>Khi một biến object được cope thì địa chỉ được copy chứ không phải cái object mà địa chỉ trỏ đến, vì vậy object sẽ không được nhân bản lên.</h3><pre><code class="language-javascript">let user = { name: &quot;John&quot; };
+
+let admin = user;
+
+admin.name = &quot;Pete&quot;; // changed by the &quot;admin&quot; reference
+
+alert(user.name); // &#x27;Pete&#x27;, changes are seen from the &quot;user&quot; reference
+</code></pre><h3>Cloning and merging, Object.assign</h3><pre><code class="language-javascript">let user = { name: &quot;John&quot; };
+
+let permissions1 = { canView: true };
+let permissions2 = { canEdit: true };
+
+// copies all properties from permissions1 and permissions2 into user
+Object.assign(user, permissions1, permissions2);
+
+// now user = { name: &quot;John&quot;, canView: true, canEdit: true }
+</code></pre><h2>Rest parameters and spread syntax</h2><h3>Rest parameters ...</h3><pre><code class="language-javascript">function sum(a, b) {
+  return a + b;
+}
+
+alert(sum(1, 2, 3, 4, 5)); // 3
+</code></pre><pre><code class="language-javascript">function sumAll(...args) {
+  // args is the name for the array
+  let sum = 0;
+
+  for (let arg of args) sum += arg;
+
+  return sum;
+}
+
+alert(sumAll(1)); // 1
+alert(sumAll(1, 2)); // 3
+alert(sumAll(1, 2, 3)); // 6
+</code></pre><h3>The “arguments” variable</h3><pre><code class="language-javascript">function showName() {
+  alert(arguments.length);
+  alert(arguments[0]);
+  alert(arguments[1]);
+
+  // it&#x27;s iterable
+  // for(let arg of arguments) alert(arg);
+}
+
+// shows: 2, Julius, Caesar
+showName(&quot;Julius&quot;, &quot;Caesar&quot;);
+
+// shows: 1, Ilya, undefined (no second argument)
+showName(&quot;Ilya&quot;);
+</code></pre><h3>Spread syntax</h3><pre><code class="language-javascript">let arr = [3, 5, 1];
+
+alert(Math.max(...arr)); // 5 (spread turns array into a list of arguments)
+</code></pre><h2>Lexical Environment</h2><p>Trong JavaScript, tất cả các function, code block {...}, và cả file script đều có 1 internal object liên kết với chúng được ẩn đi là <em>Lexial Environment</em></p><p>Object Lexical Environment thì chứa 2 phần:</p><ul><li>Environment Record - là một object lưu trữ tất cả các biến local và các thuộc tính của nó.</li><li>Một reference đến outer lexical environment để kết nối với các code bên ngoài block hoặc function.</li></ul><p>Khi một đoạn code muốn truy cập vào biến thì inner Lexical Environment sẽ được tìm kiếm đầu tiên -&gt; outer -&gt; outer .... -&gt; global one.</p><h2>Closure</h2><p><img src="/img/blogs/closure.png" alt="closure"/>
+Closure là một function mà có thể nhớ các biến bên ngoài của nó và có thể truy cập chúng. Ở một số ngôn ngữ thì điều này là không thể hoặc là function đó phải được viết một cách đặc biệt. Nhưng với JavaScript thì mọi functions đều là closures.</p><p>Hầu hết thì một Lexical Environment sẽ được loại khỏi bộ nhớ cùng với tất cả các biến sau khi function đã thực hiện xong vì không có references nào tới nó nữa.</p><p>Tuy nhiên, nếu có một function lồng nhau và nó vẫn reachable thì sau khi function kết thúc, thì nó vẫn có các property mà trỏ đến lexical environment.</p><p>Như ví dụ ở trên, counter() sau khi được gọi lần 1 nó thực hiện makeCounter() và trả về 0, tuy nhiên thì counter vẫn reachable và do đó các biến trong makeCounter vẫn được dữ lại, vì thế nếu bạn gọi counter() 1 lần nữa thì nó sẽ trả về 1, tiếp theo là 2, 3, ...</p><h2>The &quot;new Function&quot; syntax</h2><pre><code class="language-javascript">function getFunc() {
+  let value = &quot;test&quot;;
+
+  let func = new Function(&quot;alert(value)&quot;);
+
+  return func;
+}
+
+getFunc()(); // error: value is not defined
+</code></pre><p>Tất cả function đều nhớ nó được tạo ra ở đâu nhờ vào 1 thuộc tính đặc biệt là <code>[[Environment]]</code>. Nó trỏ đến Lexical Environment nơi nó được tạo ra.</p><p>Nhưng nếu function được tạo sử dụng synxtax <code>new Function</code> thì <code>[[Environment]]</code> của nó sẽ được set để trỏ đến glocal Lexical Environment chứ không phải Lexical Environment. So với hàm được tạo 1 cách thông thường:</p><pre><code class="language-javascript">function getFunc() {
+  let value = &quot;test&quot;;
+
+  let func = function () {
+    alert(value);
+  };
+
+  return func;
+}
+
+getFunc()(); // &quot;test&quot;, from the Lexical Environment of getFunc
+</code></pre><h2>Property flags and descriptors</h2><p>Như ta đã biết thì objects có thể lưu trữ thuộc tính, thuộc tính không đơn giản chỉ là 1 cặp <code>key-value</code> mà nó linh hoạt hơn vậy.</p><h3>Property flags</h3><pre><code class="language-javascript">let user = {
+  name: &quot;John&quot;,
+};
+
+let descriptor = Object.getOwnPropertyDescriptor(user, &quot;name&quot;);
+
+alert(JSON.stringify(descriptor, null, 2));
+/* property descriptor:
+{
+  &quot;value&quot;: &quot;John&quot;,
+  &quot;writable&quot;: true,
+  &quot;enumerable&quot;: true,
+  &quot;configurable&quot;: true
+}
+*/
+</code></pre><p>Các thuộc tính của objects ngoài <strong>value</strong> thì còn có 3 attributes sau:</p><ul><li><strong>writeable</strong>: if <code>true</code> thì <strong>value</strong> có thể thay đổi, còn không thì chỉ có thể <code>read</code></li><li><strong>enumerable</strong>: if <code>true</code> thì được list ra trong vòng lặp và ngược lại</li><li><strong>configurable</strong>: if <code>true</code> thì thuộc tính này có thể bị deleted những attributes có thể được chỉnh sửa và ngược lại.</li></ul><pre><code class="language-javascript">let user = {};
+
+Object.defineProperty(user, &quot;name&quot;, {
+  value: &quot;John&quot;,
+  // for new properties we need to explicitly list what&#x27;s true
+  enumerable: true,
+  configurable: true,
+});
+
+alert(user.name); // John
+user.name = &quot;Pete&quot;; // Error
+</code></pre><p>Với defineProperty nếu 1 attribute không được chỉ định thì nó sẽ mặc định có giá trị là <code>false</code>.</p><h2>Property getters and setters</h2><p>Object có 2 loại thuộc tính là <code>data properties</code> và <code>accessor properties</code></p><h3>Getters and Setters</h3><pre><code class="language-javascript">let user = {
+  name: &quot;John&quot;,
+  surname: &quot;Smith&quot;,
+
+  get fullName() {
+    return `${this.name} ${this.surname}`;
+  },
+
+  set fullName(value) {
+    [this.name, this.surname] = value.split(&quot; &quot;);
+  },
+};
+
+// set fullName is executed with the given value.
+user.fullName = &quot;Alice Cooper&quot;;
+
+alert(user.name); // Alice
+alert(user.surname); // Cooper
+</code></pre><h3>Smarter getters/setters</h3><p>Getters/setters có thể được sử dụng như <code>wrapper</code> cho 1 thuộc tính để tăng thêm quyền điều khiển.</p><pre><code class="language-javascript">let user = {
+  get name() {
+    return this._name;
+  },
+
+  set name(value) {
+    if (value.length &lt; 4) {
+      alert(&quot;Name is too short, need at least 4 characters&quot;);
+      return;
+    }
+    this._name = value;
+  },
+};
+
+user.name = &quot;Pete&quot;;
+alert(user.name); // Pete
+
+user.name = &quot;&quot;; // Name is too short...
+</code></pre><h3>Using for compatibility</h3><p>Ví dụ ta implement 1 object user như sau:</p><pre><code class="language-javascript">function User(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+let john = new User(&quot;John&quot;, 25);
+
+alert(john.age); // 25
+</code></pre><p>Nhưng sau đó chúng ta quyết định là lưu <code>birthday</code> thay vì <code>age</code>, vì nó chính xác hơn và tiện hơn. Nhưng ta vẫn muốn giữ lại thuộc tính age vì age có thể được sử dụng ở nhiều nơi bởi nhiều người.</p><p>Ta sẽ thêm <code>age</code> như sau:</p><pre><code class="language-javascript">function User(name, birthday) {
+  this.name = name;
+  this.birthday = birthday;
+
+  // age is calculated from the current date and birthday
+  Object.defineProperty(this, &quot;age&quot;, {
+    get() {
+      let todayYear = new Date().getFullYear();
+      return todayYear - this.birthday.getFullYear();
+    },
+  });
+}
+
+let john = new User(&quot;John&quot;, new Date(1992, 6, 1));
+
+alert(john.birthday); // birthday is available
+alert(john.age); // ...as well as the age
+</code></pre><h2>Callbacks</h2><p>Rất nhiều hàm được cấp bởi môi trường chạy JS cho phép bạn schedule những hành động bất đồng bộ. Nói cách khác là những hành động chúng ta khởi tạo bây giờ, nhưng sau này mới hoàn thành. Ví dụ 1 trong những function đó là <code>setTimeout</code>.</p><p>Xem ví dụ dưới đây:</p><pre><code class="language-javascript">function loadScript(src) {
+  // creates a &lt;script&gt; tag and append it to the page
+  // this causes the script with given src to start loading and run when complete
+  let script = document.createElement(&quot;script&quot;);
+  script.src = src;
+  document.head.append(script);
+}
+loadScript(&quot;/my/script.js&quot;); // the script has &quot;function newFunction() {…}&quot;
+
+newFunction(); // no such function!
+</code></pre><p><code>script.js</code> chứa hàm <code>newFunction()</code> và ta cần chạy hàm này ngay sau khi <code>loadScript</code> thành công. Hiện tại thì <code>loadScript</code> chưa cung cấp 1 cách nào để có thể theo dõi được việc load script thành công hay chưa, loadScript chạy và nó thực hiện ngay hàm tiếp theo dù script chưa được load hay chưa. Nhưng chúng ta cần biết khi nào load xong để sử dụng <code>newFunction()</code>. Và <code>callback</code> là giải pháp lúc này.</p><pre><code class="language-javascript">function loadScript(src, callback) {
+  let script = document.createElement(&#x27;script&#x27;);
+  script.src = src;
+
+  script.onload = () =&gt; callback(script);
+
+  document.head.append(script);
+}
+
+loadScript(&#x27;/my/script.js&#x27;, function() {
+  // the callback runs after the script is loaded
+  newFunction(); // so now it works
+  ...
+});
+</code></pre><h2>Promise</h2><ol><li>&quot;producing code&quot; là đoạn code mà cần thời gian để hoàn thành, chẳng hạn như load data từ network.</li><li>&quot;consuming code&quot; là đoạn code mà muốn result sau khi producing code hoàn thành. Nhiều hàm có thể cần đến result.</li><li>promise là một JS object mà kết nối &quot;producing code&quot; và &quot;consuming code&quot;.</li></ol><pre><code class="language-javascript">let promise = new Promise(function (resolve, reject) {
+  // executor (the producing code, &quot;singer&quot;)
+});
+</code></pre><p>Hàm được truyền vào Promise được gọi là <code>executor</code>. Khi một Promise được tạo ra thì executor chạy ngay. resolver và reject là 2 callbacks mà JS tạo ra, code của chúng ta chỉ nằm trong executor.</p><p><img src="/img/blogs/promise-1.png" alt="promise-1"/></p><p>Khi executor có result thì nó sẽ gọi 1 trong 2 callbacks:</p><ul><li>resolve(value) - nếu job hoàn thành cùng với <code>value</code>.</li><li>reject(error) - nếu có lỗi xảy ra, error là error object.</li></ul><p>Tóm lại: Executor sẽ tự động chạy ngay khi Promise được tạo và nó sẽ cố hoàn thành công việc. Khi nó hoàn thành thì sẽ gọi <code>resolve</code> và gọi <code>reject</code> nếu có lỗi xảy ra.</p><p>Promise object chứa những thuộc tính sau:</p><ul><li>state - khởi tạo với <code>pending</code> sau đó thay đổi thành <code>fullfilled</code> hoặc <code>rejected</code></li><li>result - khởi tạo với <code>undefined</code> sau đó thay đổi thành <code>value</code> hoặc <code>error</code></li></ul><p>Ví dụ:</p><pre><code class="language-javascript">function loadScript(src) {
+  return new Promise(function (resolve, reject) {
+    let script = document.createElement(&quot;script&quot;);
+    script.src = src;
+
+    script.onload = () =&gt; resolve(script);
+    script.onerror = () =&gt; reject(new Error(`Script load error for ${src}`));
+
+    document.head.append(script);
+  });
+}
+
+let promise = loadScript(
+  &quot;https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js&quot;
+);
+
+promise.then(
+  (script) =&gt; alert(`${script.src} is loaded!`),
+  (error) =&gt; alert(`Error: ${error.message}`)
+);
+
+promise.then((script) =&gt; alert(&quot;Another handler...&quot;));
+</code></pre><p>Chúng ta có thể thấy ngay 1 vài lợi ích của promise so với callbacks:</p><ul><li><p>Promises cho phép chúng ta làm theo thứ tự tự nhiên hơn, ví dụ loadScript(script) sau đó thì <code>.then</code> để viết những thứ muốn làm với result.</p></li><li><p>Đối với callback thì chúng ta phải biết làm gì tiếp theo với result ngay trước khi loadScript được gọi.</p></li></ul><h2>Promise API</h2><h3>Promise.all</h3><p>Execute nhiều promises đồng thời và chờ cho đến khi tất cả đều hoàn thành.</p><pre><code class="language-javascript">let promise = Promise.all([...promises...]);
+</code></pre><ul><li>Nếu có bất cứ promise nào trong array promises kia bị rejected thì Promise.all sẽ bị reject cùng với lỗi, các promise không bị lỗi sẽ bị ignore chứ k bị cancel.</li><li>Promise.all cho phép các giá trị không phải promise trong iterable.</li></ul><h3>Promise.allSettled</h3><p>Execute nhiều promises đồng thời và chờ cho đến khi tất cả đều hoàn thành, nếu có promise nào bị lỗi thì vẫn sẽ tiếp tục thực hiện và theo dõi những promise còn lại.</p><h3>Polyfill</h3><p>Nếu browser không hỗ trợ Promise.allSetted thì chúng ta có thể làm như sau:</p><pre><code class="language-javascript">if (!Promise.allSettled) {
+  const rejectHandler = (reason) =&gt; ({ status: &quot;rejected&quot;, reason });
+
+  const resolveHandler = (value) =&gt; ({ status: &quot;fulfilled&quot;, value });
+
+  Promise.allSettled = function (promises) {
+    const convertedPromises = promises.map((p) =&gt;
+      Promise.resolve(p).then(resolveHandler, rejectHandler)
+    );
+    return Promise.all(convertedPromises);
+  };
+}
+</code></pre><h3>Promise.race</h3><p>Tương tự Promise.all nhưng nó chỉ chờ cho đến khi 1 promise hoàn thành hoặc gặp lỗi.</p><h3>Promise.any</h3><p>Tương tự Promise.race nhưng chờ cho đến khi 1 promise được fulfilled.</p><h2>Async/await</h2><p><code>async</code> trước 1 function có nghĩa là function đó sẽ luôn trả về 1 promise. Tất cả các giá trị khác đều được wrapped trong 1 resolved promise.</p><p>Ví dụ, function dưới đây sẽ trả về 1 resolved promise với giá trị là 1</p><pre><code class="language-javascript">async function f() {
+  return 1;
+}
+
+f().then(alert); // 1
+</code></pre><p><code>await</code> sẽ làm JS chờ cho đến khi 1 promise hoàn thành hoặc gặp lỗi.</p><pre><code class="language-javascript">async function f() {
+  let promise = new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; resolve(&quot;done!&quot;), 1000);
+  });
+
+  let result = await promise; // wait until the promise resolves (*)
+
+  alert(result); // &quot;done!&quot;
+}
+
+f();
+</code></pre>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Authentication in a nutshell]]></title>
+        <id>authentication-in-a-nutshell</id>
+        <link href="https://ducnguyen96.github.io/blog/authentication-in-a-nutshell"/>
+        <updated>2021-08-29T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Như đã nói trong bài này, http không giữ trạng thái giữa 2 lần request vì vậy ví dụ sau khi đăng nhập sau, user đến một page nào đó cần xác minh chẳng hạn như setting thì user lại bị yêu cầu đăng nhập lần nữa. Nhưng với session hoặc token authentication thì server có thể nhận biết là user đã đăng nhập và nên được cấp quyền truy cập.]]></summary>
+        <content type="html"><![CDATA[<p>Như đã nói trong bài <a href="/blog/http-in-a-nutshell/">này</a>, http không giữ trạng thái giữa 2 lần request vì vậy ví dụ sau khi đăng nhập sau, user đến một page nào đó cần xác minh chẳng hạn như setting thì user lại bị yêu cầu đăng nhập lần nữa. Nhưng với session hoặc token authentication thì server có thể nhận biết là user đã đăng nhập và nên được cấp quyền truy cập.</p><h2>Session based authentication</h2><p>Sever tạo và lưu lại dữ liệu session ở server và lưu trữ session id trên trình duyệt của user.</p><p><img src="/img/blogs/session-based-authentication.png" alt="sesssion-based-authentication"/></p><ul><li>user đến trang đăng nhập vào gửi thông tin đăng nhập đến server.</li><li>server sẽ tạo 1 session và lưu trữ lại, sau đó gửi session id vừa tạo cho user.</li><li>user gửi request lấy profile của user (kèm session id).</li><li>server so sánh session id với session data đã lưu để nhận biết user và gửi lại đúng profile của user này.</li></ul><p>Vậy có thể nói trạng thái của user được lưu ở server.</p><h2>Token based authentication</h2><p>Đối với token based authentication thì trạng thái của user được lưu ở client và phương pháp này được khuyên dùng hơn so với phương pháp session based.
+<img src="/img/blogs/token-based-authentication.png" alt="token-based-authentication"/></p><ul><li>user đến trang đăng nhập vào gửi thông tin đăng nhập đến server.</li><li>Dữ liệu của người dùng sẽ được mã hóa dưới dạng JWT (Json Web Token) bằng 1 đoạn mã và gửi về client.</li><li>JWT được lưu ở client (hầu hết là ở localStorage).</li><li>user gửi request lấy profile của user (kèm jwt).</li><li>Server nhận được JWT, sử dụng đoạn mã đã dùng để tạo ra JWT để giải mã và có thông tin người dùng.</li><li>Server gửi lại đúng profile của user.</li></ul><h2>OAuth</h2><p><em>Về cơ bản thì oauth là một phương thức chứng thực, mà nhờ đó một web service hay một application bên thứ 3 có thể đại diện cho người dùng để truy cập vào tài nguyên người dùng nằm trên một dịch vụ nào đó.</em></p><p><img src="/img/blogs/blog-open1.webp" alt="oauth-flow"/></p><p>Ở đây user chính là người dùng app của bạn, consumer là app của bạn - Yelp và service provider có thể là google, facebook,...</p><p>Khi người dùng click vào đăng nhập với google thì app của bạn sẽ direct bạn đến google, nếu bạn chưa đăng nhập google thì sẽ phải đăng nhập, sau đó google sẽ hỏi bạn đồng ý trao quyền truy cập cho Yelp. Sau khi bạn đồng ý thì google sẽ điều hướng bạn về Yelp cùng với 1 <code>Authorization Code</code>. Yelp gửi <code>Authorization Code</code> cho <code>Authorization Server</code> của google và nhận lại được <code>accessToken</code>. Yelp sẽ sử dụng <code>accessToken</code> này và gửi đến <code>Resource server</code> của google để nhận về được <code>resource</code> như avatar hoặc email,...</p><h2>JWT</h2><p>Tham khảo <a href="https://viblo.asia/p/tim-hieu-ve-json-web-token-jwt-7rVRqp73v4bP">ở đây</a></p>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Http in a nutshell]]></title>
+        <id>http-in-a-nutshell</id>
+        <link href="https://ducnguyen96.github.io/blog/http-in-a-nutshell"/>
+        <updated>2021-08-27T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[_Hypertext Transfer Protocol (HTTP)_ là một giao thức(protocol) thuộc lớp ứng dụng được thiết kế cho để thực hiện giao tiếp giữa web browsers và web servers, nhưng nó cũng được sử dụng cho nhiều mục đích khác. HTTP tuân theo mô hình client-server cổ điển, với một client open connection để tạo request, sau đó chờ cho đến khi nhận được response. HTTP là một giao thức không có trạng thái, nghĩa là server không dữ trạng thái giữa 2 lần requests.]]></summary>
+        <content type="html"><![CDATA[<p><strong><em>Hypertext Transfer Protocol (HTTP)</em></strong> là một giao thức(protocol) thuộc <a href="/blog/mang-may-tinh/">lớp ứng dụng</a> được thiết kế cho để thực hiện giao tiếp giữa web browsers và web servers, nhưng nó cũng được sử dụng cho nhiều mục đích khác. HTTP tuân theo mô hình client-server cổ điển, với một client open connection để tạo request, sau đó chờ cho đến khi nhận được response. HTTP là một giao thức không có trạng thái, nghĩa là server không dữ trạng thái giữa 2 lần requests.</p><h2>HTTP Messages</h2><p>HTTP messages là cách mà data được trao đổi giữa client và server. Có 2 loại messages: requests gửi từ client để trigger 1 action từ server và responses từ server.</p><p><img src="/img/blogs/httpmsg2.png" alt="httpmsg2.png"/>
+HTTP requests, responses có cấu trúc tương tự nhau:</p><ol><li>start-line miêu ta requests được thực hiện hoặc là status của response.</li><li>Một set HTTP headres chỉ rõ về request hoặc là miêu tả body của response.</li><li>Một dòng trống chỉ rằng tất cả meta-info đều đã được gửi.</li><li>Một body chứa data của request (chẳng hạn như HTML form) hoặc là doc gửi theo response. Kích thước và loại data mà phần body chứa sẽ được chỉ rõ ở phần headers.
+<img src="/img/blogs/httpmsgstructure2.png" alt="httpmsgstructure2.png"/></li></ol><h2>Content Security Policy (CSP)</h2><p><strong>Content Security Policy</strong> là một lớp bảo mật giúp phát hiện và giảm thiểu một vài thể loại tấn công bao gồm Cross-Site Scripting (XSS) và Data Injection. Những cuộc tấn công này được sử dụng cho tất cả mục đích từ trộm dữ liệu cho đến site defacement(thay đổi diện mạo của site) để phân tán malware.</p><p>CSP được thiết kế để có thể fully <a href="/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec/#backward-compatibility-l%C3%A0-g%C3%AC-">backward compatibility</a>. Những browsers mà không hỗ trợ CSP thì vẫn có thể kích hoạt lớp bảo mật này bằng server và ngược lại. Nếu một website không cung cấp CSP header thì browsers sẽ sử dụng <a href="/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec/#same-origin-policy-l%C3%A0-g%C3%AC-">same-origin policy</a>.</p><p>Để kích hoạt CSP thì bạn cần cấu hình webserver trả về Content-Security-Policy HTTP header. (Thỉnh thoảng bạn sẽ thấy X-Content-Security-Policy header nhưng đây là 1 phiên bản cũ của CSP nên bạn không cần quan tâm đến nữa).</p><p>Hoặc bạn cũng có thể thêm thẻ sau vào file html để kích hoạt CSP:</p><pre><code class="language-html">&lt;meta
+  http-equiv=&quot;Content-Security-Policy&quot;
+  content=&quot;default-src &#x27;self&#x27;; img-src https://*; child-src &#x27;none&#x27;;&quot;
+/&gt;
+</code></pre><h3>Threats</h3><ol><li>Giảm thiểu XSS attacks.
+Mục tiêu chính của CSP là giảm thiểu XSS attacks. XSS attacks lợi dụng sự tin tưởng của browser vào content nhận được từ server. Các đoạn scripts độc có thể được thực thi bởi browser của nạn nhân vì browserđã tin tưởng vào nguồn của content mình nhận được, kể cả khi nó không đến từ nơi mà nó đáng lẽ phải đến từ.</li></ol><p>CSP giúp server admin giảm thiểu XSS bằng cách chỉ rõ cho browser biết chỉ nên tin tưởng vào những domain cụ thể. Sau đó thì khi browser nhận được scripts thì nó sẽ chỉ thực thi những scripts có nguồn gốc được chỉ định từ web server hoặc từ thẻ meta ở trên và bỏ qua các scripts khác (kể cả inline scripts và event-handling HTML attributes)</p><ol start="2"><li>Giảm thiểu packet sniffing attacks
+Để giảm thiểu sniffing thì cần giao tiếp qua HTTPS.</li></ol><h3>Directives</h3><p>Tham khảo thêm <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy">ở đây</a></p><h2>Strict-Transport-Security</h2><p><strong>HTTP Strict-Transport-Security</strong> response header là một header webserver trả về và nó nói với browser là chỉ truy cập với giao thức HTTPS thay vì HTTP thông thường.</p><p>Syntax</p><pre><code class="language-nginx">Strict-Transport-Security: max-age=&lt;expire-time&gt;;
+Strict-Transport-Security: max-age=&lt;expire-time&gt;; includeSubDomains;
+Strict-Transport-Security: max-age=&lt;expire-time&gt;; preload
+</code></pre><ul><li><code>expire-time</code> được tính bằng giây.</li><li><code>includeSubDomains</code> được chỉ định thì những quy tắc này cũng áp dụng với subdomains của site.</li><li><code>preload</code> xem thêm ở <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">đây</a></li></ul><p>Nếu một site cho phép connect qua HTTP và sau đó redirects tới HTTPS thì người dùng có thể giao tiếp với phiên bản chưa được mã hóa của site trước khi được redirect, điều này tạo cơ hội cho <a href="/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec/#man-in-the-middle-attack-l%C3%A0-g%C3%AC-">man-in-the-middle</a> attack. Việc redirect cũng có thể được khai thác để hướng người dùng đến 1 site khác thay vì bản bảo mật của site gốc.</p><p>HSTS header nói với browsers rằng không bao giờ truy cập vào 1 site sử dụng giao thức HTTP mà nên tự động chuyển tất cả qua HTTPS.</p><p>Ví dụ: Bạn sử dụng Wifi miễn phí ở sân bay và bắt đầu truy cập web. Bạn truy cập dịch vụ ngân hàng để kiểm tra tài khoản và thanh toán 1 số hóa đơn. Không may rằng điểm wifi miễn phí đó lại đến từ laptop của hacker, và hacker đó chặn tất cả các HTTP request của bạn và chuyển hướng về 1 trang khác clone giao diện của bank mà bạn đang định dùng. Bây giờ bạn nhập tài khoản và mật khẩu vào thì hacker sẽ nhận được tất cả thông tin này.</p><p>HSTS giải quyết vấn đề này, một khi bạn đã truy cập vào trang web của bank sử dụng HTTPS và site đó sử dụng HSTS thì browser của bạn sẽ mặc chỉ giao tiếp với bạn qua HTTPS ngăn chặn hacker tấn công man-in-the-middle.</p><h2>Sử dụng HTTP cookies</h2><p><strong>HTTP cookie</strong> hay web cookie, browser cookie là một mảnh data nhỏ được gửi từ server đến browser. Browser có thể lưu nó và gửi lại cùng với những request tiếp theo cho browser. Tiêu biểu thì nó được sử dụng để server biết 2 requests đến cùng 1 browser giữ cho user logged-in.</p><p>Cookies được sử dụng cho 3 mục đích chính sau:</p><ul><li>Quản lý session: Logins, Shopping carts, game scores hay bất cứ thứ gì mà server nên nhớ.</li><li>Personalization: Một số preferences của user, themes, cài đặt.</li><li>Tracking: Lưu trữ và phân tích hành vi người dùng.</li></ul><p>Cookies từng được sử dụng để lưu trữ chung phía client và từng là cách duy nhất, ngày nay thì lưu trữ phía client nên sử dụng các APIs như Web Storage API(localStorage và sessionStorage) và IndexedDB.</p><h3>Định nghĩa lifetime cho 1 cookie</h3><p>Có 2 cách để định nghĩa như sau:</p><ul><li>Session cookies được xóa khi mỗi current session kết thúc - được quy định bởi browser, một số browser sử dụng lưu trữ lại session khi restart browser, việc này có thể làm cho session cookies kéo dài vô tận.</li><li>Permanent cookies được set ngày cụ thể cho việc hết hạn, hoặc cũng có thể được set 1 khoảng thời gian hết hạn qua <code>Max-Age</code>.</li></ul><p>Nếu site của bạn có authenticates users, thì bạn nên regenerate và gửi lại session cookies mỗi khi user authenticates cho dù session cookies đã tồn tại. Kỹ thuật này ngăn chặn session fixation attacks, khi mà 1 bên thứ 3 có thể sử dụng lại session của user.</p><h3>Hạn chế truy cập tới cookies</h3><p>Có một số cách để đảm bảo cookies được gửi đi một cách bảo mật và không thể một cách không chủ ý thông qua thuộc tính <code>Secure</code> và <code>HttpOnly</code>.</p><p>Một cookie với thuộc tính <code>Secure</code> sẽ chỉ được gửi để sever khi đang kết nối bằng HTTPS. Các site với http thì không thể set <code>Secure</code> cho cookie. Tuy nhiên <code>Secure</code> cũng không thể đảm bảo chặn được tất các các truy cập vào thông tin nhạy cảm ở cookie; ví dụ nó có thể đọc dược và chỉnh sửa bởi người khác nếu họ truy cập được vào ổ cứng của client hoặc JS nếu <code>HttpOnly</code> không được set.</p><p>Một cookie với thuộc tính <code>HttpOnly</code> thì không thể được truy cập bằng <code>Document.cookie</code> API; nó sẽ chỉ được gửi đến sever. Ví dụ với những cookie mà giữ server-side sessions thì không cần truy cập bởi JS, và nên có thuộc tính này. Nó giảm thiểu XSS attacks.</p><p>Ví dụ:</p><pre><code class="language-javascript">Set-Cookie: id=a3fWa; Expires=Thu, 21 Oct 2021 07:28:00 GMT; Secure; HttpOnly
+</code></pre><h2>X-Content-Type-Options</h2><p><strong>X-Content-Type-Options</strong> header là một HTTP header được gửi từ webserver như là một cái mark được sử dụng để server chỉ ra những <a href="http://localhost:1313/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec/#mime-types-l%C3%A0-g%C3%AC-">MIME types</a> báo trong Content-Type headers không nên bị thay đổi và phải được tuân theo. Hay nói cách khác MIME types đã được cấu hình một cách cẩn thận.</p><p>Những tester về bảo mật sẽ luôn mong muốn header này được set.</p><p>Tìm hiểu thêm <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">ở đây</a></p><h2>X-Frame-Options</h2><p><strong>X-Frame-Options</strong> header là một HTTP header được gửi từ server để nói cho browser biết có nên đồng ý render một page trong một <code>frame</code>, <code>iframe</code>, <code>embed</code> hoặc <code>object</code> hay không. Các site có thể sử dụng header này để tránh <a href="http://localhost:1313/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec/#click-jacking-attack-l%C3%A0-g%C3%AC-">click-jacking</a> attacks, bằng cách đảm bảo rằng content của site không bị nhúng vào những sites khác.</p><p>Lớp bảo mật này chỉ được thêm vào khi browser của người dùng hỗ trợ <code>X-Frame-Options</code></p><p><strong>Syntax</strong></p><pre><code class="language-nginx">X-Frame-Options: DENY
+X-Frame-Options: SAMEORIGIN
+</code></pre><ul><li>DENY: page không thể hiển thị trong 1 frame</li><li>SAMEORIGIN: page chỉ có thể được hiển thị trong 1 frame có cùng origin với page.</li><li>ALLOW-FROM uri: không còn hoạt động ở trên browsers mới. Không nên sử dụng.</li></ul><p><strong>Config trên Nginx</strong></p><pre><code class="language-nginx">add_header X-Frame-Options SAMEORIGIN always;
+</code></pre><p><strong>Config trên Express</strong></p><pre><code class="language-javascript">const helmet = require(&quot;helmet&quot;);
+const app = express();
+app.use(helmet.frameguard({ action: &quot;SAMEORIGIN&quot; }));
+</code></pre><h2>X-XSS-Protection</h2><p><strong>X-Frame-Options</strong> header là một HTTP header được gửi từ server, đây là một header để kích hoạt tính năng bảo vệ XSS attacks trên những trình duyệt như IE, Chrome, Safari ngăn việc load những page mà browser phát hiện khả năng có XSS attacks. Mặc dù tính năng này là không cần thiết vì hầu hết các site có thể implement CSP những vẫn có thể hữu ích đối với những browser cũ chưa hỗ trợ CSP.</p><p><strong>Note</strong>:</p><ul><li>Chrome đã loại bỏ XSS Auditor</li><li>Firefox sẽ không implement tính năng này.</li><li>Edge cũng loại bỏ XSS filter.</li></ul>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Database indexing cơ bản]]></title>
+        <id>database-indexing-basic</id>
+        <link href="https://ducnguyen96.github.io/blog/database-indexing-basic"/>
+        <updated>2021-08-26T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Những kiến thức dưới đây sẽ áp dụng được với postgres còn những database khác thì mình không chắc nhé.]]></summary>
+        <content type="html"><![CDATA[<p>Những kiến thức dưới đây sẽ áp dụng được với postgres còn những database khác thì mình không chắc nhé.</p><h2>Row được lưu như thế nào ?</h2><p><img src="/img/blogs/basic-heap-storage-structure.png" alt="heap-storage-structure"/></p><p>Cấu trúc được sử dụng để lưu trữ 1 <code>table</code> là 1 heap file - list các <code>page</code> có fixed size (thường là 8Kb). Trong 1 <code>table</code> thì tất cả các <code>page</code> đều tương đương về mặt logic, nên 1 <code>row</code> cụ thể có thể được lưu trữ ở bất kỳ page nào.</p><p>Cấu trúc của 1 page cụ thể như sau:
+<img src="/img/blogs/heap_file_page.png" alt="heap-file-page"/></p><ul><li>1 Page thì có nhiều headers, chúng bao gồm checksum, start of free space, end of free space.</li><li>Sau headers là 1 list các identifier bao gồm offset, length và trỏ đến 1 item(row).</li><li>1 Pointer đến 1 item thì được gọi là CTID và bạn có thể truy cập CTID bằng cách: <code>select ctid, * from users;</code></li><li>Các identifier thì được lưu ở đầu page trở xuống.</li><li>Tuple ở đây chính là 1 row trong table, các row thì lại được lưu ngược lại từ dưới lên.</li></ul><h2>Tại sao cần indexing ?</h2><p>Vậy là chúng ta đã biết được row được gom thành các page(block) nối tiếp nhau trong file heap. Bây giờ sẽ như thế nào nếu ta tìm kiếm những row có 1 trường có giá trị cụ thể ?</p><p>Đối với những trường không unique thì khi search trên trường ấy chúng ta phải search trên toàn bộ(N) các block, đối với những trường là key (unique) thì có thể sử dụng Linear Search và yêu cầu trung bình truy xuất đến (N+1)/2 blocks.</p><p>Đối với những trường đã được sorted sẵn và unique thì lúc đấy có thể áp dụng Binary Search và bây giờ thì số lượng blocks cần truy xuất đến giảm xuống chỉ còn log2(N). Đối với N lớn thì performance sẽ tăng lên đáng kể. Và đây cũng chính là lý do mà chúng ta sẽ sử dụng indexing.</p><h2>Indexing là gì ?</h2><p>Khi tạo 1 index thì 1 file mới sẽ được tạo ra và có shema như sau.</p><p>Schema của một index:</p><pre><code class="language-postgres">Field name       Data type      Size on disk
+firstName        Char(50)       50 bytes
+(record pointer) Special        4 bytes
+</code></pre><p>Sau khi tạo ra index này thì nó sẽ được sorted để có thể áp dụng Binary Searches. Việc tạo ra nhiều index không hợp lý sẽ dẫn đến việc tiêu tốn bộ nhớ ổ đĩa không cần thiết.</p><h2>Index hoạt động như thế nào ?</h2><p>Giả sử chúng ta có 1 table có 5,000,000 rows tương tự như này:</p><pre><code class="language-postgres">Field name       Data type      Size on disk
+id (Primary key) Unsigned INT   4 bytes
+firstName        Char(50)       50 bytes
+lastName         Char(50)       50 bytes
+emailAddress     Char(100)      100 bytes
+</code></pre><p>Ta thấy thì mỗi row ở đây sẽ có fixed size là <code>204 bytes</code>, ở đây ta sẽ sử dụng postgres có size cho mỗi block(page) là 8Kb = <code>8192 bytes</code> vậy mỗi block sẽ có ~ 40 rows, mình sẽ tạm thời bỏ qua headers cũng như CTID và các thành phần khác.</p><p><strong>Note</strong>: Ở đây thì char được sử dụng thay cho varchar để đảm bảo size on disk fixed và thuận tiện cho việc tính toán dưới đây.</p><p>Với 5,000,000 rows thì chúng ta sẽ có khoảng N = 5,000,000 / 40 = 125,000 blocks. Nếu query trường firstname thì ta sẽ phải query toàn bộ 125,000 blocks, còn với trường id đã unique và sorted sẵn nên số blocks truy xuất chỉ là ~17 blocks.</p><p>Nếu ta tạo index cho trường firstname vậy mỗi row sẽ có size là <code>54 bytes</code>, mỗi block <code>8192 bytes</code> vậy sẽ có 8192/54 ~ 150 rows trong mỗi block vậy N = 5,000,000 / 150 = 33,333 blocks. Để truy xuất đến 1 row có firstname bằng 1 giá trị nhất định thì lúc này chúng ta sẽ chỉ còn cần query ~ 15 + 1 = 16 blocks giảm 1 số lượng kinh khủng so với trước. +1 ám chỉ rằng sau khi lấy được record pointer thì ta sẽ cần query đến heap để lấy dữ liệu khác như lastname, emailAddress.</p><h2>Create Postgres Table with a moillion Rows (from scratch)</h2><pre><code class="language-postgres">create table temp(t int);
+insert into temp(t) select random()*100 from generate_series(0, 1000000);
+select count(*) from temp;
+</code></pre><h2>Using Explain</h2><p><img src="/img/blogs/pg-explain-1.png" alt="pg-explain-1"/></p><ul><li>Seq Scan có nghĩa là nó sẽ full-table scan (sẽ tìm đến heap và fetch tất cả để scan).</li><li>Cost thường có 2 giá trị: giá trị đầu là số milisecond để pg fetch page đầu tiên của table, nếu bạn hay pg không yêu cầu việc gì (như ordering chẳng hạn) thì việc này sẽ tốn rất ít thời gian, nếu số này tăng cao thì nghĩa pg đang làm rất nhiều thứ khác trước khi fetching. Giá trị thứ 2 là thời gian mà pg suy nghĩ các việc sẽ làm.</li><li>Rows là giá trị estimate mà query trả về.</li><li>Width là giá trị bằng bytes của mỗi row.</li></ul><p>Bài này mình xin phép dừng tại đây vì cũng khá dài rồi, mình sẽ tiếp tục cập nhật các bài viết khác trong chuỗi bài về postgres.</p><h2>Tham khảo</h2><ul><li><a href="http://rachbelaid.com/introduction-to-postgres-physical-storage/">Introduction to PostgreSQL physical storage</a></li><li><a href="https://stackoverflow.com/questions/1108/how-does-database-indexing-work">How does database indexing work</a></li></ul>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Transaction in a nutshell]]></title>
+        <id>transaction-in-a-nutshell</id>
+        <link href="https://ducnguyen96.github.io/blog/transaction-in-a-nutshell"/>
+        <updated>2021-08-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Transaction có thể được định nghĩa là 1 nhóm task. Một task đơn lẻ là 1 đơn vị xử lý mà không thể chia nhỏ hơn nữa.]]></summary>
+        <content type="html"><![CDATA[<p><em>Transaction có thể được định nghĩa là 1 nhóm task. Một task đơn lẻ là 1 đơn vị xử lý mà không thể chia nhỏ hơn nữa.</em></p><p><em>Lấy một ví dụ đơn giản. Giả sử một nhân viên ngân hàng chuyển 500 triệu từ tài khoản A đến tài khoản B. Đây là một transaction đơn giản chứa những task sau đây.</em></p><p><strong>A&#x27;s Account</strong></p><pre><code class="language-sh">Open_Account(A)
+Old_Balance = A.balance
+New_Balance = Old_Balance - 500
+A.balance = New_Balance
+Close_Account(A)
+</code></pre><p><strong>B&#x27;s Account</strong></p><pre><code class="language-sh">Open_Account(B)
+Old_Balance = B.balance
+New_Balance = Old_Balance + 500
+B.balance = New_Balance
+Close_Account(B)
+</code></pre><p>Một transaction phải duy trì được các thuộc tính <a href="/blog/acid-trong-co-so-du-lieu/">ACID</a> đểm đảm bảo độ chính xác, tính nguyên vẹn của database.</p><h2>1. States của Transactions</h2><p><img src="/img/blogs/transaction_states.png" alt="state-of-transaction"/></p><ul><li><strong>Active</strong>: Transaction bắt đầu được thực thi, đây là trạng thái khởi đầu của tất cả các transcation.</li><li><strong>Partially Committed</strong>: Một transaction sẽ thực hiện nhiều task, và khi task cuối cùng được thực hiện thì transaction sẽ được xem là ở trạng thái này.</li><li><strong>Failed</strong>: Bất cứ kiểm tra nào từ database bị báo lỗi thì transaction sẽ ở trạng thái này và sẽ không thể được xử lý tiếp.</li><li><strong>Aborted</strong>: Khi transaction đạt trạng thái failed thì database sẽ rolls back lại tất cả những task thực hiện việc ghi dữ liệu, để đưa database đạt lại trạng thái trước khi transaction được thực thi hoặc là re-start lại transaction.</li><li><strong>Committed</strong>: Nếu tất cả các task của transaction được thực hiện thành công thì transaction đạt trạng thái này, và những thay đổi đến database sẽ được lưu vĩnh viễn.</li></ul><h2>2. Schedules là gì ?</h2><p><img src="/img/blogs/Types-of-Schedules-in-DBMS.png" alt="types-of-schedule"/></p><ul><li><strong>Schedule</strong>: Là một chuỗi nối tiếp các transaction, mỗi transaction thì có nhiều tasks.</li><li><strong>Serial Schedule</strong>: Các transaction trong schedule được sắp xếp có trình tự, để khi 1 transaction hoàn thành vòng đời của nó thì transaction tiếp theo mới được thực thi. Schedule kiểu này được gọi là schedule tuần tự(serial schedule), vì các transaction trong serial schedule được thực thi 1 cách có tuần tự.</li><li><strong>Non-Serial Schedules</strong>: Nhiều transaction xảy ra đồng thời. và các operations của transactions thì có tác động đến nhau.</li></ul><p>Các serial schedules thì có các đặc tính như: consistent, recoverable, cascadeless(không xếp tầng, chồng chất lên nhau), strict.</p><p>Còn non-serial schedule thì không phải bao giờ cũng đạt được những tính chất như vậy.</p><p>❓<strong>Serial schedule đảm bảo như vậy, tại sao chúng ta lại cần non-serial schedule.</strong></p><p>Dễ hiểu khi trong serial schedule thì các transaction được thực hiện từng cái 1 theo trình tự, T1 hoàn thành òng đời xong rồi mới đến T2 nên rất là chậm, còn với non-serial schedule thì các transaction xảy ra song song nên rất nhanh, nhưng cũng vì đó mà không đạt được những tính chất để đảm bảo được cho database luôn đúng, vậy nên những method loại bỏ các vấn đề về concurrency được tạo nên như trên.</p><h2>3. Serializability</h2><p>Như ở trên chúng ta đã nói thì chúng ta muốn chạy các transactions đồng thời (concurrency) và cũng muốn các kết quả sau khi thực hiện các transactions này giống với cách của serial schedule. Ta gọi điều này là <code>Serializability</code></p><p><img src="/img/blogs/Schedule-serializability.png" alt="serializability-hierarchical"/></p><p>Để đạt được serializability thì schedules cần đạt được một số equivalences dưới đây.</p><h2>4. Equivalence Schedules - Các tính chất tương đương giữa schedules</h2><p>2 schedules có thể tương đương về mặt result, view, conflict.</p><p><strong>1. Result Equivalence</strong>
+<img src="/img/blogs/Equivalence-of-Schedules-Problem-01.png" alt="serial-schedule"/>
+Nếu 2 schedules đều cho kết quả giống nhau sau khi được thực thi thì chúng được xem là <code>result equivalence</code>. Chúng có thể cho result giống nhau ở 1 vài giá trị nhưng cũng có thể khác nhau ở 1 vài giá trị khác. Vì thế mà loại này không có nhiều ý nghĩa.</p><p>Ở hình trên lấy X = 2 và Y = 5</p><ul><li>Kết quả của S1: X = 21 và Y = 10</li><li>Kết quả của S2: X = 21 và Y = 10</li><li>Kết quả của S3: X = 11 và Y = 10</li></ul><p>✔️ Vậy S1 và S2 result equivalence.</p><p><strong>2. Conflict equivalent</strong>
+<img src="/img/blogs/Equivalence-of-Schedules-Problem-02.png" alt="conflice-equivalent"/>
+Nếu 2 schedules thỏa mãn 2 điều kiện dưới đây thì chúng confict equivalent.</p><ul><li>Các transcation ở 2 schedules là giống nhau.</li><li>Trình tự các cặp task confict ở 2 schedules là gióng nhau.</li></ul><p>Như thế nào là 1 cặp task conflict ?</p><p>Các cặp task conflict là cặp task xảy ra trên 2 transaction cùng truy xuất và update đến 1 giá trị của database. Ví dụ như là T1 thực hiện Read(X) và T2 lại thực hiện Write(X) khiến giá trị của X lúc này ở 2 transaction là khác nhau. Có các cặp conflict như sau: R1(X) W2(X); W1(X) R2(X) và W1(X) W2(X).</p><p>Quay lại ở ví dụ trên thì đối với S1 thì 2 transaction chỉ cùng truy xuất và update dữ liệu của A, S2 cũng vậy.</p><p>Đối với S1 thì trình tự các cặp conflict như sau:</p><ul><li>R1(A), W2(A)</li><li>W1(A), R2(A)</li><li>W1(A), W2(A)</li></ul><p>Đối với S2 thì trình tự các cặp conflict như sau:</p><ul><li>R1(A), W2(A)</li><li>W1(A), R2(A)</li><li>W1(A), W2(A)</li></ul><p>Vậy ở đây ta có nói S1 và S2 là các conflict
+equivalent schedules.</p><p><strong>3. View Equivalence</strong>
+2 schedules có view equivalence khi đáp ứng 3 yêu cầu sau:</p><ul><li>Với mỗi data item X, nếu transaction Ti reads X từ trạng thái đầu tiên ở S1, sau đó ở S2, Ti cũng phải reads X từ trạng thái đầu tiên. Nghĩa là lúc Ti ở S1 và S2 read X thì chúng phải có giá trị như nhau.</li><li>Nếu transaction Ti reads 1 data item mà đã được update bởi 1 transaction Tj ở S1, thì ở S2 transaction Ti cũng phải reads được giá trị tương đương sau khi đã được update bởi 1 Tj khác trong S2.</li><li>Với mỗi data item X, nếu X đã được update bởi ít nhất 1 transaction Ti trong S1 thì ở S2 nó cũng phải được update bởi ít nhất 1 transaction Ti trong S2.</li></ul><p>Các phương pháp để kiểm tra xem 1 Schedule có View Serializable hay không ?</p><ol><li>Kiểm tra xem schedule có conflict serializable hay không ?</li></ol><ul><li>Nếu 1 schedule là conflict serializable thì chắc chắn nó view serializable.</li><li>Nếu 1 schedule không conflict serializable thì nó có thể hoặc không view serializable, và kiểm tra tiếp theo bước dưới đây.</li></ul><ol start="2"><li>Kiểm tra xem schedule có tồn tại những blind write operation hay không?
+Blind write operation là những task thực hiện việc ghi mà không thực hiện việc đọc trước đó.</li></ol><ul><li>Nếu không tồn tại, thì chắc chắn không phải view serializable.</li><li>Nếu có tồn tại, thì kiểm tra theo bước dưới đây.</li></ul><ol start="3"><li>Dùng những yêu cầu đã nêu ở trên, viết lại tất cả các dependencies, vẽ graph, nếu không có vòng lặp nào trong graph thì schedule đó là view serializable và ngược lại.</li></ol><h2>4. Mình hay dùng postgres, vậy postgres thì serializability như thế nào ?</h2><p>Câu này mình nghĩ sẽ tìm hiểu và trả lời trong 1 bài riêng về postgres 😄</p>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ACID trong cơ sở dữ liệu]]></title>
+        <id>acid-trong-co-so-du-lieu</id>
+        <link href="https://ducnguyen96.github.io/blog/acid-trong-co-so-du-lieu"/>
+        <updated>2021-08-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Transaction là một đơn vị logic nó thực hiện việc truy xuất và chỉnh sửa nội dung của database. Để duy trì tính thống nhất cả database trước và sau khi thực hiện transaction thì cần tuân theo một số tính chất và được viết tắt là ACID]]></summary>
+        <content type="html"><![CDATA[<p><strong>Transaction là một đơn vị logic nó thực hiện việc truy xuất và chỉnh sửa nội dung của database. Để duy trì tính thống nhất cả database trước và sau khi thực hiện transaction thì cần tuân theo một số tính chất và được viết tắt là ACID</strong></p><h2>Atomicity (/æt.əˈmɪs.ɪ.ti/)</h2><p>Yêu cầu transaction phải thực hiện 1 cách hoàn chỉnh hoặc là không thực hiện, chứ không có việc chỉ thực hiện 1 phần.</p><p>Nó liên quan đến 2 thứ:</p><ul><li><strong>Abort</strong>: Nếu 1 transaction bị hủy bỏ thì những thay đổi đã được thực hiện sẽ không còn nữa.</li><li><strong>Commit</strong>: Nếu 1 transaction được commit thì những thay đổi sẽ được ghi lại.</li></ul><p>2 tính chất này nó liên quan chặt chẽ đến nhau.</p><p>Ví dụ bạn có 2 table: <code>product_templates</code> và <code>products</code> với relation là <code>One-To-Many</code> 1 product template có nhiều products con. product_template có 1 trường là <code>min_price</code> là giá trị thấp nhất trong tất cả các <code>price</code> là thuộc tính của products.</p><p>Ta thực hiện 1 transaction thực hiện 2 việc là <code>delete product</code> và <code>update min_price</code>. Nếu transaction đó sau khi thực hiện việc delete product và bị lỗi thì data sẽ không còn đúng nữa.</p><h2>Isolation</h2><p>Thuộc tính này đảm bảo rằng có nhiều transaction có thể thực hiện đồng thời mà không dẫn đến database không còn nhất quán. Các transactions phải được thực thi một cách độc lập mà không có bất cứ sự can thiệp nào. Những thay đổi từ 1 transaction thì sẽ không được thấy ở các transcations khác cho đến khi những thay đổi ấy được ghi vào bộ nhớ hoặc đã được commited.</p><p>Ví dụ: ta có X = 10, Y = 5 và 2 transaction T và T&#x27;</p><table><thead><tr><th align="center">T</th><th align="center">T&#x27;</th></tr></thead><tbody><tr><td align="center">Read(X)</td><td align="center">Read(X)</td></tr><tr><td align="center">X:= X<!-- -->*<!-- -->10</td><td align="center">Read(Y)</td></tr><tr><td align="center">Write(X)</td><td align="center">Z:=X+Y</td></tr><tr><td align="center">Read(Y)</td><td align="center">Write(Z)</td></tr><tr><td align="center">Y:=Y-2</td><td align="center"></td></tr></tbody></table><p>|Write(Y)</p><p>Ở ví dụ trên nếu transaction T thực hiện xong bước Write(X) và transaction T&#x27; bắt đầu, nếu không đảm bảo tính cô lập của các transaction thì X ở T&#x27; sẽ có giá trị là 100 dẫn tới Z = 100 + 5 = 105. Trường hợp T không commit mà rollback thì sẽ dẫn đến X quay lại là 10 và Z sẽ sai.</p><ol><li>Can my inflight transaction see changes made by other transactions ?
+Điều này còn tùy thuộc vào developer, chẳng hạn như ví dụ ở trên nếu không có isolation nào thì T&#x27; sẽ Read(X) với giá trị không mong muốn.</li><li>Read phenomena: khi thiếu isolation như ví dụ ở trên thì sẽ dẫn tới việc Read 1 giá trị nào đấy không đúng nữa.</li><li>Isolation Levels: Để tránh Read phenomena thì ta sẽ thực hiện isolation cho transaction.</li></ol><h3>Read phenomena</h3><ul><li>Dirty reads: giống như ví dụ đã nêu ở trên, T&#x27; đọc X chưa được commit.</li><li>Non-repeatable reads: read COMMITTED data from an UPDATE query from another transaction, trong cùng 1 transaction khi READ 1 giá trị và nhận được 2 kết quả khác nhau.
+<img src="/img/blogs/iPI0C.png" alt="non-repeatable-reads"/>. Lưu ý: Đối với hầu hết các platform khác ngoại trừ Postgres. Repeatable read isolation level chỉ chắc chắn là nó chỉ đọc những giá trị đã commit mà không thay đổi. Còn nếu xảy ra phantom reads thì giá trị đấy vẫn được đọc.</li><li>Phantom reads: read COMMITTED data from an INSERT or DELETE query from another transaction, trong cùng 1 transaction khi READ lần 1 lấy số lượng Product được 3, cùng khi đó thì có 1 transaction khác insert hoặc delete 1 products và READ lần 2 nhận được 1 kết quả khác.
+<img src="/img/blogs/aCtew.png" alt="phantom-read"/>.</li></ul><h3>Isolation levels for inflight transaction: performance sẽ bị giảm dần theo các levels dưới đây còn độ phức tạp thì ngược lại.</h3><p><img src="/img/blogs/Isolation_levels_vs_read_phenomena.png" alt="Isolation levels vs read phenomena.png"/></p><ul><li><strong>Read uncommitted</strong>: No Isolation, tất cả những thay đổi từ bên ngoài thì đều được transaction thấy.</li><li><strong>Read commited</strong>: Mỗi query trong 1 transaction đều chỉ thấy những thay đổi đã được committed.</li><li><strong>Repeatable Read</strong>: Mỗi query trong 1 transaction chỉ thấy những committed updates trước khi bắt đầu transcation.</li><li><strong>Serializable</strong>: Transactions bị tuần tự hóa, nghĩa là sẽ được thực thi ngay sau transaction trức hoàn thành.</li></ul><h2>Consistency</h2><h3>Consistency in Dat</h3><p>Được điều chỉnh bởi user và được củng cố bằng cách thêm các primary keys, foreign keys.</p><p>Vì sao user lại điều chỉnh mà không phải đặt mặc định lúc nào database cũng phải chặt chẽ, chính xác nhất ❓</p><p>Vì ở một số trường hợp thì có developer có thể cho phép sai số nhỏ để đổi lấy performance.</p><h3>Consistency in reads</h3><ol><li>Nếu một transaction change database và commit thì 1 transaction mới có ngay lập tức thấy được change đó không ?</li></ol><ul><li>Điều này còn tùy thuộc. Nếu bạn chỉ dùng 1 database thì điều ở trên là đúng. Còn nếu bạn muốn horizontal scale thì bắt buộc bạn phải có nhiều replica database và 1 primary database. Lúc này transaction được commit sẽ thay đổi primary database và sẽ mất thời gian để update các replica, nếu sau khi transaction được commit mà có 1 transaction mới thực hiện việc read từ replica thì transaction đó sẽ nhận được data cũ.</li></ul><ol start="2"><li>Cả relational và NoSQL database đều bị ảnh hưởng.</li><li>Điều này được gọi là eventual consitency.</li></ol><h2>Durability</h2><p>Tính chất này đảm bảo rằng 1 khi mà transaction đã thực thi xong thì những thay đổi đến database sẽ được ghi vào ổ đĩa và chúng vẫn sẽ được dữ ngay cả khi có 1 lỗi hệ thống xảy ra chẳng hạn như lỗi phần mềm hoặc là mất điện 😢. (Committed Data is never lost)</p>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Snap in a nutshell]]></title>
+        <id>snap-in-a-nutshell</id>
+        <link href="https://ducnguyen96.github.io/blog/snap-in-a-nutshell"/>
+        <updated>2021-08-23T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Snap là một hệ thống triển khai và đóng gói phần mềm được phát triển bởi Canonical cho những hệ điều hành sử dụng nhân Linux.]]></summary>
+        <content type="html"><![CDATA[<p>Snap là một hệ thống triển khai và đóng gói phần mềm được phát triển bởi <a href="https://en.wikipedia.org/wiki/Canonical_(company)">Canonical</a> cho những hệ điều hành sử dụng nhân Linux.</p><h2>1. Why Snap</h2><p>Với các trình quản lý package khác như <code>apt</code> hay <code>yum</code> thì các packages được đóng gói và phân phối như 1 phần của os, điều này tạo ra <code>delay</code> giữa việc phát triển và triển khai ứng dụng đến user. Snap được sinh ra để các developers có thể publish lên <code>Snap Store</code> và đưa thẳng đến người dùng.</p><h2>2. Hoạt động được trên hầu hết các Linux distro</h2><p>Một đặc điểm khiến snap phổ biến là các <code>snaps (packages)</code> có thể hoạt động được trên hầu hết các Linux distro.</p><p>Các snap được nén với định dạng <code>SquashFS</code> với đuôi mở rộng là <code>.snap</code>. Các file này chứa ứng dụng, các dependencies và metadata. Metadata được biên dịch bởi <code>snapd</code> và thiết lập 1 <code>sandbox</code> bảo mật cho ứng dụng đấy. Sau khi snap được cài đặt thì nó được mount tới OS host và mỗi khi người dùng khởi chạy ứng dụng thì chúng sẽ được giải nén ngay lúc đấy, điều này giúp snap sử dụng ít dung lượng hơn nhưng khởi động ứng dụng lại lâu hơn.</p><h2>3. Các snap có bảo mật không</h2><p>Các snap đẩy lên Snap Store sẽ được tự động test và scan malware, mặc dù vậy thì chúng không đạt được độ tin cậy như những ứng dụng bình thường của distro.</p><p>Vào tháng 5(2018), 2 ứng dụng được phát triển bởi cùng 1 developer đã được tìm thấy là chứa miner tiền ảo, miner sẽ được chạy background khi mà ứng dụng này được thực thi. Khi vụ việc được biết đến thì Canonical đã gỡ 2 ứng dụng này khỏi Snap Store và chuyển quyền sở hữu đến 1 bên thứ 3 sau khi đã loại bỏ miner.</p><p>Mặc dù Snap sandbox đã giảm ảnh hưởng của những ứng dụng xấu nhưng Canonical vẫn khuyến khích users chỉ nên sử dụng snap của những publisher đã được người dùng tin tưởng.</p><h2>4. Cài đặt snap cho debian</h2><pre><code class="language-sh">sudo apt install snapd
+sudo snap install core
+</code></pre><h2>5. Tìm kiếm package</h2><pre><code class="language-sh">snap find &lt;search_text&gt;
+</code></pre><h2>6. Cài đặt package bằng snap</h2><pre><code class="language-sh">sudo snap install hugo --channel=extended
+</code></pre><h2>7. Xem danh sách packages</h2><pre><code class="language-sh">snap list
+</code></pre><h2>8. Gỡ package cài đặt bằng snap</h2><pre><code class="language-sh">sudo snap remove &lt;package&gt;
+</code></pre><h2>9. Update package</h2><pre><code class="language-sh">sudo snap refresh --list
+</code></pre><h2>10. Snap packages doesn&#x27;t work on zsh or other shell?</h2><p>zsh không đọc các packages cài đặt bởi snap ở thư mục <code>/snap/bin</code> nên chúng ta cần phải thêm <code>PATH</code> cho nó như sau</p><pre><code class="language-sh"># .your-zsh-config-folder/.zshrc
+export PATH=$PATH:/snap/bin
+</code></pre>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Cài đặt docker, nginx, cloudflare, tmate và deploy một web app hoàn toàn free trên raspberry pi]]></title>
+        <id>cai-dat-docker-nginx-cloudflare-tmate-va-deploy-mot-web-app-hoan-toan-free-tren-raspberry-pi</id>
+        <link href="https://ducnguyen96.github.io/blog/cai-dat-docker-nginx-cloudflare-tmate-va-deploy-mot-web-app-hoan-toan-free-tren-raspberry-pi"/>
+        <updated>2021-07-14T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[1. Cài đặt image cho Pi]]></summary>
+        <content type="html"><![CDATA[<h2>1. Cài đặt image cho Pi</h2><p>Cài đặt <a href="https://en.wikipedia.org/wiki/Raspberry_Pi_OS">Raspbian</a> bằng <a href="https://www.raspberrypi.org/software/">raspberry pi imager</a>
+<strong>Lưu ý</strong>: Raspberry Pi chạy chip ARM và Raspbian ở kiến trúc arm/v7 32bit nên các cài đặt ở phía dưới đều phải dùng cho kiến trúc này.</p><h2>2. Cài tmate để ssh</h2><p>Chúng ta dùng tmate bản <a href="https://github.com/tmate-io/tmate/releases/tag/2.4.0">static build</a> arm/v7 32bit để có đầy đủ tính năng mới nhất như chạy foreground (-F).</p><pre><code class="language-sh">wget https://github.com/tmate-io/tmate/releases/download/2.4.0/dbg-symbols-tmate-2.4.0-static-linux-arm32v7.tar.xz
+</code></pre><p>Đăng ký API key để có static IP và session name giống nhau cho mỗi lần đăng nhập vào con Pi.
+Link đăng ký ở <a href="https://tmate.io/#named_sessions">đây</a> nhé.
+Tạo 1 <a href="https://github.com/tmate-io/tmate/issues/198">systemd service</a> để tự động chạy tmate mỗi lần reboot Pi theo</p><h2>3. Cài đặt nginx cho Pi</h2><p>Cài đặt nginx với apt</p><pre><code class="language-sh">sudo apt install nginx
+</code></pre><h2>4. Cài đặt docker với convenience script</h2><pre><code class="language-sh">curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+</code></pre><h2>5. Build image cho Pi</h2><p>Tạo builder</p><pre><code class="language-sh">docker buildx create --platform linux/arm/v7 --name armbuilder
+</code></pre><p>Sử dụng builder</p><pre><code class="language-sh">docker buildx use armbuilder
+</code></pre><p>Bootstrap builder</p><pre><code class="language-sh">docker buildx inspect --bootstrap
+</code></pre><p>Sau khi đã có builder mới chúng ta sẽ bắt đầu build image
+Vì đa số chúng ta không sử dụng kiến trúc arm/v7 nên ta sẽ cần phải cài đặt thêm 1 cross-platform emulator cho docker để có thể build được image cho arm/v7. Xem chi tiết ở <a href="https://github.com/tonistiigi/binfmt#installing-emulators">đây</a></p><pre><code class="language-sh">docker run --privileged --rm tonistiigi/binfmt --install all
+</code></pre><p>Build image đầu tiên cho pi</p><pre><code class="language-sh">docker buildx build --platform linux/arm/v7 -t ducnguyen96/drinkwater-api:0.0.13 --push .
+</code></pre><p><strong>Lưu ý</strong>: Với các bạn đang sử dụng bcrypt cho ứng dụng của mình thì các bạn nên chuyển sang bcryptjs vì bcrypt không hoạt động được trên arm/v7 nhé.</p><h2>6. Docker run trên pi</h2><p>Có rất nhiều image được built based từ alpine - 1 phiên bản linux tinh gọn dùng và chúng ta sẽ sử dụng chúng rất nhiều. Docker có tính năng security để cài đặt chặt chẽ các tính toán trên container, để có thể chạy tính năng này trên image Alpine thì nó yêu cầu libseccomp mà có vẻ như Alpine còn thiếu, vậy chúng ta sẽ tắt tính năng này đi.</p><pre><code class="language-sh">--security-opt=seccomp=unconfined
+</code></pre><p>Tham khảo tại <a href="https://www.gitmemory.com/issue/Koenkk/zigbee2mqtt/7662/852985841">đây</a>
+Khởi chạy container đầu tiên nào :3</p><pre><code class="language-sh">docker run -it -d --name drinkwate-web --security-opt=seccomp=unconfined
+-p 4000:4000 ducnguyen96/drinkwater-web:0.0.13
+</code></pre><h2>7. Self host với cloudflare</h2><p>Cài đặt cloudflare cho pi ở <a href="https://docs.pi-hole.net/guides/dns/cloudflared/#armhf-architecture-32-bit-raspberry-pi">đây</a>
+Lưu ý: Thư mục gốc của cloudflare nằm ở /etc/cloudflared</p><ol><li>Login</li></ol><pre><code class="language-sh">cloudflared tunnel login
+</code></pre><p>Nếu pi chỉ chạy terminal thì copy link vào browser nhé</p><ol start="2"><li>Create a tunnel</li></ol><pre><code class="language-sh">cloudflared tunnel create &lt;NAME&gt;
+</code></pre><ol start="3"><li>Config tunnel</li></ol><pre><code class="language-sh">tunnel: 6ff42ae2-765d-4adf-8112-31c55c1551ef
+credentials-file: /root/.cloudflared/6ff42ae2-765d-4adf-8112-31c55c1551ef.js
+
+
+ingress:
+ - hostname: gitlab.widgetcorp.tech
+ service: http://localhost:80
+ - hostname: gitlab-ssh.widgetcorp.tech
+ service: ssh://localhost:22
+ - service: http_status:404
+</code></pre><ol start="4"><li>Route to tunnel theo mẫu sau
+<img src="/img/blogs/dns-record.png" alt="dns-record"/></li><li>Run cloudflare as a service</li></ol><pre><code class="language-sh">sudo cloudflared service install
+</code></pre><pre><code class="language-sh">sudo systemctl start cloudflared
+</code></pre><pre><code class="language-sh">sudo systemctl enable cloudflared
+</code></pre><p>Vậy là chúng ta đã có thể host 1 web app hoàn toàn free :3 !</p>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Mạng máy tính]]></title>
+        <id>mang-may-tinh</id>
+        <link href="https://ducnguyen96.github.io/blog/mang-may-tinh"/>
+        <updated>2021-06-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Phần 1 - The TCP/IP Five-Layer Network Model]]></summary>
+        <content type="html"><![CDATA[<h2>Phần 1 - The TCP/IP Five-Layer Network Model</h2><p><img src="/img/docs/layers-responsibility.png" alt="7 layers"/>
+The protocols at each layer carry the ones above them in order to get data from one place to the next.</p><h3>1. Physical Layer</h3><p>Đại diện cho những thiết bị vật lý kết nối với máy tính. Liên quan đến những thứ như cáp, thiết bị kết nối, gửi tín hiệu.</p><h3>2. Data Link Layer</h3><ul><li>The network interface or the network access layer.</li><li>Lớp này chịu trách nhiệm định nghĩa các cách để diễn dịch (interpreting) các tín hiếu để cho các thiết bị có thể giao tiếp với nhau.</li><li>Có rất nhiều giao thức (protocols) xuất hiện ở layer này nhưng phổ biến nhất là Ethernet.</li><li>Các tiêu chuẩn của Ethernet cũng định nghĩa 1 giao thức chịu trách nhiệm cho việc nhận dữ liệu từ các node trên cùng 1 network.</li></ul><h3>3. Internet Layer</h3><ul><li>Layer này cho phép các network khác nhau có thể giao tiếp được với nhau thông qua các routers.</li><li>Giao thức phổ biến nhất ở layer này là IP (Internet Protocol).</li><li>Một node riêng rẽ có thể chạy nhiều ứng dụng clients hoặc servers. Bạn có thể chạy 1 chương trình client email và web browser cùng lúc. Email và webserver cũng có thể chạy trên cùng 1 server.</li></ul><h3>4. Transport Layer</h3><ul><li>Emails và Web pages có thể được gửi đến ứng dụng của bạn là nhờ transport layer.</li><li>Khi Internet Layer chuyển dữ liệu giữa các node độc lập. Transport Layer phân loại ứng dụng client hoặc server nào thì nên nhận được data từ Internet layer.</li><li>Giao thức phổ biến nhất ở layer này là TCP (Transmission Control Protocol). 1 số giao thức khác có sử dụng đến IP có thể kể đến như UDP (User Datagram Protocol).</li></ul><p><strong>Lưu ý</strong>: IP chịu trách nhiệm nhận dữ liệu từ node này sang node khác, trong khi TCP hoặc UDP thì chịu trách nhiệm phân loại dữ liệu nhận được từ IP đến ứng dụng cần thiết (applications or programs)</p><h2>Phần 2 - The Basics of Networking Devices</h2><h3>1. Cables</h3><ul><li>Cáp kết nối những thiết bị khác nhau và cho phép data được truyền qua lại giữa các thiết bị.</li><li>Cáp đồng (copper) là loại cáp được dùng phổ biến nhất. Nó được tạo thành từ các cặp dây đồng và được bọc bởi dây dẫn cách điện.</li><li>Máy tính giao tiếp với nhau bằng 0 và 1. Chúng gửi các dữ liệu nhị phân bằng cách thay đổi voltage (điện thế).</li><li>Thiết bị nhận được tín hiệu sẽ diễn dịch các thay đổi điện thế này thành 0 và 1 và sau đó được chuyển thành các dạng dữ liệu khác nhau.</li><li>Các loại phổ biến nhất: Cat5, Cat5e, Cat6. Những loại này thì có các đặc điểm vật lý khác nhau, chẳng hạn số lần xoắn giữa các cặp dây đồng dẫn đến việc thay đổi chiều dài cáp cũng như tỉ lệ truyền tải.</li><li>Cat5 là loại cũ nhất và gần như được thay thế bằng Cat5e và Cat6.</li></ul><h3>2. Hub</h3><ul><li>Hub là thiết bị ở physical layer cho phép nhiều kết nối cùng 1 lúc đến từ nhiều máy tính.</li><li>Các thiết bị kết nối đến 1 hub nào đó sẽ giao tiếp với nhau cùng lúc. Tùy thuộc vào các hệ thống kết nối của các thiết bị mà chúng sẽ quyết định xem data được truyền đến có phải dành cho chúng hay không. Điều nãy dẫn đến có rất nhiều noise trên network và gây ra 1 vấn đề được gọi là collision domain.</li></ul><h3>3. Collision Domain</h3><p><img src="/img/docs/collision-domain.png" alt="Collision Domain"/>
+Many or all devices on a network shared a single collision domain. All data in collision domain is snet to all the nodes connected to it.</p><p>Collision Domain là 1 network segment (phân đoạn) nơi cùng lúc chỉ 1 thiết bị có thể giao tiếp. Nếu nhiều hệ thống cố truyền dữ liệu cùng lúc thì các xung điện được gửi trong sợi cáp sẽ gây trở ngại cho nhau. Việc này dẫn đến việc các hệ thống kết nối với hub phải chờ 1 thời gian trước khi chúng cố tái gửi dữ liệu. Chính vì vậy mà mạng lưới rất chậm nên gần như ngày này chúng ta không còn sử dụng hub nữa và được thay thế bằng switch.</p><h3>4. Switching Hub</h3><ul><li>Switch rất giống Hub ở chỗ chúng cho phép rất nhiều các thiết bị kết nối đến chúng. Điểm khác biệt là Hub thì ở layer 1 (Physical Layer) còn switch thì ở layer 2 (Data Link Layer).</li><li>Switch có thể inspect (quan sát) nội dung bên trong dữ liệu của giao thức ethernet được gửi trong toàn mạng. Và quyết định xem dữ liệu nên được gửi đến hệ thống nào và chỉ gửi đến hệ thống đó. Switch gần như lọai bỏ hoàn toàn collision domain.</li></ul><h3>5. Routers</h3><ul><li>Hubs và Switches được sử dụng để cho các thiết bị có thể kết nối đến cùng 1 mạng lưới cụ thể (LAN - Local Area Network), để có thể truyền nhận dữ liệu từ các network thì chúng ta cần đến router.</li><li>Router là 1 thiết bị cho phép truyền tải dữ liệu giữa các networks. Router hoạt động ở layer 3.</li><li>Switch có inspect dữ liệu Ethernet để quyết định chúng được gửi đến đâu, Router thì có thể inspect dữ liệu IP để quyết định chúng được gửi đến đây.</li><li>Những routers mà ta thường thấy là những home routers, bảng routing table của chúng khá đơn giản. Mục đích của chúng là nhận traffic từ home hoặc office và gửi đến ISP (Internet Service Provider).</li><li>Một khi traffic được gửi đên ISP thì 1 loại router mới phức tạp hơn nhiều nhận nhiệm vụ xử lý traffic. Những core ISP router này chịu trách nhiệm cho việc gửi và nhận dữ liệu hằng ngày trên internet của chúng ta.</li><li>Routers chia sẻ dữ liệu với nhau qua giao thức BGP (Border Gateway Protocol). Giao thức này cho biết đoạn đường tối ưu nhất để truyền traffic.</li></ul><h3>6. Servers and Clients</h3><ul><li>Chúng ta gọi mỗi thiết bị trên network là 1 nodes. 1 nodes có thể là 1 server hay là 1 client hoặc thường là vừa server và client. 1 server là 1 node mà được sử dụng để cung cấp dữ liệu cho 1 client nào đó, và client chính là node nhận dữ liệu.</li><li>Chẳng hạn email server vừa có thể xem là 1 server vì chúng gửi email đến ứng dụng email của người dùng. Nhưng cũng có thể xem nó là 1 client của DNS server.</li></ul><h2>Phần 3 - The Data Link Layer</h2><p><img src="/img/docs/layers-responsibility.png" alt="5-layers"/>
+By dumping responsibility on the Data Link Layer, the Network, Transport, Application layers can all operate the same no matter how the device they&#x27;re running on is connected.</p><h3>1. Ethernet and MAC address</h3><ul><li>Giao thức được sử dụng rộng rãi nhất để truyền dữ liệu giữa các links độc lập là Ethernet. Data Link Layer cung cấp 1 cách chung để sofware ở các layer cao hơn có thể truyền và nhận dữ liệu.</li><li>MAC address là 1 định danh độc nhất được gắn với 1 network interface. Là 1 dãy số 48 bit gồm 6 cặp số hexadecimal(16 bits), 1 cách khác nữa để định danh MAC là Octet.</li></ul><h3>2. Unicast, Multicast and Broadcast</h3><ul><li>Unicast frame: luôn gửi tới tất cả các thiết bị trên collision domain nhưng chỉ thục sự được nhận và xử lý bởi 1 địa chỉ.</li><li>Multicast frame: gửi tới tất cả, nhưng nhận hoặc loại bỏ thì tùy vào từng thiết bị.</li><li>Broadcast frame</li></ul><h3>3. Dissecting an Ethernet Frame</h3><ul><li><p>Data packet là 1 thuật ngữa bao trùm đại diện cho bất kỳ 1 bộ dữ liệu nhị phân nào được truyền trong network. Data packet không được gắn với 1 layer cụ thể nào.</p></li><li><p>Data packet ở Ethernet level đưuọc biết như các Ethernet frame.</p></li><li><p>Ethernet Frame là 1 bộ sưu tập thông tin cấu trúc cao được trình bày trong 1 trình tự cụ thể. Như vậy, các network interfaces ở physical layer có thể chuyển 1 dãy bits thành dữ liệu có ý nghĩa và ngược lại.
+<img src="/img/docs/ethernet-frame.png" alt="ethernet-frame"/></p><p>Các segment trong Ethernet Frame là không thể thiếu và hầu như là có kích thước cố định.</p></li><li><p>7 bytes đầu tiên được sử dụng để đồng bộ internal clocks để điểu chỉnh tốc độ truyền tải dữ liệu.</p></li><li><p>1 bytes tiếp theo (SFD - Start Frame Delimiter) gửi tín hiệu rằng preamable đã kết thúc và frame bắt đầu ngay sau đó.</p></li><li><p>6 bytes tiếp là địa chỉ MAC.</p></li><li><p>EtherType filed: dài 16 bits được sử dụng để miêu tả giao thức của nộidung của frame.</p></li><li><p>VLAN: bất cứ frame nào có VLAN tag thì chỉ được gửi tới 1 ... cụ thể.</p></li></ul><h2>Phần 4 - The Network Layer</h2><h3>1. The Network Layer</h3><p>Trong mạng LAN thì các nodes đều chỉ giao tiếp với nhau trong 1 mạng nhỏ thông qua các cáp nên địa chỉ MAC có thể đáp ứng được như cầu. Nhưng có hàng tỷ các thiết bị trên thế giới có địa chỉ MAC độc lập và chúng không được sắp xếp theo 1 trình tự cụ thể nào nên việc giao tiếp với nhau ở mạng lưới toàn cầu sử dụng địa chỉ MAC là rất khó khăn. Chính vì thế IP sinh ra để giải quyết vấn đề này.</p><h3>2. IP Addresses</h3><p><img src="/img/docs/ip-address.png" alt="ip-addresses"/>
+IP là các giãy số dài 32 bit được tạo hành từ 4 octet. Mỗi octet có thể đại diện cho mọi số trong khoảng từ 0 đến 255.</p><p>ℹ️ <strong>Chú ý</strong>: Các địa chỉ IP thuộc về networks chứ không thuộc về các thiết bị kết nối với network. Laptop của bạn sẽ luôn có 1 địa chỉ MAC duy nhất từ khi sản xuất nhưng sẽ có IP khác nhau lúc bạn đi cafe, làm việc ở nhà, công ty,... Mạng LAN ở cafe, home, công ty sẽ cung cấp 1 địa chỉ IP tới laptop của bạn bằng 1 công nghệ gọi là DHCP (Dynamic Host Configuration Protocol)</p><ul><li>1 địa chỉ IP được cấp bằng DHCP được gọi là Dynamic IP address (địa chỉ IP động), trái ngược với Static IP address là (địa chỉ IP tĩnh) được cấu hình trên 1 node thủ công.</li><li>Trong hầu hết các trường hợp thì IP tĩnh được dùng cho servers và các thiết bị mang, IP động được dùng cho clients. Nhưng trong 1 số trường hợp thì có thể không đúng.</li></ul><h3>3. IP Datagrams and Encapsulation</h3><p><img src="/img/docs/datagram.png" alt="data-gram"/>
+Giống như data packets ở Ethernet layer có 1 cái tên riêng - Ethernet Frame thì các packets ở Network layer cũng vậy - IP datagram - là 1 dãy các trường có cấu trúc cao được định nghĩa 1 cách chặt chẽ.
+<img src="/img/docs/datagram-encapsulated.png" alt="data-encapsulated"/>
+Contents của IP datagram được đóng gói thành payload của 1 Ethernet Frame. Và IP datagram cũng có payload được gửi xuống từ Transport layer.</p><h3>4. IP Address Classes</h3><p><img src="/img/docs/ip-addresses.png" alt="ip-addresses"/>
+Class A có 3 bits cho IP address. Mỗi octet có giá trị từ 0 đến 255 nên sẽ có tổng cộng 256<em>256</em>256=16777216 địa chỉ IP cho mỗi host class A</p><ul><li>Địa chỉ IP có thể chia làm 2 ## phần là address ID và host ID.</li><li>IP có 3 classes: Class A(1 octets đầu là address ID, 3 octet tiếp là host ID), class B (2 octet đầu là address ID), class C (1 octet là address ID).</li><li>Ở class D, mỗi 1 IP datagram có thể được gửi tới toàn bộ network cùng 1 lúc.</li></ul><h3>5. ARP - Address Resolution Protocol</h3><p>ARP là một giao thức được sử dụng để tìm ra địa chỉ ## phần cứng của 1 node với 1 địa chỉ IP cụ thể. Khi mà IP datagram được hình thành 1 cách hoàn toàn thì nó cần được đóng gói trong 1 Ethernet Frame. Nghĩa là thiết bị truyền tín hiệu cần 1 địa chỉ MAC để có thể hoàn thành header trong Ethernet Frame.
+<img src="/img/docs/sending-arp-broadcast.png" alt="send-abroad"/></p><p>Khi muốn gửi ethernet frame đến 1 địa chỉ IP nào đó mà chưa có địa chỉ MAC thì thiết bị gửi sẽ truyền đi 1 ARP message broadcast đến toàn bộ các node trên network.
+<img src="/img/docs/arp-response.png" alt="arp-response"/></p><p>Các node khi nhận được arp message sẽ phản hồi và gửi địa chỉ MAC đến thiết bị gửi. Sau đó ARP sẽ cập nhật MAC address vào ARP table entries. Các entries này sẽ hết hạn trong 1 khoảng thời gian ngắn.</p>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
+</feed>

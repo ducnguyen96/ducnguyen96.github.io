@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96=self.webpackChunkducnguyen_96||[]).push([[5109],{5480:function(a){a.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"/blog/tags/acid","name":"acid","count":2,"permalink":"/blog/tags/acid"}')}}]);

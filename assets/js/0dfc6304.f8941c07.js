@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96=self.webpackChunkducnguyen_96||[]).push([[5806],{353:function(e){e.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"/blog/tags/terminology","name":"terminology","count":1,"permalink":"/blog/tags/terminology"}')}}]);
