@@ -7,7 +7,7 @@ tags: [authentication]
 
 # Authentication in a nutshell
 
-Như đã nói trong bài [này](/posts/backend/http-in-a-nutshell/), http không giữ trạng thái giữa 2 lần request vì vậy ví dụ sau khi đăng nhập sau, user đến một page nào đó cần xác minh chẳng hạn như setting thì user lại bị yêu cầu đăng nhập lần nữa. Nhưng với session hoặc token authentication thì server có thể nhận biết là user đã đăng nhập và nên được cấp quyền truy cập.
+Như đã nói trong bài [này](/blog/http-in-a-nutshell/), http không giữ trạng thái giữa 2 lần request vì vậy ví dụ sau khi đăng nhập sau, user đến một page nào đó cần xác minh chẳng hạn như setting thì user lại bị yêu cầu đăng nhập lần nữa. Nhưng với session hoặc token authentication thì server có thể nhận biết là user đã đăng nhập và nên được cấp quyền truy cập.
 
 ## Session based authentication
 

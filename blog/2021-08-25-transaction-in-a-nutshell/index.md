@@ -31,7 +31,7 @@ B.balance = New_Balance
 Close_Account(B)
 ```
 
-Một transaction phải duy trì được các thuộc tính [ACID](/posts/backend/acid-in-dbms/) đểm đảm bảo độ chính xác, tính nguyên vẹn của database.
+Một transaction phải duy trì được các thuộc tính [ACID](/blog/acid-trong-co-so-du-lieu/) đểm đảm bảo độ chính xác, tính nguyên vẹn của database.
 
 ## 1. States của Transactions
 

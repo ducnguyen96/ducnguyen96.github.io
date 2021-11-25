@@ -140,7 +140,7 @@ let greeting = "say Hello instead"; // error: Identifier 'greeting' has been dec
 ```
 
 **"let" có hoisted không ?**
-Tham khảo ở [đây](/posts/backend/javascript-in-a-nutshell/#hoisted)
+Tham khảo ở [đây](/blog/javascript-in-a-nutshell/#hoisted)
 
 ### const
 

@@ -30,6 +30,7 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          blogSidebarCount: "ALL",
           // Please change this to your repo.
           editUrl: "https://github.com/ducnguyen96/ducnguyen96.github.io/blog/",
         },
@@ -77,7 +78,7 @@ const config = {
             items: [
               {
                 label: "Tutorial",
-                to: "/docs/intro",
+                to: "/docs/backend/nginx_basic",
               },
             ],
           },

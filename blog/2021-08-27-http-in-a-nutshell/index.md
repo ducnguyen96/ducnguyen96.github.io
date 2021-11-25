@@ -7,7 +7,7 @@ tags: [http, https]
 
 # Http in a nutshell
 
-**_Hypertext Transfer Protocol (HTTP)_** là một giao thức(protocol) thuộc [lớp ứng dụng](https://ducnguyen96.github.io/posts/others/mang-may-tinh/) được thiết kế cho để thực hiện giao tiếp giữa web browsers và web servers, nhưng nó cũng được sử dụng cho nhiều mục đích khác. HTTP tuân theo mô hình client-server cổ điển, với một client open connection để tạo request, sau đó chờ cho đến khi nhận được response. HTTP là một giao thức không có trạng thái, nghĩa là server không dữ trạng thái giữa 2 lần requests.
+**_Hypertext Transfer Protocol (HTTP)_** là một giao thức(protocol) thuộc [lớp ứng dụng](/blog/mang-may-tinh/) được thiết kế cho để thực hiện giao tiếp giữa web browsers và web servers, nhưng nó cũng được sử dụng cho nhiều mục đích khác. HTTP tuân theo mô hình client-server cổ điển, với một client open connection để tạo request, sau đó chờ cho đến khi nhận được response. HTTP là một giao thức không có trạng thái, nghĩa là server không dữ trạng thái giữa 2 lần requests.
 
 ## HTTP Messages
 
@@ -26,7 +26,7 @@ HTTP requests, responses có cấu trúc tương tự nhau:
 
 **Content Security Policy** là một lớp bảo mật giúp phát hiện và giảm thiểu một vài thể loại tấn công bao gồm Cross-Site Scripting (XSS) và Data Injection. Những cuộc tấn công này được sử dụng cho tất cả mục đích từ trộm dữ liệu cho đến site defacement(thay đổi diện mạo của site) để phân tán malware.
 
-CSP được thiết kế để có thể fully [backward compatibility](/posts/others/common-terminology/#backward-compatibility-là-gì-). Những browsers mà không hỗ trợ CSP thì vẫn có thể kích hoạt lớp bảo mật này bằng server và ngược lại. Nếu một website không cung cấp CSP header thì browsers sẽ sử dụng [same-origin policy](/posts/others/common-terminology/#same-origin-policy-l%C3%A0-g%C3%AC-).
+CSP được thiết kế để có thể fully [backward compatibility](/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec/#backward-compatibility-là-gì-). Những browsers mà không hỗ trợ CSP thì vẫn có thể kích hoạt lớp bảo mật này bằng server và ngược lại. Nếu một website không cung cấp CSP header thì browsers sẽ sử dụng [same-origin policy](/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec/#same-origin-policy-l%C3%A0-g%C3%AC-).
 
 Để kích hoạt CSP thì bạn cần cấu hình webserver trả về Content-Security-Policy HTTP header. (Thỉnh thoảng bạn sẽ thấy X-Content-Security-Policy header nhưng đây là 1 phiên bản cũ của CSP nên bạn không cần quan tâm đến nữa).
 
@@ -69,7 +69,7 @@ Strict-Transport-Security: max-age=<expire-time>; preload
 - `includeSubDomains` được chỉ định thì những quy tắc này cũng áp dụng với subdomains của site.
 - `preload` xem thêm ở [đây](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)
 
-Nếu một site cho phép connect qua HTTP và sau đó redirects tới HTTPS thì người dùng có thể giao tiếp với phiên bản chưa được mã hóa của site trước khi được redirect, điều này tạo cơ hội cho [man-in-the-middle](/posts/others/common-terminology/#man-in-the-middle-attack-l%C3%A0-g%C3%AC-) attack. Việc redirect cũng có thể được khai thác để hướng người dùng đến 1 site khác thay vì bản bảo mật của site gốc.
+Nếu một site cho phép connect qua HTTP và sau đó redirects tới HTTPS thì người dùng có thể giao tiếp với phiên bản chưa được mã hóa của site trước khi được redirect, điều này tạo cơ hội cho [man-in-the-middle](/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec/#man-in-the-middle-attack-l%C3%A0-g%C3%AC-) attack. Việc redirect cũng có thể được khai thác để hướng người dùng đến 1 site khác thay vì bản bảo mật của site gốc.
 
 HSTS header nói với browsers rằng không bao giờ truy cập vào 1 site sử dụng giao thức HTTP mà nên tự động chuyển tất cả qua HTTPS.
 
@@ -114,7 +114,7 @@ Set-Cookie: id=a3fWa; Expires=Thu, 21 Oct 2021 07:28:00 GMT; Secure; HttpOnly
 
 ## X-Content-Type-Options
 
-**X-Content-Type-Options** header là một HTTP header được gửi từ webserver như là một cái mark được sử dụng để server chỉ ra những [MIME types](http://localhost:1313/posts/others/common-terminology/#mime-types-l%C3%A0-g%C3%AC-) báo trong Content-Type headers không nên bị thay đổi và phải được tuân theo. Hay nói cách khác MIME types đã được cấu hình một cách cẩn thận.
+**X-Content-Type-Options** header là một HTTP header được gửi từ webserver như là một cái mark được sử dụng để server chỉ ra những [MIME types](http://localhost:1313/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec/#mime-types-l%C3%A0-g%C3%AC-) báo trong Content-Type headers không nên bị thay đổi và phải được tuân theo. Hay nói cách khác MIME types đã được cấu hình một cách cẩn thận.
 
 Những tester về bảo mật sẽ luôn mong muốn header này được set.
 
@@ -122,7 +122,7 @@ Tìm hiểu thêm [ở đây](https://developer.mozilla.org/en-US/docs/Web/HTTP/
 
 ## X-Frame-Options
 
-**X-Frame-Options** header là một HTTP header được gửi từ server để nói cho browser biết có nên đồng ý render một page trong một `frame`, `iframe`, `embed` hoặc `object` hay không. Các site có thể sử dụng header này để tránh [click-jacking](http://localhost:1313/posts/others/common-terminology/#click-jacking-attack-l%C3%A0-g%C3%AC-) attacks, bằng cách đảm bảo rằng content của site không bị nhúng vào những sites khác.
+**X-Frame-Options** header là một HTTP header được gửi từ server để nói cho browser biết có nên đồng ý render một page trong một `frame`, `iframe`, `embed` hoặc `object` hay không. Các site có thể sử dụng header này để tránh [click-jacking](http://localhost:1313/blog/mot-so-thuat-ngu-pho-bien-ma-minh-gap-xuyen-suot-hoc-tap-va-lam-viec/#click-jacking-attack-l%C3%A0-g%C3%AC-) attacks, bằng cách đảm bảo rằng content của site không bị nhúng vào những sites khác.
 
 Lớp bảo mật này chỉ được thêm vào khi browser của người dùng hỗ trợ `X-Frame-Options`
 

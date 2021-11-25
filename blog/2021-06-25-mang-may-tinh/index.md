@@ -1,5 +1,8 @@
 ---
-sidebar_position: 1
+slug: mang-may-tinh
+title: Mạng máy tính
+authors: [ducnguyen96]
+tags: [networking]
 ---
 
 # Mạng máy tính

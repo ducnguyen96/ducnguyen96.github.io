@@ -207,7 +207,7 @@ curl "https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT" | grep -oG 'las
 
 ## 13. Lỗi khi test code typescript + express với mongodb-memory-server trên debian
 
-Xem chi tiết ở [bài này](/posts/backend/microservices-with-node-p9/#fix-bug-mongodb-memory-server-trên-debian-11)
+<!-- Xem chi tiết ở [bài này](/posts/backend/microservices-with-node-p9/#fix-bug-mongodb-memory-server-trên-debian-11) -->
 
 ## 14. Docker remove repository images
 
