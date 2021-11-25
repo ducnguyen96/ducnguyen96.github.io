@@ -146,6 +146,8 @@ Class A có 3 bits cho IP address. Mỗi octet có giá trị từ 0 đến 255 
 
 ARP là một giao thức được sử dụng để tìm ra địa chỉ ## phần cứng của 1 node với 1 địa chỉ IP cụ thể. Khi mà IP datagram được hình thành 1 cách hoàn toàn thì nó cần được đóng gói trong 1 Ethernet Frame. Nghĩa là thiết bị truyền tín hiệu cần 1 địa chỉ MAC để có thể hoàn thành header trong Ethernet Frame.
 ![send-abroad](/img/docs/sending-arp-broadcast.png)
+
 Khi muốn gửi ethernet frame đến 1 địa chỉ IP nào đó mà chưa có địa chỉ MAC thì thiết bị gửi sẽ truyền đi 1 ARP message broadcast đến toàn bộ các node trên network.
 ![arp-response](/img/docs/arp-response.png)
+
 Các node khi nhận được arp message sẽ phản hồi và gửi địa chỉ MAC đến thiết bị gửi. Sau đó ARP sẽ cập nhật MAC address vào ARP table entries. Các entries này sẽ hết hạn trong 1 khoảng thời gian ngắn.
