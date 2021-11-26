@@ -51,6 +51,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+        contextualSearch: true,
+        apiKey: "4ecf77a6d860f569d4e043afa4277a14",
+        indexName: "test",
+      },
       navbar: {
         title: "ducnguyen96",
         logo: {
@@ -66,12 +71,12 @@ const config = {
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/ducnguyen96",
+            to: "https://github.com/ducnguyen96",
             label: "GitHub",
             position: "right",
           },
           {
-            href: "https://www.youtube.com/channel/UCCrvmlNIXLgZOMAMn9VKBeA",
+            to: "https://www.youtube.com/channel/UCCrvmlNIXLgZOMAMn9VKBeA",
             label: "Youtube",
             position: "right",
           },
