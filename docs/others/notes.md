@@ -227,3 +227,22 @@ docker rmi -f $(docker images --format '{{.Repository}} {{.ID}}' | grep 'ducnguy
 git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch .env" HEAD
 git push origin master --force
 ```
+
+## 17. Add a program to dmenu
+
+Nếu program là 1 file bin và không có libs thì chỉ đơn giản là move program đó đến `/user/bin/` hoặc `/bin/`
+
+Trường hợp nó có libs và deps khác thì mình sẽ follows theo cách `go` được installed, ở đây lấy ví dụ là blender.
+
+### Move blender đến `/user/local/`.
+
+```bash
+sudo mv blender /user/local/
+```
+
+### Tạo 1 symlink đến 1 thư mục bin mà dmenu có thể quét.
+
+```bash
+cd /user/local/blender
+sudo ln -s "$(pwd)/blender" /usr/bin/
+```
