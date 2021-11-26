@@ -246,3 +246,9 @@ sudo mv blender /user/local/
 cd /user/local/blender
 sudo ln -s "$(pwd)/blender" /usr/bin/
 ```
+
+### Tìm keycode hay keysym của 1 Key?
+
+```bash
+xev
+```

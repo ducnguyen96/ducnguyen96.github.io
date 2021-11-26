@@ -57,7 +57,7 @@ const config = {
         indexName: "test",
       },
       navbar: {
-        title: "ducnguyen96",
+        title: "",
         logo: {
           alt: "ducnguyen96",
           src: "img/logo.jpeg",
