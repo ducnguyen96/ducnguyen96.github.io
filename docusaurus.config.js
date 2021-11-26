@@ -26,13 +26,15 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl: "https://github.com/ducnguyen96/ducnguyen96.github.io",
+          editUrl:
+            "https://github.com/ducnguyen96/ducnguyen96.github.io/edit/master/",
         },
         blog: {
           showReadingTime: true,
           blogSidebarCount: "ALL",
           // Please change this to your repo.
-          editUrl: "https://github.com/ducnguyen96/ducnguyen96.github.io/blog/",
+          editUrl:
+            "https://github.com/ducnguyen96/ducnguyen96.github.io/edit/master/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
