@@ -18,6 +18,11 @@ const config = {
   deploymentBranch: "gh-pages",
   plugins: ["@docusaurus/plugin-ideal-image"],
 
+  i18n: {
+    defaultLocale: "vi",
+    locales: ["vi"],
+  },
+
   presets: [
     [
       "@docusaurus/preset-classic",

@@ -51,7 +51,10 @@ Ví dụ: ta có X = 10, Y = 5 và 2 transaction T và T'
 
 - Dirty reads: giống như ví dụ đã nêu ở trên, T' đọc X chưa được commit.
 - Non-repeatable reads: read COMMITTED data from an UPDATE query from another transaction, trong cùng 1 transaction khi READ 1 giá trị và nhận được 2 kết quả khác nhau.
-  ![non-repeatable-reads](/img/blogs/iPI0C.png). Lưu ý: Đối với hầu hết các platform khác ngoại trừ Postgres. Repeatable read isolation level chỉ chắc chắn là nó chỉ đọc những giá trị đã commit mà không thay đổi. Còn nếu xảy ra phantom reads thì giá trị đấy vẫn được đọc.
+  ![non-repeatable-reads](/img/blogs/iPI0C.png).
+
+  Lưu ý: Đối với hầu hết các platform khác ngoại trừ Postgres. Repeatable read isolation level chỉ chắc chắn là nó chỉ đọc những giá trị đã commit mà không thay đổi. Còn nếu xảy ra phantom reads thì giá trị đấy vẫn được đọc.
+
 - Phantom reads: read COMMITTED data from an INSERT or DELETE query from another transaction, trong cùng 1 transaction khi READ lần 1 lấy số lượng Product được 3, cùng khi đó thì có 1 transaction khác insert hoặc delete 1 products và READ lần 2 nhận được 1 kết quả khác.
   ![phantom-read](/img/blogs/aCtew.png).
 

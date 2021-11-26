@@ -14,6 +14,7 @@ tags: [http, https]
 HTTP messages là cách mà data được trao đổi giữa client và server. Có 2 loại messages: requests gửi từ client để trigger 1 action từ server và responses từ server.
 
 ![httpmsg2.png](/img/blogs/httpmsg2.png)
+
 HTTP requests, responses có cấu trúc tương tự nhau:
 
 1. start-line miêu ta requests được thực hiện hoặc là status của response.

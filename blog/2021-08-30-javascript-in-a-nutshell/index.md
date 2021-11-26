@@ -378,6 +378,7 @@ Khi một đoạn code muốn truy cập vào biến thì inner Lexical Environm
 ## Closure
 
 ![closure](/img/blogs/closure.png)
+
 Closure là một function mà có thể nhớ các biến bên ngoài của nó và có thể truy cập chúng. Ở một số ngôn ngữ thì điều này là không thể hoặc là function đó phải được viết một cách đặc biệt. Nhưng với JavaScript thì mọi functions đều là closures.
 
 Hầu hết thì một Lexical Environment sẽ được loại khỏi bộ nhớ cùng với tất cả các biến sau khi function đã thực hiện xong vì không có references nào tới nó nữa.

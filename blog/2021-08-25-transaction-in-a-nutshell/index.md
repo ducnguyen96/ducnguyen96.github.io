@@ -73,6 +73,7 @@ Như ở trên chúng ta đã nói thì chúng ta muốn chạy các transaction
 
 **1. Result Equivalence**
 ![serial-schedule](/img/blogs/Equivalence-of-Schedules-Problem-01.png)
+
 Nếu 2 schedules đều cho kết quả giống nhau sau khi được thực thi thì chúng được xem là `result equivalence`. Chúng có thể cho result giống nhau ở 1 vài giá trị nhưng cũng có thể khác nhau ở 1 vài giá trị khác. Vì thế mà loại này không có nhiều ý nghĩa.
 
 Ở hình trên lấy X = 2 và Y = 5
@@ -85,6 +86,7 @@ Nếu 2 schedules đều cho kết quả giống nhau sau khi được thực th
 
 **2. Conflict equivalent**
 ![conflice-equivalent](/img/blogs/Equivalence-of-Schedules-Problem-02.png)
+
 Nếu 2 schedules thỏa mãn 2 điều kiện dưới đây thì chúng confict equivalent.
 
 - Các transcation ở 2 schedules là giống nhau.
