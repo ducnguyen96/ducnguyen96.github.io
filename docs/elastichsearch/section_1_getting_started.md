@@ -248,4 +248,28 @@ Như đã nói ở trên thì mỗi cluster có thể có nhiều nodes, mỗi n
 
 ### Coordination
 
--
+- Chịu trách nhiệm về phân phối queries cũng như tập hợp results.
+
+**Configuration**
+
+- node.master: false
+- node.data: false
+- node.ingest: false
+- node.ml: false
+- xpack.ml.enabled: false
+
+### Voting-only
+
+- Hiếm khi được sử dụng.
+- Một node với role này sẽ tham gia vào việc voting để chọn master node.
+- Node này không thể được chọn làm master node.
+- Chỉ sử dụng node này với những clusters lớn.
+
+**Configuration:** node.voting_only: true|false
+
+### Khi nào thì thay đổi node roles ?
+
+- Hữu ích với các clusters lớn.
+- Thay đổi để tối ưu cluster để scale số lượng requests.
+- Trước khi thay đổi thì bạn nên hiểu rõ tài nguyên phần cứng mà bạn có.
+- Chỉ thay đổi khi bạn biết nó sẽ ảnh hưởng như thế nào.
