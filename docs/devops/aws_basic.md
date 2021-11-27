@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# AWS Helper
+# AWS Basic
 
 ## 1. Cài đặt AWS CLI
 

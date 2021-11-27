@@ -16,12 +16,12 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: "Tutorial",
+    title: "Docs",
     image: "/img/undraw_docusaurus_mountain.svg",
     description: (
       <>
         Là nơi mình lưu lại những đoạn code mẫu mà có thể dùng lại trong tương
-        lai.
+        lai cũng như docs cho một số libs/frameworks mà mình dùng.
       </>
     ),
   },

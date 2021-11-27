@@ -66,9 +66,9 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "backend/nginx_basic",
+            docId: "others/notes",
             position: "left",
-            label: "Tutorial",
+            label: "Docs",
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
@@ -90,8 +90,8 @@ const config = {
             title: "Docs",
             items: [
               {
-                label: "Tutorial",
-                to: "/docs/backend/nginx_basic",
+                label: "Docs",
+                to: "/docs/others/notes",
               },
             ],
           },
