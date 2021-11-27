@@ -11,7 +11,7 @@ sidebar_position: 3
 **Lưu ý:** Chỉ tạo index theo cách này khi developer, trong môi trường production thì nên tạo theo giá trị mặc định hoặc bạn phải nắm rõ các tham số truyền vào.
 
 ```bash
-PU /products
+PUT /products
 {
   "settings": {
     "number_of_shards": 2,
