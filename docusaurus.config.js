@@ -16,7 +16,67 @@ const config = {
   organizationName: "ducnguyen96", // Usually your GitHub org/user name.
   projectName: "ducnguyen96.github.io", // Usually your repo name.
   deploymentBranch: "gh-pages",
-  plugins: ["@docusaurus/plugin-ideal-image"],
+  plugins: [
+    "@docusaurus/plugin-ideal-image",
+    [
+      "@docusaurus/plugin-pwa",
+      {
+        debug: true,
+        offlineModeActivationStrategies: [
+          "appInstalled",
+          "standalone",
+          "queryString",
+        ],
+        pwaHead: [
+          {
+            tagName: "link",
+            rel: "icon",
+            href: "/img/logo.jpeg",
+          },
+          {
+            tagName: "link",
+            rel: "manifest",
+            href: "/manifest.json", // your PWA manifest
+          },
+          {
+            tagName: "meta",
+            name: "theme-color",
+            content: "#25C2A0",
+          },
+          {
+            tagName: "meta",
+            name: "apple-mobile-web-app-capable",
+            content: "yes",
+          },
+          {
+            tagName: "meta",
+            name: "apple-mobile-web-app-status-bar-style",
+            content: "#000",
+          },
+          {
+            tagName: "link",
+            rel: "apple-touch-icon",
+            href: "/img/logo.jpeg",
+          },
+          {
+            tagName: "link",
+            rel: "mask-icon",
+            href: "/img/favicon.ico",
+          },
+          {
+            tagName: "meta",
+            name: "msapplication-TileImage",
+            content: "/img/logo.jpeg",
+          },
+          {
+            tagName: "meta",
+            name: "msapplication-TileColor",
+            content: "#000",
+          },
+        ],
+      },
+    ],
+  ],
 
   i18n: {
     defaultLocale: "vi",

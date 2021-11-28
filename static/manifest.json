@@ -1,0 +1,47 @@
+{
+  "theme_color": "#25C2A0",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "ducnguyen96: Developer Roadmap",
+  "short_name": "dn96",
+  "description": "Developer Roadmap",
+  "icons": [{
+      "src": "/img/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [{
+      "src": "/img/screenshot_1.png",
+      "type": "image/png",
+      "sizes": "1920x1080"
+    },
+    {
+      "src": "/img/screenshot_2.png",
+      "type": "image/png",
+      "sizes": "1920x1080"
+    },
+    {
+      "src": "/img/screenshot_3.png",
+      "type": "image/png",
+      "sizes": "1920x1080"
+    }
+  ]
+}
