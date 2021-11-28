@@ -1,0 +1,71 @@
+---
+sidebar_position: 1
+---
+
+import "./introduction.css";
+
+# Introduction
+
+Dưới đây là một số docs cùng với code mẫu mà mình đã hoặc sẽ dùng, mình làm site này với mục đích trước hết là bản thân có thể dễ dàng xem lại, đồng thời có thể mang lại thứ gì đó cho mọi người.
+
+Mình chắc hầu hết software engineer đều mong muốn có thể built riêng cho mình 1 ứng dụng gì đấy và nắm được cách thức mọi thứ hoạt động, mình cũng vậy. Cho nên các bạn có thể thấy nhiều bài viết liên quan đến các stacks khác nhau từ frontend đến backend và devops,...
+
+Tuy nhiên định hướng lâu dài của mình vẫn là backend, hoặc xa hơn mình có thể tiến tới devops nhiều hơn. Mình thích UI đẹp tuy nhiên mình thích cách các server đứng sau phục vụ mọi thứ cho client, đồng thời thì mình cũng thích linux và open-source.
+Mình dùng debian chưa quá lâu tuy nhiên nhận thấy nó có thể hoạt động theo bất cứ cách gì mà mình muốn, cộng đồng open-source cũng built rất nhiều packages cool ngầu và hữu ích. Nếu có thời gian mình cũng mong muốn làm gì đấy để cùng đóng góp cho động đồng open-source của Việt Nam.
+
+Dưới đây là một số side-projects mình làm lúc study về libs/frameworks:
+
+export const ShowCaseCard = ({ header, body, tags, key }) => (
+  <li className="card shadow--md" key={key}>
+    <div className="card__image showcaseCardImage">
+      <div>
+        <img src="/img/docs/showcase_redditclone.png" />
+      </div>
+    </div>
+    <div className="card__body">
+      <div className="showcaseCardHeader">
+        <h4>
+          <a
+            href="http://redditclone.ducnguyen96.xyz/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {header}
+          </a>
+        </h4>
+        <p>{body}</p>
+      </div>
+    </div>
+    <ul className="card__footer cardFooter">
+      {tags.map((tag, index) => (
+        <li className="tag_n7M7" key={index}>
+          <span className="textLabel">{tag}</span>
+          <span className={"colorLabel " + tag.toLowerCase()}></span>
+        </li>
+      ))}
+    </ul>
+  </li>
+);
+
+<div className="container" style={{ paddingLeft: 0 }}>
+  <ul className="container showcaseList">
+    <ShowCaseCard
+      header="Reddit Clone"
+      body="Reddit is an American social news aggregation, web content rating, and
+          discussion website."
+      tags={[
+        "react",
+        "mui",
+        "typescript",
+        "graphql",
+        "relay",
+        "golang",
+        "ent",
+        "postgres",
+        "nginx",
+        "GCE",
+      ]}
+      key="0"
+    />
+  </ul>
+</div>

@@ -1,0 +1,97 @@
+.showcaseList {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+}
+
+.showcaseCardImage {
+  border-bottom: 2px solid var(--ifm-color-emphasis-200);
+  height: 150px;
+  overflow: hidden;
+}
+
+.showcaseCardImage > div {
+  background-size: "cover";
+  background-repeat: "no-repeat";
+  position: "relative";
+  width: "100%";
+  height: "auto";
+  max-width: "100%";
+  margin-bottom: "-4px";
+}
+
+.cardFooter {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* .showcaseCardHeader {
+  align-items: center;
+  display: flex;
+  margin-bottom: 12px;
+} */
+
+
+.tag_n7M7 {
+  align-items: center;
+  border: 1px solid var(--ifm-color-secondary-darkest);
+  border-radius: 12px;
+  cursor: default;
+  display: inline-flex;
+  font-size: .675rem;
+  margin-bottom: 6px!important;
+  margin-right: 6px;
+  margin-top: var(--ifm-list-item-margin);
+}
+
+.tag_n7M7 .textLabel {
+  margin-left: 8px;
+}
+
+.tag_n7M7 .colorLabel {
+  border-radius: 50%;
+  height: 7px;
+  margin-left: 6px;
+  margin-right: 6px;
+  width: 7px;
+}
+
+.colorLabel.react {
+  background-color: #61DAFB;
+}
+
+.colorLabel.mui {
+  background-color: #007FFF;
+}
+
+.colorLabel.typescript {
+  background-color: #3178C6;
+}
+
+.colorLabel.graphql {
+  background-color: #E00097;
+}
+
+.colorLabel.relay {
+  background-color: #F26B00;
+}
+
+.colorLabel.golang {
+  background-color: #007D9C;
+}
+
+.colorLabel.ent {
+  background-color: #F2D632;
+}
+
+.colorLabel.postgres {
+  background-color: #336791;
+}
+
+.colorLabel.nginx {
+  background-color: #009639;
+}
+
+.colorLabel.gce {
+  background-color: #4282F0;
+}

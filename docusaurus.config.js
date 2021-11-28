@@ -66,7 +66,7 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "others/notes",
+            docId: "introduction",
             position: "left",
             label: "Docs",
           },
@@ -81,6 +81,16 @@ const config = {
             label: "Youtube",
             position: "right",
           },
+          {
+            to: "http://localhost:3000/projects/cv/",
+            label: "CV",
+            position: "right",
+          },
+          {
+            to: "http://localhost:3000/projects/cv-pdf/",
+            label: "CV-PDF",
+            position: "right",
+          },
         ],
       },
       footer: {
@@ -91,7 +101,7 @@ const config = {
             items: [
               {
                 label: "Docs",
-                to: "/docs/others/notes",
+                to: "/docs/introduction",
               },
             ],
           },
