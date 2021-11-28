@@ -82,12 +82,12 @@ const config = {
             position: "right",
           },
           {
-            to: "http://localhost:3000/projects/cv/",
+            to: "https://ducnguyen96.github.io/projects/cv/",
             label: "CV",
             position: "right",
           },
           {
-            to: "http://localhost:3000/projects/cv-pdf/",
+            to: "https://ducnguyen96.github.io/projects/cv-pdf/",
             label: "CV-PDF",
             position: "right",
           },
