@@ -1303,3 +1303,216 @@ Kết quả
 - Set `norms` thành `false` nếu không cần `relevance scoring`.
 - Set `index` thành `false` nếu không cần filter (time series).
 - Những điều trên chỉ có ảnh hưởng lớn nếu số lượng documents là rất lớn.
+
+## 26. Stemming and stop words
+
+### Stemming
+
+- Đưa words về dạng nguyên gốc
+- Ví dụ: loved --> love, drinking --> drink
+
+```json
+"I love drinking bottles of wine on last year's vacation."
+
+--> "I love drink bottle of wine on last year vacation."
+```
+
+### Stop words
+
+- Là những từ sẽ được loại ra trong quá trình analysis.
+- Ví dụ: a, the, at, of, on,...
+
+```json
+"I love drinking bottles of wine on last year's vacation."
+
+--> "I loved drinking bottles wine last year's vacation."
+```
+
+- Chúng không có hoặc có giá trị rất ít cho relevance scoring.
+- Mặc định không bị loại, và cũng không khuyến khích loại bỏ chúng.
+
+## 27. Built-in analyzers
+
+### standard
+
+- Split text tại boundaries và remove chấm câu.
+  - Thực hiện bởi standard tokenizer.
+- Lowercases ký tự với lowercase token filter.
+- Chứa `stop`.
+
+```json
+"Is that Peter's cute-looking dog?"
+
+--> ["is", "that", "peter's", "cute", "looking", "dog"]
+```
+
+### simple
+
+- Tương tự `standard` tuy nhiên sẽ split khi gặp bất cứ ký tự nào không phải chữ cái.
+- Lowercases với lowercase tokenizer --> unusual, performance hack.
+
+```json
+"Is that Peter's cute-looking dog?"
+
+--> ["is", "that", "peter", "s", "cute", "looking", "dog"]
+```
+
+### whitespace
+
+- Split khi gặp whitespace.
+- Không lowercase.
+
+```json
+"Is that Peter's cute-looking dog?"
+
+--> ["Is", "that", "Peter's", "cute-looking", "dog?"]
+```
+
+### keyword
+
+- Chỉ đơn giảm là ouputs tất cả như 1 token
+
+```json
+"Is that Peter's cute-looking dog?"
+
+--> ["Is that Peter's cute-looking dog?"]
+```
+
+### pattern
+
+- Regular expression sẽ được sử dụng.
+- Mặc định là non-word characters (\W+).
+
+```json
+"Is that Peter's cute-looking dog?"
+
+--> ["is", "that", "peter", "s", "cute", "looking", "dog"]
+```
+
+## 28. Custom analyzer
+
+```bash
+PUT /analyzer_test
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "my_custom_analyzer": {
+          "type": "custom",
+          "char_filter": [
+            "html_strip"
+          ],
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "stop",
+            "asciifolding"
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+Sử dụng
+
+```bash
+POST /analyzer_test/_analyze
+{
+  "analyzer": "my_custom_analyzer",
+  "text": "I&apos;m in a <em>good</em> mood&nbsp;-&nbsp;and I <strong>love</strong> acai!"
+}
+```
+
+Kết quả
+
+```json
+{
+  "tokens": [
+    {
+      "token": "i'm",
+      "start_offset": 0,
+      "end_offset": 8,
+      "type": "<ALPHANUM>",
+      "position": 0
+    },
+    {
+      "token": "good",
+      "start_offset": 18,
+      "end_offset": 27,
+      "type": "<ALPHANUM>",
+      "position": 3
+    },
+    {
+      "token": "mood",
+      "start_offset": 28,
+      "end_offset": 32,
+      "type": "<ALPHANUM>",
+      "position": 4
+    },
+    {
+      "token": "i",
+      "start_offset": 49,
+      "end_offset": 50,
+      "type": "<ALPHANUM>",
+      "position": 6
+    },
+    {
+      "token": "love",
+      "start_offset": 59,
+      "end_offset": 72,
+      "type": "<ALPHANUM>",
+      "position": 7
+    },
+    {
+      "token": "acai",
+      "start_offset": 73,
+      "end_offset": 77,
+      "type": "<ALPHANUM>",
+      "position": 8
+    }
+  ]
+}
+```
+
+## 29. Thêm analyzers vào indices
+
+- open index cho phép index và search.
+- closed index sẽ từ chối request.
+- dynamic settings có thể thay đổi mà không cần close index.
+- static settings chỉ có thể thay đổi tại thời điểm khởi tạo hoặc close index.
+
+```bash
+PUT /analyzer_test/_settings
+{
+  "analysis": {
+    "analyzer": {
+      "my_second_analyzer": {
+        "type": "custom",
+        "char_filter": [
+          "html_strip"
+        ],
+        "tokenizer": "standard",
+        "filter": [
+          "lowercase",
+          "stop",
+          "asciifolding"
+        ]
+      }
+    }
+  }
+}
+```
+
+- Nếu chạy query ở trên ta sẽ gặp lỗi vì settings này là static và index đang open. Ta cần đóng index trước.
+
+```bash
+POST /analyzer_test/_close
+```
+
+- Sau khi thêm analyzer thì mở lại index.
+
+```bash
+POST /analyzer_test/_open
+```
