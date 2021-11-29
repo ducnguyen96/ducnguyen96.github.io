@@ -854,3 +854,452 @@ PUT /reviews/_mapping
 
 - Alias có thể update nhưng chỉ update target field bằng cách update mapping với `path` mới.
 - Có thể update vì nó không ảnh hưởng đến việc index.
+
+## 18. Multi-field mappings
+
+![multi-field mappings](/img/docs/elasticsearch/multi-field_mapping.png)
+
+```bash
+PUT /multi_field_test
+{
+  "mappings": {
+    "description": {
+      "type": "text"
+    },
+    "ingredients": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}
+```
+
+Query với text
+
+```bash
+GET /multi_field_test/_search
+{
+  "query": {
+    "match": {
+      "ingredients": "Spaghetti"
+    }
+  }
+}
+```
+
+Query với keyword
+
+```bash
+GET /multi_field_test/_search
+{
+  "query": {
+    "match": {
+      "ingredients.keyword": "Spaghetti"
+    }
+  }
+}
+```
+
+```bash
+DELETE /multi_field_test
+```
+
+## 19. Index templates
+
+![access_log_template](/img/docs/elasticsearch/access_log_template.png)
+
+- Template chỉ rõ các settings và mappings.
+- Applied tới những indices thỏa mãn 1 hoặc nhiều patterns.
+- Các patterns có thể includes wildcards (\*).
+- Templates có tác dụng khi tạo các indices mới.
+
+```bash
+PUT /_template/access-logs
+{
+  "index_patterns": ["access-logs-*"],
+  "settings": {
+    "number_of_shards": 2,
+    "index.mapping.coerce": false
+  }
+  "mappings": {
+    "properties": {
+      "@timestamp": {
+        "type": "date"
+      },
+      "url.original": {
+        "type": "keyword"
+      },
+      "http.request.referrer": {
+        "type": "keyword"
+      },
+      "http.response.status_code": {
+        "type" "long"
+      }
+    }
+  }
+}
+```
+
+Tạo index mới
+
+```bash
+PUT /access-logs-2020-01-01
+```
+
+### Thứ tự của index templates
+
+- Một index mới có thể match với nhiều templates.
+- Tham số _order_ có thể được sử dụng để ưu tiên thứ tự của templates.
+  - Tham số này có giá trị là 1 integer.
+  - Template có order nhỏ hơn thì được merged trước.
+
+### Update template
+
+![update-template](/img/docs/elasticsearch/update_templates.png)
+
+## 20. Elastic Common Schema (ECS)
+
+![update-template](/img/docs/elasticsearch/ecs.png)
+
+- Là một số chỉ định về các fields thường gặp và cách chúng nên được mapped.
+- Trước ECS thì các field names không có sự gắn kết.
+- Ingest logs từ nginx sẽ cho field names khác với Apache.
+- Ví dụ về field thường gặp: `@timestamp`
+- 1 Group các fields được gọi là field set.
+
+### Sử dụng ECS
+
+- Trong ECS thì documents được xem là `events`.
+  - ECS không cung cấp các trường cho non-events (chẳng hạn như products).
+- Hầu hết là hữu ích cho các events tiêu chuẩn như:
+  - web server logs, operating system metrics, etc.
+- ECS được tự động xử lý bởi các sản phẩm trong Elastic Stack.
+
+## 21. Dynamic mapping
+
+![update-template](/img/docs/elasticsearch/dynamic_mapping.png)
+
+- Nếu bạn index một document với 1 index chưa tồn tại thì index đấy sẽ được tạo tự động.
+- Nhìn hình trên ta thấy một số điểm đáng chú ý như sau:
+
+  - Ở trường `tags` thì có 2 loại index được tạo ra là text dùng cho full-text search và keyword dùng cho exact-match. Elasticsearch không biết bạn sẽ dùng field này như thế nào nên nó index 2 loại luôn cho bạn.
+  - Ở trường `in_stock` Elastichsearch không biết khoảng giá trị của trường này nên mặc định sẽ để type có thể lưu giá trị lớn nhất.
+  - Trường `created_at` mặc dù input là string nhưng Elasticsearch có cơ chế detect date nên đã mặc định chuyển sang type là date.
+
+![update-template](/img/docs/elasticsearch/dynamic_mapping_1.png)
+
+## 22. Kết hợp explicit và dynamic mapping
+
+Tạo index
+
+```bash
+PUT /people
+{
+  "mappings": {
+    "properties": {
+      "first_name": {
+        "type": "text"
+      }
+    }
+  }
+}
+```
+
+Add document
+
+```bash
+POST /people/_doc
+{
+  "first_name": "duc",
+  "last_name": "nguyen"
+}
+```
+
+Kiểm tra mapping
+
+```bash
+GET /people/_mapping
+```
+
+Kết quả
+
+```json
+{
+  "people": {
+    "mappings": {
+      "properties": {
+        "first_name": {
+          "type": "text"
+        },
+        "last_name": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## 23. Configure dynamic mapping
+
+- Set `dynamic` thành `false` sẽ làm field đó bị ignored, nhưng vẫn xuất hiện ở trong \_source, chỉ là không được indexed.
+- Vì không được index nên khi query dựa vào field này thì kết quả trả về null.
+- Set `dynamic` thành `"strict"` thì elasticsearch sẽ reject.
+- dynamic có thể bị overwrite ở các properties con.
+
+### date detection
+
+```bash
+PUT /computers
+{
+  "mappings": {
+    "date_detection": false
+  }
+}
+```
+
+### date detection formats
+
+```bash
+PUT /computers
+{
+  "mappings": {
+    "dynamic_date_formats": ["dd-MM-yyyy"]
+  }
+}
+```
+
+## 24. Dynamic templates
+
+![update-template](/img/docs/elasticsearch/dynamic_template.png)
+
+```bash
+PUT /test_index
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "strings": {
+          "match_mapping_type": "string",
+          "mapping": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+### `match` và `unmatch`
+
+- Được sử dụng để chỉ định điều kiện cho field names.
+- Cả 2 tham số đều hỗ trợ patterns với wildcard(\*).
+- Hỗ trợ regex.
+
+```bash
+PUT /test_index
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "names": {
+          "match_mapping_type": "string",
+          "match": "^[a-zA-Z]+_name$",
+          "match_pattern": "regex",
+          "mapping": {
+            "type": "text"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+Thêm document
+
+```bash
+POST /test_index/_doc
+{
+  "first_name": "Nguyen",
+  "middle_name": "Van",
+  "last_name": "Duc"
+}
+```
+
+Get mapping
+
+```bash
+GET /test_index/_mapping
+```
+
+Kết quả
+
+```json
+{
+  "test_index": {
+    "mappings": {
+      "dynamic_templates": [
+        {
+          "names": {
+            "match": "^[a-zA-Z]+_name$",
+            "match_mapping_type": "string",
+            "match_pattern": "regex",
+            "mapping": {
+              "type": "text"
+            }
+          }
+        }
+      ],
+      "properties": {
+        "first_name": {
+          "type": "text"
+        },
+        "last_name": {
+          "type": "text"
+        },
+        "middle_name": {
+          "type": "text"
+        }
+      }
+    }
+  }
+}
+```
+
+### `path_match` và `patch_unmatch`
+
+- Tương tự với `match` và `unmatch`.
+
+Tạo template
+
+```bash
+PUT /test_index
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "copy_to_full_name": {
+          "match_mapping_type": "string",
+          "path_match": "emplyer.name.*",
+          "mapping": {
+            "type": "text",
+            "copy_to": "full_name"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+Thêm doc
+
+```bash
+POST /test_index/_doc
+{
+  "first_name": "Nguyen",
+  "middle_name": "Van",
+  "last_name": "Duc"
+}
+```
+
+Get mapping
+
+```bash
+GET /test_index/_mapping
+```
+
+Kết quả
+
+```json
+{
+  "test_index": {
+    "mappings": {
+      "dynamic_templates": [
+        {
+          "copy_to_full_name": {
+            "path_match": "emplyer.name.*",
+            "match_mapping_type": "string",
+            "mapping": {
+              "copy_to": "full_name",
+              "type": "text"
+            }
+          }
+        }
+      ],
+      "properties": {
+        "first_name": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "last_name": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "middle_name": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## 25. Mapping Practices
+
+- Dynamic mapping rất tiện tuy nhiên không nên sử dụng trong production.
+- Nếu có nhiều documents thì optimize mappings sẽ tiết kiệm nhiều bộ nhớ.
+- Nên set `dynamic` thành `strict`.
+
+### text
+
+- Không nên map 1 lúc cả `text` và `keyword`.
+- Dùng `text` cho full-text search.
+- Dùng `keyword` cho aggregations, sorting, filtering với exact match.
+- Hãy disable coercion và cung cấp type chính xác.
+
+### numeric
+
+- Với số nguyên thì dùng integer chắc sẽ đủ.
+- Với decimal thì `float` đã đủ chính xác, `double` sẽ chính xac shown nhưng chiếm gấp 2 bộ nhớ.
+
+### Tham số mapping
+
+- Set `doc_values` thành `false` nếu không cần sorting, aggregations và scripting.
+- Set `norms` thành `false` nếu không cần `relevance scoring`.
+- Set `index` thành `false` nếu không cần filter (time series).
+- Những điều trên chỉ có ảnh hưởng lớn nếu số lượng documents là rất lớn.
