@@ -50,7 +50,7 @@ GET /product/1/_explain
 
 Ta có 3 queries sau đây (với name là "Lobster - Live"):
 
-### 1
+**1**
 
 ```bash
 GET /product/_search
@@ -65,7 +65,7 @@ GET /product/_search
 
 ==> Trả về kết quả
 
-### 2
+**2**
 
 ```bash
 GET /product/_search
@@ -80,7 +80,7 @@ GET /product/_search
 
 => Không
 
-### 3
+**3**
 
 ```bash
 GET /product/_search
