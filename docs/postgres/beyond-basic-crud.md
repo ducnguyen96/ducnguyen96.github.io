@@ -301,3 +301,273 @@ EXECUTE PROCEDURE trigger_set_timestamp();
 ```
 
 Bây giờ khi có update đến 1 row của fav thì trường `updated_at` sẽ trigger `trigger_set_timestamp`.
+
+## 7.Createing and Loading Database
+
+Tạo table
+
+```bash
+https://www.pg4e.com/lectures/03-Techniques.sql
+```
+
+Load data
+
+```bash
+https://www.pg4e.com/lectures/03-Techniques-Load.sql
+```
+
+## 8. Loading and Normalizing CSV Data
+
+```sql
+--- Load a CSV file and automatically normalize into one-to-many
+
+-- Download
+-- wget https://www.pg4e.com/lectures/03-Techniques.csv
+
+-- x,y
+-- Zap,A
+-- Zip,A
+-- One,B
+-- Two,B
+
+DROP TABLE IF EXISTS xy_raw;
+DROP TABLE IF EXISTS y;
+DROP TABLE IF EXISTS xy;
+
+CREATE TABLE xy_raw(x TEXT, y TEXT, y_id INTEGER);
+CREATE TABLE y (id SERIAL, PRIMARY KEY(id), y TEXT);
+CREATE TABLE xy(id SERIAL, PRIMARY KEY(id), x TEXT, y_id INTEGER, UNIQUE(x,y_id));
+
+\d xy_raw
+\d+ y
+
+\copy xy_raw(x,y) FROM '03-Techniques.csv' WITH DELIMITER ',' CSV;
+
+SELECT DISTINCT y from xy_raw;
+
+INSERT INTO y (y) SELECT DISTINCT y FROM xy_raw;
+
+UPDATE xy_raw SET y_id = (SELECT y.id FROM y WHERE y.y = xy_raw.y);
+
+SELECT * FROM xy_raw;
+
+INSERT INTO xy (x, y_id) SELECT x, y_id FROM xy_raw;
+
+SELECT * FROM xy JOIN y ON xy.y_id = y.id;
+
+ALTER TABLE xy_raw DROP COLUMN y;
+
+DROP TABLE xy_raw;
+```
+
+## 9. Tạo test data trong PostgreSQL
+
+- **repeat()**: generate long strings(horizontal).
+
+```sql
+SELECT REPEAT('Neon ', 5);
+```
+
+```json
+          repeat
+---------------------------
+ Neon Neon Neon Neon Neon
+(1 row)
+
+```
+
+- **generate_series()**: generate lots of rows (vertical).
+
+```sql
+SELECT GENERATE_SERIES(1, 5);
+```
+
+```json
+ generate_series
+-----------------
+               1
+               2
+               3
+               4
+               5
+```
+
+- **random()**: make rows unique.
+  - Floating point 0 <= random() <= 1.0
+
+```sql
+SELECT random(), random(), trunc(random()*100);
+```
+
+```json
+       random       |       random       | trunc
+--------------------+--------------------+-------
+ 0.5890984854380257 | 0.9700410868564049 |    62
+```
+
+**combined**
+
+```sql
+SELECT 'https://ducnguyen96.github.io/' || TRUNC(RANDOM()*10000) || REPEAT('LEMON ', 5) || GENERATE_SERIES(1, 5);
+```
+
+```json
+                             ?column?
+-------------------------------------------------------------------
+ https://ducnguyen96.github.io/2957LEMON LEMON LEMON LEMON LEMON 1
+ https://ducnguyen96.github.io/9551LEMON LEMON LEMON LEMON LEMON 2
+ https://ducnguyen96.github.io/4068LEMON LEMON LEMON LEMON LEMON 3
+ https://ducnguyen96.github.io/1896LEMON LEMON LEMON LEMON LEMON 4
+ https://ducnguyen96.github.io/7486LEMON LEMON LEMON LEMON LEMON 5
+```
+
+## 10. Text Function
+
+- `Where` Clause Operations
+  - LIKE, ILIKE, NOT LIKE, NOT ILIKE
+  - SIMILAR TO, NOT SIMILAR TO
+  - =, >, <, >=, <=, BETWEEN IN
+- Manipulate `SELECT` results / `WHERE` clause
+  - lower(), upper()
+
+Tham khảo thêm: https://www.postgresql.org/docs/14/functions-string.html
+
+Ví dụ:
+
+```sql
+CREATE TABLE textfun(
+  content TEXT
+);
+
+CREATE INDEX textfun_b ON textfun(content);
+
+SELECT pg_relation_size('textfun'), pg_indexes_size('textfun');
+```
+
+```json
+ pg_relation_size | pg_indexes_size
+------------------+-----------------
+                0 |            8192
+```
+
+```sql
+INSERT INTO textfun(content)
+SELECT (
+  CASE WHEN (random() < 0.5)
+    THEN 'https://www.pg4e.com/neon/'
+    ELSE 'https://www.pg4e.com/LEMONS/'
+  END
+) || GENERATE_SERIES(100000, 200000);
+```
+
+```json
+ pg_relation_size | pg_indexes_size
+------------------+-----------------
+          6832128 |         8290304
+```
+
+```sql
+SELECT content FROM textfun LIMIT 5;
+```
+
+```json
+              content
+------------------------------------
+ https://www.pg4e.com/neon/100000
+ https://www.pg4e.com/LEMONS/100001
+ https://www.pg4e.com/LEMONS/100002
+ https://www.pg4e.com/LEMONS/100003
+ https://www.pg4e.com/LEMONS/100004
+```
+
+### Apply
+
+```sql
+SELECT content FROM textfun WHERE content LIKE '%150000%';
+-- https://www.pg4e.com/neon/150000
+SELECT UPPER(content) FROM textfun WHERE content LIKE '%150000%';
+-- HTTPS://WWW.PG4E.COM/NEON/150000
+SELECT RIGHT(content, 4) FROM textfun WHERE content LIKE '%150000%';
+-- 0000
+SELECT LEFT(content) FROM textfun WHERE content LIKE '%150000%';
+-- http
+SELECT STRPOS(content, 'ttps://') FROM textfun WHERE content LIKE '%150000%';
+-- 2
+SELECT SUBSTR(content, 2, 4) FROM textfun WHERE content LIKE '%150000%';
+-- ttps
+SELECT SPLIT_PART(content) FROM textfun WHERE content LIKE '%150000%';
+-- neon
+SELECT TRANSLATE(content, 'th.p/', 'TH!P_') FROM textfun WHERE content LIKE '%150000%';
+-- HTTPS:__www!Pg4e!com_neon_1500000
+```
+
+## 11. B-Tree Performance
+
+### So sánh 1
+
+![b-tree](/img/docs/postgresql/b-tree.png);
+
+- Ta có thể thấy các postgres filter sẽ khác nhau khi apply các pattern khác nhau.
+- Câu query thích hợp sẽ giúp bạn tăng tốc độ lên cả 1000 lần.
+
+### So sánh 2
+
+![b-tree](/img/docs/postgresql/b-tree-1.png);
+
+- LIMIT 1 có thể tăng performance vì postgres có thể dừng ngay sau khi tìm thấy target.
+
+### So sánh 3
+
+![b-tree](/img/docs/postgresql/b-tree-2.png);
+
+- Sub-query có thời gian query rất lâu.
+
+## 12. Character Sets
+
+- Ngày trước thì mỗi ký tự sẽ được đại diện bằng một số từ 0 đến 127 và được lưu ở bộ nhớ 8 bits - 1 byte.
+- Hàm `ascii()` cho ta biết giá trị bằng số của 1 ký tự ASCII.
+- Hàm `chr()` map 1 số thành 1 ký tự.
+
+```sql
+SELECT ASCII('H'), ASCII('e'), ASCII('1'), CHR(72), CHR(42);
+```
+
+```json
+ ascii | ascii | ascii | chr | chr
+-------+-------+-------+-----+-----
+    72 |   101 |    49 | H   | *
+```
+
+### Unicode - Tất cả các ký tự
+
+- Unicode is 32/21 bits
+- Unicode 12.1
+  - 137.000 characters
+  - 150 character sets
+
+```sql
+SELECT CHR(72), CHR(231), CHR(20013);
+```
+
+```json
+ chr | chr | chr
+-----+-----+-----
+ H   | ç   | 中
+```
+
+### UTF-8
+
+- UTF-8 là một phiên bản rút gọn cho Unicode
+  - Represents 21 bits in 8-32 bits
+  - 0-128 là ASCII
+  - 128-255 là signals
+
+```sql
+SHOW SERVER_ENCODING;
+```
+
+```json
+ server_encoding
+-----------------
+ UTF8
+```
