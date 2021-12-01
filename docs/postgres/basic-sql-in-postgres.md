@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Thiết kế database và SQL cơ bản trong PostgreSQL
+# SQL cơ bản trong PostgreSQL
 
 ## 1. Working with Tables and PostgreSQL
 
