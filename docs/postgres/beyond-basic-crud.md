@@ -571,3 +571,247 @@ SHOW SERVER_ENCODING;
 -----------------
  UTF8
 ```
+
+## 12. Special Math for Hash Computation
+
+- Bitwise operators
+  - << left shift.
+  - ^ exclusive or
+  - & and.
+
+```python
+x = 15
+y = ord('H')
+print('x', x, format(x, '08b'))     # x 15 00001111
+print('y', y, format(y, '08b'))     # y 72 01001000
+print('x^y', format(x^y, '08b'))    # x^y  01000111
+print('x&y', format(x&y, '08b'))    # x&y  00001000
+print('x<<1', format(x<<1, '08b'))  # x<<1 00011110
+```
+
+### Simple hash function
+
+```python
+while True:
+  txt = input("Enter a string: ")
+  if len(txt) < 1: break
+
+  hv = 0
+  for let in text:
+
+    hv = ((hv << 1) ^ ord(let)) & 0xffffff
+
+    if (hv < 2000):
+      print(let,
+        format(ord(let), '08b'),
+        format(hv, '16b'),
+        format(ord(let), '03d'), hv
+      )
+  print(format(hv, '08x'), hv)
+```
+
+```json
+Enter a string: Hello
+H 01001000              1001000 072 72
+e 01100101             11110101 101 245
+l 01101100            110000110 108 390
+l 01101100           1101100000 108 864
+o 01101111          11010101111 111 1711
+000006af  1711
+
+Enter a string: hello
+h 01101000              1101000 104 104
+e 01100101             10110101 101 181
+l 01101100            100000110 108 262
+l 01101100           1001100000 108 608
+o 01101111          10010101111 111 1199
+000004af  1199
+```
+
+## 13. Index Choices and Index Techniques
+
+#### Index Strategies
+
+Lưu ý tốc độ `SELECT` ở dưới đây là cho exact match.
+
+```sql
+CREATE TABLE cr2 (
+  id SERIAL,
+  url TEXT,
+  content TEXT
+);
+
+NO INDEX
+
+Relation Size 507904
+Index Size         0
+
+SELECT       1.784ms
+```
+
+```sql
+CREATE TABLE cr2 (
+  id SERIAL,
+  url TEXT,
+  content TEXT
+);
+
+create unique index cr2_md5 on cr2 (md5(url));
+
+Relation Size 507904
+Index Size    311296
+
+SELECT       0.142ms
+```
+
+```sql
+CREATE TABLE cr3 (
+  id SERIAL,
+  url TEXT,
+  url_md5 uuid unique,
+  content TEXT
+);
+
+insert into cr3 (url)
+select repeat('Neon', 1000) || generate_series(1,5000);
+
+update cr3 set url_md5 = md5(url)::uuid;
+
+MD5 Index on url
+
+Relation Size 507904
+Index Size    311296
+
+SELECT       0.030ms
+```
+
+```sql
+CREATE TABLE cr4 (
+  id SERIAL,
+  url TEXT,
+  content TEXT
+);
+
+insert into cr4 (url)
+select repeat('Neon', 1000) || generate_series(1,5000);
+
+create index cr4_hash on cr4 using hash(url);
+
+Relation Size 507904
+Index Size    278528
+
+SELECT       0.045ms
+```
+
+### PostgreSQL Index Tyupes
+
+- B-Tree - giữ được order - thường được sử dụng cho
+  - Hỗ trợ exact lookup, prefix lookup, <, >, range, sort.
+- Hash
+  - Smaller - hỗ trợ exact lookup.
+  - Not recommended before PostgreSQL 10.
+
+## 14. Regular Expression
+
+### Quick Guide
+
+- `^` Matches the beginning of a line
+- `$` Matches the end of the line
+- `.` Matches any character
+- `*` Repeats a character zero or more times
+- `*?`Repeats a character zero or more times (non-greedy)
+- `+` Repeats a character one or more times
+- `+?` Repeats a character one or more times (non-greedy)
+- [aeiou] Matches a single character in the listed set
+- [^xyz] Matches a single character not in the listed set
+- [a-z0-9]The set of characters can include a range
+- ( Indicates where string extraction is to start
+- ) Indicates where string extraction is to end
+
+### Where Clause Operators
+
+- `~` Matches
+- `~*` Matches case insensitive
+- `!~` Does not match
+- `!~*` Does not match insensitive
+- Different than `LIKE` - Match anywhere
+  - tweet ~ 'UMSI'
+  - tweet LIKE '%UMSI%'
+
+### The simplest regex is like `LIKE`
+
+```sql
+CREATE TABLE em (id serial, primary key(id), email text);
+
+INSERT INTO em (email) VALUES ('csev@umich.edu');
+INSERT INTO em (email) VALUES ('coleen@umich.edu');
+INSERT INTO em (email) VALUES ('sally@uiuc.edu');
+INSERT INTO em (email) VALUES ('ted79@umuc.edu');
+INSERT INTO em (email) VALUES ('glenn1@apple.com');
+INSERT INTO em (email) VALUES ('nbody@apply.com');
+
+SELECT email FROM em WHERE email ~'umich';
+```
+
+```json
+      email
+------------------
+ csev@umich.edu
+ coleen@umich.edu
+```
+
+```sql
+SELECT substring(email FROM '[0-9]+') FROM em WHERE email ~ '[0-9]';
+```
+
+```json
+ substring
+-----------
+ 79
+ 1
+```
+
+### Multiple matches
+
+- `substirng()` gets the first match in a text column.
+- we can get an array of maches using `regexp_matches()`.
+
+```sql
+CREATE TABLE tw (id serial, primary key(id), tweet text);
+
+INSERT INTO tw (tweet) VALUES ('THIS IS #SQL and #FUN stuff');
+INSERT INTO tw (tweet) VALUES ('More people should learn #SQL from #UMSI');
+INSERT INTO tw (tweet) VALUES ('#UMSI also teaches #PYTHON');
+```
+
+```sql
+SELECT regexp_matches(tweet, '#([A-Za-z0-9_]+)', 'g') FROM tw;
+```
+
+```json
+ regexp_matches
+----------------
+ {SQL}
+ {FUN}
+ {SQL}
+ {UMSI}
+ {UMSI}
+ {PYTHON}
+```
+
+### Flat files, Regex, Email
+
+```sql
+CREATE TABLE mbox (line TEXT);
+-- E'\007' is the BEL character and not in the data so each row is one column.
+\copy mbox FROM PROGRAM 'wget -q -0 - "$@" https://www.pg4e.com/lectures/mbox-short.txt' WITH delimiter E'\007';
+
+SELECT line FROM mbox WHERE line ~ '^From';
+SELECT substring(line, ' (.+@[^ ]+) ') FROM mbox WHERE line ~ '^From';
+
+SELECT substring(line, ' (.+@[^ ]+) '), count(substring(line, ' (.+@[^ ]+) ')) FROM mbox WHERE line ~ '^From' GROUP BY substring(line, ' (.+@[^ ]+) ') ORDER BY count(substring(line, ' (.+@[^ ]+) ')) DESC;
+
+SELECT email, count(email) FROM (
+  SELECT substring(line, ' (.+@[^ ]+) ') AS email FROM mbox WHERE line ~ '^From '
+) AS badsub GROUP BY email ORDER BY count(email) DESC;
+```
