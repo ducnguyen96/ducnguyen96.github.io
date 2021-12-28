@@ -2,11 +2,76 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ducnguyen96.github.io/blog</id>
     <title>Developer Roadmap Blog</title>
-    <updated>2021-10-07T00:00:00.000Z</updated>
+    <updated>2021-12-28T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ducnguyen96.github.io/blog"/>
     <subtitle>Developer Roadmap Blog</subtitle>
     <icon>https://ducnguyen96.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Permissions khi sử dụng volume trong Docker]]></title>
+        <id>docker-volume-directory-permissions</id>
+        <link href="https://ducnguyen96.github.io/blog/docker-volume-directory-permissions"/>
+        <updated>2021-12-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Nguồn:]]></summary>
+        <content type="html"><![CDATA[<p>Nguồn:</p><ul><li><a href="https://stackoverflow.com/questions/50325494/how-can-i-change-permission-of-mounted-volumes-in-docker-compose-yml-from-the-do">https://stackoverflow.com/questions/50325494/how-can-i-change-permission-of-mounted-volumes-in-docker-compose-yml-from-the-do</a></li><li><a href="https://stackoverflow.com/a/29251160/1811501">https://stackoverflow.com/a/29251160/1811501</a></li></ul><p>Hôm nay khi mình sử dụng docker-compose để chạy một số container trên local thì gặp lỗi này <code>warning: could not open directory &#x27;databases/postgresql/&#x27;: Permission denied </code>.</p><p>Với file <code>.yml</code> như sau:</p><pre><code class="language-yaml">version: &quot;3.8&quot;
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:13.2-alpine
+    restart: always
+    volumes:
+      - ./databases/postgresql:/var/lib/postgresql/data
+    env_file:
+      - .env/.postgres
+    ports:
+      - 6432:5432
+</code></pre><p>Thư mục <code>./databases</code> là thư mục có sẵn trong repo và mình clone về.</p><p>Mình xin phép được diễn giải lại 2 answers trên stackoverflow.</p><h2>Vấn đề</h2><p>Khi bind một thư mục host với container, các files và thư mục duy trì permissions mà chúng có trên máy host, nó được thiết kế như vậy. Khu sử dụng bind-mount, bạn trao cho các container quyền truy cập đến các files có sẵn trên host, và Docker sẽ không thay đổi đến các files đó, việc thay đổi cũng rất nguy hiểm (chẳng hạn, bind thư mục home trên máy chủ của bạn với container sẽ thay đổi permissions của thư mục đó, điều này có thể dẫn đến việc bạn không thể sử dụng máy nữa).</p><p>Để thay đổi permissions của các files đó, thì chúng ta thay đổi trên host chứ không thay đổi bằng container.</p><h2>Permissions trên Linux</h2><p>Permissions trên Linux dựa vào user và group <em>ids</em> (<code>&#x27;uid&#x27;</code>/ <code>&#x27;gid&#x27;</code>). Mặc dù bạn thấy một user-gì đấy và tên group chính là owner, nhưng những cái tên đó không thực sự quan trọng trong Linux, nó chỉ có tác dụng cho user nhìn vào để biết ai là owner.</p><p>Bạn có thể set bất cứ <code>uid</code>/<code>gid</code> nào cho một file, một user không cần phải <code>tồn tại</code> khi cài đặt permissions.
+Ví dụ:</p><pre><code class="language-bash">touch foobar &amp;&amp; sudo chown 1234:5678 foobar &amp;&amp; ls -la foobar
+
+# UID and GID được set là 1234 / 5678, mặc dù user ấy không tồn tại.
+-rw-rw-r-- 1 1234 5678 0 Mar 25 19:14 foobar
+</code></pre><h2>Kiểm tra permissions (trong và ngoài một container)</h2><p>Như đã nói ở trên, Docker duy trì ownership của host khi sử dụng một volume. Ví dụ dưới đây cho ta thấy permissions và ownership trong volume là giống nhau giữa trong và ngoài container.</p><pre><code class="language-bash"># (Tạo một dummy site)
+
+mkdir -p volume-example/site &amp;&amp; cd volume-example
+echo &quot;&lt;html&gt;&lt;body&gt;hello world&lt;/body&gt;&lt;/html&gt;&quot; &gt; site/index.html
+
+# In permissions trên host;
+
+ls -n site
+
+# total 4
+# -rw-rw-r-- 1 1002 1002 38 Mar 25 19:15 index.html
+
+# In permissions phía trong một nginx container, sử dụng nó là volume:
+
+sudo docker run --rm -v $(pwd)/site:/var/www nginx ls -n /var/www
+
+# total 4
+# -rw-rw-r-- 1 1002 1002 38 Mar 25 19:15 index.html
+</code></pre><h2>Cách giải quyết</h2><p>Như đã nói ở trên, một user không cần thiết phải tồn tại để sử dụng chúng, cho dù chúng ta không có một <code>www-data</code> user trên host, chúng ta vẫn có thể cài permissions chính xác nếu chúng ta biết <code>uid</code> và <code>gid</code> của nó bên trong container.</p><p>Hãy xem <code>uid</code> và <code>gid</code> của <code>www-data</code> user bên trong container nginx.</p><pre><code class="language-bash">sudo docker run --rm nginx id www-data
+
+# uid=33(www-data) gid=33(www-data) groups=33(www-data)
+</code></pre><p>Đầu tiên kiểm tra trạng thái trước khi thay đổi permissions. Lần này ta sẽ chạy nginx container với <code>www-data</code> user.</p><pre><code class="language-bash">sudo docker run \
+  --rm \
+  --volume $(pwd)/site:/var/www \
+  --user www-data nginx touch /var/www/can-i-write.txt
+
+# touch: cannot touch `/var/www/can-i-write.txt&#x27;: Permission denied
+# chưa có quyền để tạo file trong như mục `site`.
+</code></pre><p>Tiếp theo, thay đổi permissions trên thư mục host.</p><pre><code class="language-bash">sudo chown -R 33:33 site
+
+sudo docker run \
+   --rm \
+   --volume $(pwd)/site:/var/www \
+   --user www-data nginx touch /var/www/can-i-write.txt
+</code></pre><p>Được rồi nè :D.</p><p>Có một cách giải quyết khác cho trường hợp của mình khi dev local không phải môi trường production. Mình có thể thay đổi permissions của 1 file/directory thay vì thay đổi owner.</p><pre><code class="language-bash">sudo chmod -R 777 databases
+</code></pre><p>Thao khảo: <a href="https://stackoverflow.com/questions/8328481/chmod-777-to-a-folder-and-all-contents">https://stackoverflow.com/questions/8328481/chmod-777-to-a-folder-and-all-contents</a></p>]]></content>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[RabbitMQ overview]]></title>
         <id>what-is-rabbitmq</id>
