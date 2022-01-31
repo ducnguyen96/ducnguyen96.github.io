@@ -34,7 +34,7 @@ Có một vài thách thức với cách tiếp cận trên:
 
 ## Why Docker ?
 
-📔 Bạn đọc có thể tham khảo thêm [ở đây](/posts/backend/docker-fundamentals/)
+📔 Bạn đọc có thể tham khảo thêm [ở đây](/docs/docker/docker_basic)
 ![microservices-dg-60](/img/docs/microservices/microservices-dg-60.png)
 Sử dụng docker ta sẽ đóng gói các services lại thành các containers.
 
