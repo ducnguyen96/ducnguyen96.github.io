@@ -1,1 +1,1 @@
-Chúc mừng năm mới
+Chúc mừng năm mới. Happy new year!
