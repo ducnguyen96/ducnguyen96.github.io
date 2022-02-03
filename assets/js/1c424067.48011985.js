@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkducnguyen_96=self.webpackChunkducnguyen_96||[]).push([[5774],{1858:function(l){l.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"/blog/tags/cloudflare","name":"cloudflare","count":1,"permalink":"/blog/tags/cloudflare"}')}}]);
