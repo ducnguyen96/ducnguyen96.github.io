@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96=self.webpackChunkducnguyen_96||[]).push([[6474],{29261:function(n){n.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"/blog/tags/networking","name":"networking","count":1,"permalink":"/blog/tags/networking"}')}}]);
