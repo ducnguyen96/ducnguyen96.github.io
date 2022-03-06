@@ -15,21 +15,17 @@ Mình dùng debian chưa quá lâu tuy nhiên nhận thấy nó có thể hoạt
 
 Dưới đây là một số side-projects mình làm lúc study về libs/frameworks:
 
-export const ShowCaseCard = ({ header, body, tags, key }) => (
+export const ShowCaseCard = ({ header, body, tags, key, image, link }) => (
   <li className="card shadow--md" key={key}>
     <div className="card__image showcaseCardImage">
       <div>
-        <img src="/img/docs/showcase_redditclone.png" />
+        <img src={image} />
       </div>
     </div>
     <div className="card__body">
       <div className="showcaseCardHeader">
         <h4>
-          <a
-            href="https://redditclone.ducnguyen96.xyz/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={link} target="_blank" rel="noopener noreferrer">
             {header}
           </a>
         </h4>
@@ -53,19 +49,19 @@ export const ShowCaseCard = ({ header, body, tags, key }) => (
       header="Reddit Clone"
       body="Reddit is an American social news aggregation, web content rating, and
           discussion website."
-      tags={[
-        "react",
-        "mui",
-        "typescript",
-        "graphql",
-        "relay",
-        "golang",
-        "ent",
-        "postgres",
-        "nginx",
-        "GCE",
-      ]}
+      tags={["react", "mui", "typescript", "graphql", "relay", "golang", "ent", "postgres", "nginx", "GCE"]}
       key="0"
+      image="/img/docs/showcase_redditclone.png"
+      link="https://redditclone.ducnguyen96.xyz/"
+    />
+    <ShowCaseCard
+      header="Open Music Theory"
+      body="Reddit is an American social news aggregation, web content rating, and
+          discussion website."
+      tags={["docusaurus"]}
+      key="1"
+      image="/img/docs/open-musictheory.png"
+      link="https://open-musictheory.github.io/docs/fundamentals/basic-natation"
     />
   </ul>
 </div>
