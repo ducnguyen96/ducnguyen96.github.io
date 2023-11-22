@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'ducnguyen96',
   tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  favicon: 'favicon.ico',
 
   url: 'https://ducnguyen96.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
@@ -55,7 +55,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'docusaurus-social-card.jpg',
     algolia: {
       contextualSearch: true,
       appId: 'MBM19YJCG1',
@@ -66,7 +66,7 @@ const config: Config = {
       title: '',
       logo: {
         alt: 'ducnguyen96',
-        src: 'img/logo.jpeg',
+        src: 'logo.jpeg',
       },
       items: [
         {
@@ -85,47 +85,60 @@ const config: Config = {
           label: 'Youtube',
           position: 'right',
         },
-        {
-          to: '/projects/cv/',
-          label: 'CV',
-          position: 'right',
-        },
-        {
-          to: '/projects/cv-pdf/',
-          label: 'CV-PDF',
-          position: 'right',
-        },
+        // {
+        //   to: '/projects/cv/',
+        //   label: 'CV',
+        //   position: 'right',
+        // },
+        // {
+        //   to: '/projects/cv-pdf/',
+        //   label: 'CV-PDF',
+        //   position: 'right',
+        // },
       ],
     },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Docs',
-              to: '/docs/introduction',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Youtube',
-              href: 'https://www.youtube.com/channel/UCCrvmlNIXLgZOMAMn9VKBeA',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} ducnguyen96, Inc. Built with Docusaurus.`,
-    },
+    // footer: {
+    //   style: 'dark',
+    //   links: [
+    //     {
+    //       title: 'Docs',
+    //       items: [
+    //         {
+    //           label: 'Docs',
+    //           to: '/docs/introduction',
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       title: 'Community',
+    //       items: [
+    //         {
+    //           label: 'Youtube',
+    //           href: 'https://www.youtube.com/channel/UCCrvmlNIXLgZOMAMn9VKBeA',
+    //         },
+    //       ],
+    //     },
+    //   ],
+    //   copyright: `Copyright © ${new Date().getFullYear()} ducnguyen96, Inc. Built with Docusaurus.`,
+    // },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+  plugins: [
+    async function myPlugin(context, options) {
+      return {
+        name: "docusaurus-tailwindcss",
+        configurePostCss(postcssOptions) {
+          // Appends TailwindCSS and AutoPrefixer.
+          postcssOptions.plugins.push(require("tailwindcss"));
+          postcssOptions.plugins.push(require("autoprefixer"));
+          return postcssOptions;
+        },
+      };
+    },
+  ]
 };
 
 export default config;
