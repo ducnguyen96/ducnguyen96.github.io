@@ -32,7 +32,7 @@ const projects: Project[] = [
     title: "Curriculum Vitae PDF",
     description: "My CV written in LaTeX",
     link: "/projects/cv-pdf",
-    tags: ["HTML", "CSS"],
+    tags: [],
     icon: "pepicons-pop:cv",
     color: "text-primary",
   },
@@ -48,7 +48,7 @@ const projects: Project[] = [
     title: "Documentation",
     description: "My personal documentation",
     link: "/docs/intro",
-    tags: ["HTML", "CSS"],
+    tags: [],
     icon: "mingcute:doc-fill",
     color: "text-primary",
   },
@@ -87,7 +87,7 @@ export default function Home(): JSX.Element {
 
   return (
     <main
-      className="w-screen h-screen flex flex-col items-center bg-[url('/images/escape_velocity.jpg')] bg-cover"
+      className="w-screen h-screen flex flex-col items-center bg-[url('/images/escape_velocity.jpg')] bg-cover p-2"
       onKeyDown={onKeyDown}
     >
       <div className="avatar animate-pulse mt-20">
@@ -105,7 +105,7 @@ export default function Home(): JSX.Element {
         onChange={onInputChange}
       />
 
-      <div className="container grid grid-flow-col auto-cols-max mt-10 gap-10">
+      <div className="container flex flex-wrap justify-center mt-10 gap-10">
         {searchedProjects.map((project, idx) => (
           <a
             href={project.link}
@@ -119,7 +119,7 @@ export default function Home(): JSX.Element {
             target="_blank"
           >
             <Icon
-              className={clsx("text-6xl", project.color ?? "")}
+              className={clsx("text-5xl", project.color ?? "")}
               icon={project.icon}
             />
           </a>
