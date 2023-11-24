@@ -17,14 +17,7 @@ jobs:
           node-version: "18.x"
       - name: Test Build
         run: |
-          if [ -e pnpm-lock.lock ]; then
-            pnpm install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-            npm ci
-          else
-            npm i
-          fi
-          npm run build
+          pnpm install --frozen-lockfile
   gh-release:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
@@ -43,11 +36,5 @@ jobs:
         run: |
           git config --global user.email "levinguyen.dl@gmail.com"
           git config --global user.name "ducnguyen96"
-          if [ -e pnpm-lock.lock ]; then
-            pnpm install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-            npm ci
-          else
-            npm i
-          fi
-          npm run deploy
+          pnpm install --frozen-lockfile
+          pnpm deploy
