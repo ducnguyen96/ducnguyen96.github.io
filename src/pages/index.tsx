@@ -7,11 +7,19 @@ type Project = {
   description: string;
   link: string;
   tags: string[];
-  icon: string;
+  icon?: string;
+  logo?: string;
   color?: string;
 };
 
 const projects: Project[] = [
+  {
+    title: "TESOL",
+    description: "https://tse-tesol.edu.vn clone",
+    link: "/projects/tesol",
+    tags: [],
+    logo: "/images/tesol.png",
+  },
   {
     title: "Github",
     description: "Personal Github",
@@ -118,10 +126,18 @@ export default function Home(): JSX.Element {
             data-tip={project.title}
             target="_blank"
           >
-            <Icon
-              className={clsx("text-5xl", project.color ?? "")}
-              icon={project.icon}
-            />
+            {project.icon ? (
+              <Icon
+                className={clsx("text-5xl", project.color ?? "")}
+                icon={project.icon}
+              />
+            ) : (
+              <img
+                className="w-12 h-12"
+                src={project.logo}
+                alt={`${project.title} logo`}
+              />
+            )}
           </a>
         ))}
       </div>
