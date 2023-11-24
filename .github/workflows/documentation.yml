@@ -17,6 +17,7 @@ jobs:
           node-version: "18.x"
       - name: Test Build
         run: |
+          npm i -g pnpm
           pnpm install --frozen-lockfile
   gh-release:
     if: github.event_name != 'pull_request'
@@ -36,5 +37,6 @@ jobs:
         run: |
           git config --global user.email "levinguyen.dl@gmail.com"
           git config --global user.name "ducnguyen96"
+          npm i -g pnpm
           pnpm install --frozen-lockfile
           pnpm deploy
