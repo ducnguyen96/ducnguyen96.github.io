@@ -4,7 +4,7 @@
   <ShortName>ducnguyen96</ShortName>
   <Description>Search ducnguyen96</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://ducnguyen96.github.io/img/favicon.ico</Image>
+  <Image width="16" height="16" type="image/x-icon">https://ducnguyen96.github.io/favicon.ico</Image>
   <Url type="text/html" method="get" template="https://ducnguyen96.github.io/search?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://ducnguyen96.github.io/opensearch.xml" />
   <moz:SearchForm>https://ducnguyen96.github.io/</moz:SearchForm>
