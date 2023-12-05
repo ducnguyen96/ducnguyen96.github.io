@@ -14,6 +14,13 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: "Issues Tracker",
+    description: "My personal issues tracker built with Svelte, a clone of Github Issues",
+    link: "https://issues-af52b.web.app",
+    tags: ["Svelte", "Firebase"],
+    icon: "octicon:issue-opened-16",
+  },
+  {
     title: "TESOL",
     description: "https://tse-tesol.edu.vn clone",
     link: "/projects/tesol",
