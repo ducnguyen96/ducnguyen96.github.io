@@ -32,3 +32,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.avatar__photo {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.prose pre code {
+  padding: var(--ifm-pre-padding);
+  border-radius: var(--rounded-badge);
+}
