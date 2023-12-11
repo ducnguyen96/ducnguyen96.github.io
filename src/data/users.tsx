@@ -60,10 +60,30 @@ export type TagType =
   | 'docker'
   | 'kubernetes'
   | 'aws'
+  | 'php'
+  | 'wordpress'
+  | 'tailwindcss'
 
 // Add sites to this list
 // prettier-ignore
-const Users: User[] = [];
+const Users: User[] = [
+  {
+    title: 'TESOL',
+    description: 'TESOL is a wordpress website. It is a website for a language school. It has a blog, a contact form, and a page for the courses.',
+    preview: require('./showcase/tesol.jpg'),
+    website: '/projects/tesol',
+    source: null,
+    tags: ['php', 'wordpress', 'frontend', 'tailwindcss'],
+  },
+  {
+    title: 'Issues',
+    description: 'Issues is clone of github issues. It is a website for creating issues and commenting on them.',
+    preview: require('./showcase/issues.jpg'),
+    website: 'https://issues-af52b.web.app',
+    source: null,
+    tags: ['svelte', 'firebase', 'frontend', 'backend', 'typescript', 'tailwindcss'],
+  }
+];
 
 export type User = {
   title: string;
@@ -269,6 +289,33 @@ export const Tags: {[type in TagType]: Tag} = {
       id: 'showcase.tag.aws.description',
     }),
     color: '#ff9900',
+  },
+
+  php: {
+    label: 'PHP',
+    description: translate({
+      message: 'Made with PHP',
+      id: 'showcase.tag.php.description',
+    }),
+    color: '#8892bf',
+  },
+
+  wordpress: {
+    label: 'WordPress',
+    description: translate({
+      message: 'Made with WordPress',
+      id: 'showcase.tag.wordpress.description',
+    }),
+    color: '#21759b',
+  },
+
+  tailwindcss: {
+    label: 'Tailwind CSS',
+    description: translate({
+      message: 'Made with Tailwind CSS',
+      id: 'showcase.tag.tailwindcss.description',
+    }),
+    color: '#38b2ac',
   },
 };
 

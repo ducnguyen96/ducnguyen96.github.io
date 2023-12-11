@@ -138,7 +138,7 @@ function useSiteCountPlural() {
           id: 'showcase.filters.resultCount',
           description:
             'Pluralized label for the number of sites found on the showcase. Use as much plural forms (separated by "|") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)',
-          message: '0 site|{sitesCount} sites',
+          message: '{sitesCount} sites',
         },
         {sitesCount},
       ),
@@ -262,7 +262,7 @@ function ShowcaseCards() {
     <section className="margin-top--lg margin-bottom--xl">
       {filteredUsers.length === sortedUsers.length ? (
         <>
-          <div className={styles.showcaseFavorite}>
+          {/* <div className={styles.showcaseFavorite}>
             <div className="container">
               <div
                 className={clsx(
@@ -271,7 +271,7 @@ function ShowcaseCards() {
                 )}>
                 <Heading as="h2">
                   <Translate id="showcase.favoritesList.title">
-                    Our favorites
+                    Favorites
                   </Translate>
                 </Heading>
                 <FavoriteIcon svgClass={styles.svgIconFavorite} />
@@ -287,10 +287,10 @@ function ShowcaseCards() {
                 ))}
               </ul>
             </div>
-          </div>
+          </div> */}
           <div className="container margin-top--lg">
             <Heading as="h2" className={styles.showcaseHeader}>
-              <Translate id="showcase.usersList.allUsers">All sites</Translate>
+              <Translate id="showcase.usersList.allUsers">All apps</Translate>
             </Heading>
             <ul className={clsx('clean-list', styles.showcaseList)}>
               {otherUsers.map((user) => (
