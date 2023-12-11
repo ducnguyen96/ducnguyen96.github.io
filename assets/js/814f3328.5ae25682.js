@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Stored XSS (Cross Site Scripting) l\xe0 g\xec v\xe0 c\xe1ch ng\u0103n ch\u1eb7n","permalink":"/blog/what-is-stored-xss","unlisted":false}]}')}}]);
