@@ -76,7 +76,6 @@ const config: Config = {
           label: "Docs",
         },
         { to: "/blog", label: "Blog", position: "left" },
-        { to: "showcase", label: "Showcase", position: "left" },
         {
           to: "https://github.com/ducnguyen96",
           label: "GitHub",

@@ -39,24 +39,27 @@ import {sortBy} from '@site/src/utils/jsUtils';
 // Please choose all tags that you think might apply.
 // We'll remove inappropriate tags, but it's less likely that we add tags.
 export type TagType =
-  // DO NOT USE THIS TAG: we choose sites to add to favorites
   | 'favorite'
-  // For open-source sites, a link to the source code is required.
-  // The source should be the *website's* source, not the project's source!
   | 'opensource'
   | 'product'
-  // Feel free to add the 'design' tag as long as there's _some_ level of
-  // CSS/swizzling.
-  | 'design'
-  // Site must have more than one locale.
-  | 'i18n'
-  | 'versioning'
-  // Large sites are defined as those with > 200 pages, excluding versions.
-  | 'large'
-  | 'meta'
-  | 'personal'
-  // Right-to-left direction.
-  | 'rtl';
+  | 'react'
+  | 'typescript'
+  | 'javascript'
+  | 'svelte'
+  | 'nextjs'
+  | 'go'
+  | 'rust'
+  | 'web'
+  | 'backend'
+  | 'frontend'
+  | 'firebase'
+  | 'nestjs'
+  | 'microservices'
+  | 'linux'
+  | 'postgresql'
+  | 'docker'
+  | 'kubernetes'
+  | 'aws'
 
 // Add sites to this list
 // prettier-ignore
@@ -82,7 +85,7 @@ export const Tags: {[type in TagType]: Tag} = {
     label: translate({message: 'Favorite'}),
     description: translate({
       message:
-        'Our favorite Docusaurus sites that you must absolutely check out!',
+        'My favorite that you must absolutely check out!',
       id: 'showcase.tag.favorite.description',
     }),
     color: '#e9669e',
@@ -91,7 +94,7 @@ export const Tags: {[type in TagType]: Tag} = {
   opensource: {
     label: translate({message: 'Open-Source'}),
     description: translate({
-      message: 'Open-Source Docusaurus sites can be useful for inspiration!',
+      message: 'Open-Source apps can be useful for inspiration!',
       id: 'showcase.tag.opensource.description',
     }),
     color: '#39ca30',
@@ -100,79 +103,172 @@ export const Tags: {[type in TagType]: Tag} = {
   product: {
     label: translate({message: 'Product'}),
     description: translate({
-      message: 'Docusaurus sites associated to a commercial product!',
+      message: 'Not a toy project, but a real product!',
       id: 'showcase.tag.product.description',
     }),
     color: '#dfd545',
   },
 
-  design: {
-    label: translate({message: 'Design'}),
+  react: {
+    label: 'React',
     description: translate({
-      message:
-        'Beautiful Docusaurus sites, polished and standing out from the initial template!',
-      id: 'showcase.tag.design.description',
+      message: 'Made with React',
+      id: 'showcase.tag.react.description',
     }),
-    color: '#a44fb7',
+    color: '#61dafb',
   },
 
-  i18n: {
-    label: translate({message: 'I18n'}),
+  typescript: {
+    label: 'TypeScript',
     description: translate({
-      message:
-        'Translated Docusaurus sites using the internationalization support with more than 1 locale.',
-      id: 'showcase.tag.i18n.description',
+      message: 'Made with TypeScript',
+      id: 'showcase.tag.typescript.description',
     }),
-    color: '#127f82',
+    color: '#007acc',
   },
 
-  versioning: {
-    label: translate({message: 'Versioning'}),
+  javascript: {
+    label: 'JavaScript',
     description: translate({
-      message:
-        'Docusaurus sites using the versioning feature of the docs plugin to manage multiple versions.',
-      id: 'showcase.tag.versioning.description',
+      message: 'Made with JavaScript',
+      id: 'showcase.tag.javascript.description',
     }),
-    color: '#fe6829',
+    color: '#f0db4f',
   },
 
-  large: {
-    label: translate({message: 'Large'}),
+  svelte: {
+    label: 'Svelte',
     description: translate({
-      message:
-        'Very large Docusaurus sites, including many more pages than the average!',
-      id: 'showcase.tag.large.description',
+      message: 'Made with Svelte',
+      id: 'showcase.tag.svelte.description',
     }),
-    color: '#8c2f00',
+    color: '#ff3e00',
   },
 
-  meta: {
-    label: translate({message: 'Meta'}),
+  nextjs: {
+    label: 'Next.js',
     description: translate({
-      message: 'Docusaurus sites of Meta (formerly Facebook) projects',
-      id: 'showcase.tag.meta.description',
+      message: 'Made with Next.js',
+      id: 'showcase.tag.nextjs.description',
     }),
-    color: '#4267b2', // Facebook blue
+    color: '#000000',
   },
 
-  personal: {
-    label: translate({message: 'Personal'}),
+  go: {
+    label: 'Go',
     description: translate({
-      message:
-        'Personal websites, blogs and digital gardens built with Docusaurus',
-      id: 'showcase.tag.personal.description',
+      message: 'Made with Go',
+      id: 'showcase.tag.go.description',
     }),
-    color: '#14cfc3',
+    color: '#00add8',
   },
 
-  rtl: {
-    label: translate({message: 'RTL Direction'}),
+  rust: {
+    label: 'Rust',
     description: translate({
-      message:
-        'Docusaurus sites using the right-to-left reading direction support.',
-      id: 'showcase.tag.rtl.description',
+      message: 'Made with Rust',
+      id: 'showcase.tag.rust.description',
     }),
-    color: '#ffcfc3',
+    color: '#B7410E',
+  },
+
+  web: {
+    label: 'Web',
+    description: translate({
+      message: 'Made for the Web',
+      id: 'showcase.tag.web.description',
+    }),
+    color: '#4285f4',
+  },
+
+  backend: {
+    label: 'Backend',
+    description: translate({
+      message: 'Made for the Backend',
+      id: 'showcase.tag.backend.description',
+    }),
+    color: '#4285f4',
+  },
+
+  frontend: {
+    label: 'Frontend',
+    description: translate({
+      message: 'Made for the Frontend',
+      id: 'showcase.tag.frontend.description',
+    }),
+    color: '#4285f4',
+  },
+
+  firebase: {
+    label: 'Firebase',
+    description: translate({
+      message: 'Made with Firebase',
+      id: 'showcase.tag.firebase.description',
+    }),
+    color: '#ffa611',
+  },
+
+  nestjs: {
+    label: 'NestJS',
+    description: translate({
+      message: 'Made with NestJS',
+      id: 'showcase.tag.nestjs.description',
+    }),
+    color: '#ea2845',
+  },
+
+  microservices: {
+    label: 'Microservices',
+    description: translate({
+      message: 'Made for Microservices',
+      id: 'showcase.tag.microservices.description',
+    }),
+    color: '#ea2845',
+  },
+
+  linux: {
+    label: 'Linux',
+    description: translate({
+      message: 'Made for Linux',
+      id: 'showcase.tag.linux.description',
+    }),
+    color: '#000000',
+  },
+
+  postgresql: {
+    label: 'PostgreSQL',
+    description: translate({
+      message: 'Made with PostgreSQL',
+      id: 'showcase.tag.postgresql.description',
+    }),
+    color: '#336791',
+  },
+
+  docker: {
+    label: 'Docker',
+    description: translate({
+      message: 'Made with Docker',
+      id: 'showcase.tag.docker.description',
+    }),
+    color: '#2496ed',
+  },
+
+  kubernetes: {
+    label: 'Kubernetes',
+    description: translate({
+      message: 'Made with Kubernetes',
+      id: 'showcase.tag.kubernetes.description',
+    }),
+    color: '#326ce5',
+  },
+
+  aws: {
+    label: 'AWS',
+    description: translate({
+      message: 'Made with AWS',
+      id: 'showcase.tag.aws.description',
+    }),
+    color: '#ff9900',
   },
 };
 
