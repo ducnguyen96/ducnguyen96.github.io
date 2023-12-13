@@ -7,8 +7,8 @@
 
 /* eslint-disable global-require */
 
-import {translate} from '@docusaurus/Translate';
-import {sortBy} from '@site/src/utils/jsUtils';
+import { translate } from "@docusaurus/Translate";
+import { sortBy } from "@site/src/utils/jsUtils";
 
 /*
  * ADD YOUR SITE TO THE DOCUSAURUS SHOWCASE
@@ -39,30 +39,30 @@ import {sortBy} from '@site/src/utils/jsUtils';
 // Please choose all tags that you think might apply.
 // We'll remove inappropriate tags, but it's less likely that we add tags.
 export type TagType =
-  | 'favorite'
-  | 'opensource'
-  | 'product'
-  | 'react'
-  | 'typescript'
-  | 'javascript'
-  | 'svelte'
-  | 'nextjs'
-  | 'go'
-  | 'rust'
-  | 'web'
-  | 'backend'
-  | 'frontend'
-  | 'firebase'
-  | 'nestjs'
-  | 'microservices'
-  | 'linux'
-  | 'postgresql'
-  | 'docker'
-  | 'kubernetes'
-  | 'aws'
-  | 'php'
-  | 'wordpress'
-  | 'tailwindcss'
+  | "favorite"
+  | "opensource"
+  | "product"
+  | "react"
+  | "typescript"
+  | "javascript"
+  | "svelte"
+  | "nextjs"
+  | "go"
+  | "rust"
+  | "web"
+  | "backend"
+  | "frontend"
+  | "firebase"
+  | "nestjs"
+  | "microservices"
+  | "linux"
+  | "postgresql"
+  | "docker"
+  | "kubernetes"
+  | "aws"
+  | "php"
+  | "wordpress"
+  | "tailwindcss";
 
 // Add sites to this list
 // prettier-ignore
@@ -71,7 +71,7 @@ const Users: User[] = [
     title: 'TESOL',
     description: 'TESOL is a wordpress website. It is a website for a language school. It has a blog, a contact form, and a page for the courses.',
     preview: require('./showcase/tesol.jpg'),
-    website: '/projects/tesol',
+    website: 'https://ducnguyen96.github.io/projects/tesol',
     source: null,
     tags: ['php', 'wordpress', 'frontend', 'tailwindcss'],
   },
@@ -100,222 +100,221 @@ export type Tag = {
   color: string;
 };
 
-export const Tags: {[type in TagType]: Tag} = {
+export const Tags: { [type in TagType]: Tag } = {
   favorite: {
-    label: translate({message: 'Favorite'}),
+    label: translate({ message: "Favorite" }),
     description: translate({
-      message:
-        'My favorite that you must absolutely check out!',
-      id: 'showcase.tag.favorite.description',
+      message: "My favorite that you must absolutely check out!",
+      id: "showcase.tag.favorite.description",
     }),
-    color: '#e9669e',
+    color: "#e9669e",
   },
 
   opensource: {
-    label: translate({message: 'Open-Source'}),
+    label: translate({ message: "Open-Source" }),
     description: translate({
-      message: 'Open-Source apps can be useful for inspiration!',
-      id: 'showcase.tag.opensource.description',
+      message: "Open-Source apps can be useful for inspiration!",
+      id: "showcase.tag.opensource.description",
     }),
-    color: '#39ca30',
+    color: "#39ca30",
   },
 
   product: {
-    label: translate({message: 'Product'}),
+    label: translate({ message: "Product" }),
     description: translate({
-      message: 'Not a toy project, but a real product!',
-      id: 'showcase.tag.product.description',
+      message: "Not a toy project, but a real product!",
+      id: "showcase.tag.product.description",
     }),
-    color: '#dfd545',
+    color: "#dfd545",
   },
 
   react: {
-    label: 'React',
+    label: "React",
     description: translate({
-      message: 'Made with React',
-      id: 'showcase.tag.react.description',
+      message: "Made with React",
+      id: "showcase.tag.react.description",
     }),
-    color: '#61dafb',
+    color: "#61dafb",
   },
 
   typescript: {
-    label: 'TypeScript',
+    label: "TypeScript",
     description: translate({
-      message: 'Made with TypeScript',
-      id: 'showcase.tag.typescript.description',
+      message: "Made with TypeScript",
+      id: "showcase.tag.typescript.description",
     }),
-    color: '#007acc',
+    color: "#007acc",
   },
 
   javascript: {
-    label: 'JavaScript',
+    label: "JavaScript",
     description: translate({
-      message: 'Made with JavaScript',
-      id: 'showcase.tag.javascript.description',
+      message: "Made with JavaScript",
+      id: "showcase.tag.javascript.description",
     }),
-    color: '#f0db4f',
+    color: "#f0db4f",
   },
 
   svelte: {
-    label: 'Svelte',
+    label: "Svelte",
     description: translate({
-      message: 'Made with Svelte',
-      id: 'showcase.tag.svelte.description',
+      message: "Made with Svelte",
+      id: "showcase.tag.svelte.description",
     }),
-    color: '#ff3e00',
+    color: "#ff3e00",
   },
 
   nextjs: {
-    label: 'Next.js',
+    label: "Next.js",
     description: translate({
-      message: 'Made with Next.js',
-      id: 'showcase.tag.nextjs.description',
+      message: "Made with Next.js",
+      id: "showcase.tag.nextjs.description",
     }),
-    color: '#000000',
+    color: "#000000",
   },
 
   go: {
-    label: 'Go',
+    label: "Go",
     description: translate({
-      message: 'Made with Go',
-      id: 'showcase.tag.go.description',
+      message: "Made with Go",
+      id: "showcase.tag.go.description",
     }),
-    color: '#00add8',
+    color: "#00add8",
   },
 
   rust: {
-    label: 'Rust',
+    label: "Rust",
     description: translate({
-      message: 'Made with Rust',
-      id: 'showcase.tag.rust.description',
+      message: "Made with Rust",
+      id: "showcase.tag.rust.description",
     }),
-    color: '#B7410E',
+    color: "#B7410E",
   },
 
   web: {
-    label: 'Web',
+    label: "Web",
     description: translate({
-      message: 'Made for the Web',
-      id: 'showcase.tag.web.description',
+      message: "Made for the Web",
+      id: "showcase.tag.web.description",
     }),
-    color: '#4285f4',
+    color: "#4285f4",
   },
 
   backend: {
-    label: 'Backend',
+    label: "Backend",
     description: translate({
-      message: 'Made for the Backend',
-      id: 'showcase.tag.backend.description',
+      message: "Made for the Backend",
+      id: "showcase.tag.backend.description",
     }),
-    color: '#4285f4',
+    color: "#4285f4",
   },
 
   frontend: {
-    label: 'Frontend',
+    label: "Frontend",
     description: translate({
-      message: 'Made for the Frontend',
-      id: 'showcase.tag.frontend.description',
+      message: "Made for the Frontend",
+      id: "showcase.tag.frontend.description",
     }),
-    color: '#4285f4',
+    color: "#4285f4",
   },
 
   firebase: {
-    label: 'Firebase',
+    label: "Firebase",
     description: translate({
-      message: 'Made with Firebase',
-      id: 'showcase.tag.firebase.description',
+      message: "Made with Firebase",
+      id: "showcase.tag.firebase.description",
     }),
-    color: '#ffa611',
+    color: "#ffa611",
   },
 
   nestjs: {
-    label: 'NestJS',
+    label: "NestJS",
     description: translate({
-      message: 'Made with NestJS',
-      id: 'showcase.tag.nestjs.description',
+      message: "Made with NestJS",
+      id: "showcase.tag.nestjs.description",
     }),
-    color: '#ea2845',
+    color: "#ea2845",
   },
 
   microservices: {
-    label: 'Microservices',
+    label: "Microservices",
     description: translate({
-      message: 'Made for Microservices',
-      id: 'showcase.tag.microservices.description',
+      message: "Made for Microservices",
+      id: "showcase.tag.microservices.description",
     }),
-    color: '#ea2845',
+    color: "#ea2845",
   },
 
   linux: {
-    label: 'Linux',
+    label: "Linux",
     description: translate({
-      message: 'Made for Linux',
-      id: 'showcase.tag.linux.description',
+      message: "Made for Linux",
+      id: "showcase.tag.linux.description",
     }),
-    color: '#000000',
+    color: "#000000",
   },
 
   postgresql: {
-    label: 'PostgreSQL',
+    label: "PostgreSQL",
     description: translate({
-      message: 'Made with PostgreSQL',
-      id: 'showcase.tag.postgresql.description',
+      message: "Made with PostgreSQL",
+      id: "showcase.tag.postgresql.description",
     }),
-    color: '#336791',
+    color: "#336791",
   },
 
   docker: {
-    label: 'Docker',
+    label: "Docker",
     description: translate({
-      message: 'Made with Docker',
-      id: 'showcase.tag.docker.description',
+      message: "Made with Docker",
+      id: "showcase.tag.docker.description",
     }),
-    color: '#2496ed',
+    color: "#2496ed",
   },
 
   kubernetes: {
-    label: 'Kubernetes',
+    label: "Kubernetes",
     description: translate({
-      message: 'Made with Kubernetes',
-      id: 'showcase.tag.kubernetes.description',
+      message: "Made with Kubernetes",
+      id: "showcase.tag.kubernetes.description",
     }),
-    color: '#326ce5',
+    color: "#326ce5",
   },
 
   aws: {
-    label: 'AWS',
+    label: "AWS",
     description: translate({
-      message: 'Made with AWS',
-      id: 'showcase.tag.aws.description',
+      message: "Made with AWS",
+      id: "showcase.tag.aws.description",
     }),
-    color: '#ff9900',
+    color: "#ff9900",
   },
 
   php: {
-    label: 'PHP',
+    label: "PHP",
     description: translate({
-      message: 'Made with PHP',
-      id: 'showcase.tag.php.description',
+      message: "Made with PHP",
+      id: "showcase.tag.php.description",
     }),
-    color: '#8892bf',
+    color: "#8892bf",
   },
 
   wordpress: {
-    label: 'WordPress',
+    label: "WordPress",
     description: translate({
-      message: 'Made with WordPress',
-      id: 'showcase.tag.wordpress.description',
+      message: "Made with WordPress",
+      id: "showcase.tag.wordpress.description",
     }),
-    color: '#21759b',
+    color: "#21759b",
   },
 
   tailwindcss: {
-    label: 'Tailwind CSS',
+    label: "Tailwind CSS",
     description: translate({
-      message: 'Made with Tailwind CSS',
-      id: 'showcase.tag.tailwindcss.description',
+      message: "Made with Tailwind CSS",
+      id: "showcase.tag.tailwindcss.description",
     }),
-    color: '#38b2ac',
+    color: "#38b2ac",
   },
 };
 
@@ -325,7 +324,7 @@ function sortUsers() {
   // Sort by site name
   result = sortBy(result, (user) => user.title.toLowerCase());
   // Sort by favorite tag, favorites first
-  result = sortBy(result, (user) => !user.tags.includes('favorite'));
+  result = sortBy(result, (user) => !user.tags.includes("favorite"));
   return result;
 }
 
