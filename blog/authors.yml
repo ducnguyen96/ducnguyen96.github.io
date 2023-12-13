@@ -15,3 +15,9 @@ alexedwards:
   title: Developer
   url: https://www.alexedwards.net
   image_url: https://avatars.githubusercontent.com/u/228149?v=4
+
+codeacademy:
+  name: Codeacademy
+  title: Company
+  url: https://www.codecademy.com
+  image_url: https://avatars.githubusercontent.com/u/1463944?s=200&v=4

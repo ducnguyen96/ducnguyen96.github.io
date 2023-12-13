@@ -33,7 +33,7 @@ The rest of this post will present the server's code in Go, in parts. The comple
 $ SERVERPORT=4112 go run .
 ```
 
-Note that `SERVERPORT` can be any port; this is the `TCP` port your local server is listening on. Once the server is running, you can interact with it in a separate terminal by using `curl` commands, or in any other way that works for you. See this script for an example; the directory containing [this script](https://github.com/eliben/code-for-blog/blob/master/2021/go-rest-servers/testing/manual.sh) also has an automated test harness for the server.
+Note that `SERVERPORT` can be any port; this is the `TCP` port your local server is listening on. Once the server is running, you can interact with it in a separate terminal by using `curl` commands, or in any other way that works for you. See [this script](https://github.com/eliben/code-for-blog/blob/master/2021/go-rest-servers/testing/manual.sh) for an example; the directory containing this script also has an automated test harness for the server.
 
 ## The Model
 
@@ -87,22 +87,6 @@ func (ts *TaskStore) GetTasksByTag(tag string) []Task
 func (ts *TaskStore) GetTasksByDueDate(year int, month time.Month, day int) []Task
 ```
 
-## Setting up the server
-
-The `main` function of our server is fairly simple:
-
-```go
-func main() {
-  mux := http.NewServeMux()
-  server := NewTaskServer()
-  mux.HandleFunc("/task/", server.taskHandler)
-  mux.HandleFunc("/tag/", server.tagHandler)
-  mux.HandleFunc("/due/", server.dueHandler)
-
-  log.Fatal(http.ListenAndServe("localhost:"+os.Getenv("SERVERPORT"), mux))
-}
-```
-
 The `taskstore` package implements this API using a simple `map[int]Task`, but you could easily imagine it being implemented using a database. In a realistic application, `TaskStore` would likely be an interface that several backends can implement, but for our simple example the current API is sufficient. If you'd like an extended exercise, go ahead and implement a `TaskStore` using something like `MongoDB`.
 
 ## Setting up the server
@@ -120,6 +104,8 @@ func main() {
   log.Fatal(http.ListenAndServe("localhost:"+os.Getenv("SERVERPORT"), mux))
 }
 ```
+
+Let's spend a moment talking about `NewTaskServer`, and then we'll come back to discuss the router and path handlers.
 
 `NewTaskServer` is a constructor for our server type, `taskServer`. The server wraps a `TaskStore`, which is safe for [concurrent access](/blog/2019/on-concurrency-in-go-http-servers).
 

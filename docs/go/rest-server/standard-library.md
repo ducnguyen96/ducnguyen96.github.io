@@ -4,40 +4,40 @@ sidebar_label: Standard Library
 
 # Standard Library
 
-Developers who just start using a language often ask "what framework should I use to do X" as one of their first questions. While this makes total sense for web applications and servers in many languages, in Go the answer to this question is nuanced. There are strong opinions both for and against using frameworks. My goal in these posts is to examine the issue objectively from several angles.
+Một trong những câu hỏi thường gặp ở Developer lúc chuẩn bị start 1 project nào đấy là "Nên sử dụng framework nào?". Đối với nhiều ngôn ngữ thì điều này là hoàn toàn bình thường nhưng với Go thì không phải lúc nào cũng vậy. Có nhiều ý kiến trái chiều về việc nên sử dụng frameworks hay không với Go. Mục tiêu của series này là xem xét một cách khách quan từ nhiều góc độ.
 
 ## The task
 
-First of all, I'll assume the reader knows what a _REST server_ is. If you need a refresher, [this is a good resource](https://www.codecademy.com/articles/what-is-rest), but there are many others. The rest of the series assumes you know what I mean by a "path", "HTTP header", "response code", etc.
+Đầu tiên, nếu bạn cần nhớ lại kiến thức về _REST server_ [đây là bài viết tốt](/blog/2023/what-is-rest). Phần còn lại của series này sẽ giả sử bạn biết về "path", "HTTP header", "response code", v.v.
 
-In our case, the server is a simple backend for a task management application (think Google Keep, Todoist and the like); it presents the following REST API to clients:
+Server của chúng ta là một backend đơn giản cho ứng dụng quản lý công việc (tương tự Google Keep, hay các ứng dụng Todo khác); nó gồm 1 số APIs sau:
 
 ```js
-POST   /task/              :  create a task, returns ID
-GET    /task/<taskid>      :  returns a single task by ID
+POST   /task/              :  create task, trả về ID
+GET    /task/<taskid>      :  return task theo ID
 GET    /task/              :  returns all tasks
-DELETE /task/<taskid>      :  delete a task by ID
-GET    /tag/<tagname>      :  returns list of tasks with this tag
-GET    /due/<yy>/<mm>/<dd> :  returns list of tasks due by this date
+DELETE /task/<taskid>      :  delete a task theo ID
+GET    /tag/<tagname>      :  returns list tasks chứa tag này
+GET    /due/<yy>/<mm>/<dd> :  returns list tasks với ngày hết hạn
 ```
 
-Our server supports `GET`, `POST` and `DELETE` requests, some of them with several potential paths. The parts between angle brackets `<...>` denote parameters that the client supplies as part of the request; for example, `GET /task/42` is a request to fetch the task with ID 42, etc. Tasks are uniquely identified by IDs.
+Server của chúng ta hỗ trợ `GET`, `POST` và `DELETE` requests, một số trong số đó có nhiều đường dẫn khác nhau. Các phần giữa dấu ngoặc `<...>` đề cập đến các tham số mà client cung cấp như là một phần của request; ví dụ, `GET /task/42` là một request để `GET` task với ID 42, v.v. Tasks thì duy nhất theo ID.
 
-The data encoding is JSON. In POST `/task/` the client will send a JSON representation of the task to create. Similarly, everywhere it says the server "returns" something, the returned data is encoded as JSON in the body of the HTTP response.
+Dữ liệu được mã hóa dưới dạng JSON. Trong POST `/task/` client sẽ gửi một 1 task theo format JSON. Tương tự, mọi nơi mà server "return" cái gì đó, dữ liệu trả về được mã hóa dưới dạng JSON trong body của HTTP response.
 
 ## Code
 
-The rest of this post will present the server's code in Go, in parts. The complete code for the server can be found [here](https://github.com/eliben/code-for-blog/tree/master/2021/go-rest-servers/stdlib-basic); it's a self-contained Go module, with no dependencies. Once you clone or copy the project directory, you can run the server without installing anything:
+Phần còn lại của bài viết này sẽ giới thiệu code của server, viết bằng Go, theo từng phần. Code hoàn chỉnh của server có thể tìm thấy [ở đây](https://github.com/eliben/code-for-blog/tree/master/2021/go-rest-servers/stdlib-basic); nó là một Go module độc lập, không có dependencies. Sau khi clone hoặc copy, bạn có thể chạy server mà không cần cài đặt bất cứ thứ gì:
 
 ```bash
 $ SERVERPORT=4112 go run .
 ```
 
-Note that `SERVERPORT` can be any port; this is the `TCP` port your local server is listening on. Once the server is running, you can interact with it in a separate terminal by using `curl` commands, or in any other way that works for you. See this script for an example; the directory containing [this script](https://github.com/eliben/code-for-blog/blob/master/2021/go-rest-servers/testing/manual.sh) also has an automated test harness for the server.
+Chú ý rằng `SERVERPORT` có thể là bất kỳ port nào; đây là port `TCP` mà server local của bạn đang lắng nghe. Sau khi server chạy, bạn có thể tương tác với nó trong một terminal khác bằng cách sử dụng các lệnh `curl`, hoặc bằng bất kỳ cách nào khác mà bạn thấy phù hợp. Xem ví dụ [ở đây](https://github.com/eliben/code-for-blog/blob/master/2021/go-rest-servers/testing/manual.sh).
 
 ## The Model
 
-Let's start by discussing the model (or the "data layer") for our server - the `taskstore` package (`internal/taskstore` in the project directory). This is a simple abstraction representing a database of tasks; here is its API:
+Hãy bắt đầu bằng cách thảo luận về model (hoặc "data layer") cho server của chúng ta - package `taskstore` (thư mục `internal/taskstore`). Đây là API của nó:
 
 ```go
 package taskstore
@@ -50,8 +50,7 @@ type Task struct {
 	Due  time.Time `json:"due"`
 }
 
-// TaskStore is a simple in-memory database of tasks; TaskStore methods are
-// safe to call concurrently.
+// TaskStore là một database đơn giản lưu trữ các task trong bộ nhớ; các methods của TaskStore có thể gọi concurrently.
 type TaskStore struct {
 	sync.Mutex
 
@@ -61,35 +60,33 @@ type TaskStore struct {
 
 func New() *TaskStore
 
-// CreateTask creates a new task in the store.
+// CreateTask tạo một task mới trong store.
 func (ts *TaskStore) CreateTask(text string, tags []string, due time.Time) int
 
-// GetTask retrieves a task from the store, by id. If no such id exists, an
-// error is returned.
+// GetTask lấy một task từ store, theo ID. Nếu không có ID nào tồn tại, trả về lỗi.
 func (ts *TaskStore) GetTask(id int) (Task, error)
 
-// DeleteTask deletes the task with the given id. If no such id exists, an error
-// is returned.
+// DeleteTask xóa task với ID cho trước. Nếu ID không tồn tại, trả về lỗi.
 func (ts *TaskStore) DeleteTask(id int) error
 
-// DeleteAllTasks deletes all tasks in the store.
+// DeleteAllTasks xóa tất cả các task trong store.
 func (ts *TaskStore) DeleteAllTasks() error
 
-// GetAllTasks returns all the tasks in the store, in arbitrary order.
+// GetAllTasks trả về tất cả các task trong store, theo thứ tự bất kỳ.
 func (ts *TaskStore) GetAllTasks() []Task
 
-// GetTasksByTag returns all the tasks that have the given tag, in arbitrary
-// order.
+// GetTasksByTag trả về tất cả các task có tag cho trước, theo thứ tự bất kỳ.
 func (ts *TaskStore) GetTasksByTag(tag string) []Task
 
-// GetTasksByDueDate returns all the tasks that have the given due date, in
-// arbitrary order.
+// GetTasksByDueDate trả về tất cả các task có due date cho trước, theo thứ tự bất kỳ.
 func (ts *TaskStore) GetTasksByDueDate(year int, month time.Month, day int) []Task
 ```
 
+Package `taskstore` triển khai API bằng cách sử dụng `map[int]Task`, nhưng bạn có thể xem nó như là một database. Trong một ứng dụng thực tế, `TaskStore` có thể là một interface mà nhiều backends có thể sử dụng, nhưng với ví dụ đơn giản của chúng ta thì API hiện tại là đủ.
+
 ## Setting up the server
 
-The `main` function of our server is fairly simple:
+Hàm `main` của server khá đơn giản:
 
 ```go
 func main() {
@@ -103,25 +100,7 @@ func main() {
 }
 ```
 
-The `taskstore` package implements this API using a simple `map[int]Task`, but you could easily imagine it being implemented using a database. In a realistic application, `TaskStore` would likely be an interface that several backends can implement, but for our simple example the current API is sufficient. If you'd like an extended exercise, go ahead and implement a `TaskStore` using something like `MongoDB`.
-
-## Setting up the server
-
-The `main` function of our server is fairly simple:
-
-```go
-func main() {
-  mux := http.NewServeMux()
-  server := NewTaskServer()
-  mux.HandleFunc("/task/", server.taskHandler)
-  mux.HandleFunc("/tag/", server.tagHandler)
-  mux.HandleFunc("/due/", server.dueHandler)
-
-  log.Fatal(http.ListenAndServe("localhost:"+os.Getenv("SERVERPORT"), mux))
-}
-```
-
-`NewTaskServer` is a constructor for our server type, `taskServer`. The server wraps a `TaskStore`, which is safe for [concurrent access](/blog/2019/on-concurrency-in-go-http-servers).
+`NewTaskServer` là một constructor cho server của chúng ta, `taskServer`. Server bao gồm một `TaskStore`, có thể [truy cập đồng thời](/blog/2019/on-concurrency-in-go-http-servers) một cách an toàn.
 
 ```go
 type taskServer struct {
@@ -136,9 +115,9 @@ func NewTaskServer() *taskServer {
 
 ## Routing and handlers
 
-**Update (2023-10-16)**: in `Go 1.22` the capabilities of the standard library HTTP router are significantly enhanced. See [this post](/blog/2023/better-http-server-routing-in-go-122) for details.
+**Update (2023-10-16)**: trong `Go 1.22` thì router từ package `http` được cải thiện đáng kể. Xem [bài viết này](/blog/2023/better-http-server-routing-in-go-122) để biết chi tiết.
 
-Back to the routing, using the standard HTTP multiplexer included in the `net/http` package:
+Trở lại với routing, sử dụng HTTP multiplexer có sẵn trong package `net/http`:
 
 ```go
 mux.HandleFunc("/task/", server.taskHandler)
@@ -146,11 +125,9 @@ mux.HandleFunc("/tag/", server.tagHandler)
 mux.HandleFunc("/due/", server.dueHandler)
 ```
 
-The standard multiplexer is very bare-bones; that's both its strength and weakness. Strength because it's super easy to understand - there's no magic involved whatsoever. Weakness because it sometimes makes path matching rather tedious and split over several places, as we shall soon see.
+Multiplexer có sẵn rất đơn giản, chỉ hỗ trợ matching chính xác của path prefix. Điều này có nghĩa là `/task/` sẽ match với `/task/` và `/task/42`, nhưng không match với `/task` (không có trailing slash). Điều này vừa là điểm mạnh vừa là điểm yếu của nó. Điểm mạnh là nó rất dễ hiểu. Điểm yếu là nó đôi khi làm cho việc matching path trở nên khá phiền phức và phải chia ra nhiều nơi, như chúng ta sẽ thấy ngay sau đây.
 
-Since the standard mux only supports exact matching of path prefixes, we're pretty much forced to only match roots at the top level and defer the more detailed matching to the handler.
-
-Let's examine `taskHandler` in detail:
+Vì mux chỉ hỗ trợ matching chính xác của path prefix, nên chúng ta bắt đầu với `/task/`, `/tag/` và `/due/` là các root của các API. Các handler cho các root này được định nghĩa trong `taskHandler`, `tagHandler` và `dueHandler`:
 
 ```go
 func (ts *taskServer) taskHandler(w http.ResponseWriter, req *http.Request) {
@@ -168,7 +145,7 @@ func (ts *taskServer) taskHandler(w http.ResponseWriter, req *http.Request) {
     }
 ```
 
-We begin with the exact match of path to `/task/` (meaning no `<taskid>` follows). Here we have to figure out which HTTP method is used, and call the appropriate server method. Most handlers are fairly simple wrappers around the `TaskStore` API. Let's examine one in detail:
+Chúng ta bắt đầu với exact match của path với `/task/` (nghĩa là không có `<taskid>` theo sau). Ở đây chúng ta phải xác định HTTP method nào được sử dụng, và gọi method thích hợp. Hầu hết các handler đều là các wrapper đơn giản của `TaskStore` API. Hãy xem ví dụ sau đây:
 
 ```go
 func (ts *taskServer) getAllTasksHandler(w http.ResponseWriter, req *http.Request) {
@@ -185,14 +162,14 @@ func (ts *taskServer) getAllTasksHandler(w http.ResponseWriter, req *http.Reques
 }
 ```
 
-This handler has two main jobs:
+Handler này có 2 việc chính:
 
-1. Get data from the model (`TaskStore`)
-2. Fill in an HTTP response for the client
+1. Lấy dữ liệu từ model (`TaskStore`)
+2. Điền vào HTTP response cho client
 
-Both are straightforward, but if you examine the other handlers in the server you'll notice that the second is a bit repetitive - marshal the JSON, write the right HTTP response header, etc. We'll get back to this later on.
+Cả 2 đều rất trực quan, nhưng nếu bạn nhìn vào các handlers khác thì bạn sẽ thấy bước thứ 2 lặp lại khá nhiều - marshal JSON, write HTTP response header, v.v. Chúng ta sẽ quay lại vấn đề này sau.
 
-Now back to `taskHandler`; so far we've seen how it handles direct matches of the `/task/` path. What about `/task/<taskid>`? That's where the next part of the function comes in:
+Bây giờ trở lại với `taskHandler`; cho đến nay chúng ta đã thấy cách nó xử lý các exact match của `/task/`. Còn `/task/<taskid>` thì sao?
 
 ```go
 } else {
@@ -220,9 +197,9 @@ Now back to `taskHandler`; so far we've seen how it handles direct matches of th
 }
 ```
 
-When the path is not an exact match to `/task/`, we expect there to be a numeric ID following the slash. The code above parses this numeric ID and invokes the appropriate handler (based on HTTP method).
+Khi path không khớp chính xác với `/task/`, chúng ta expect có một ID theo sau dấu `/`. Đoạn code trên parses ID này và gọi handler phù hợp (dựa trên HTTP method).
 
-The rest of the code is more of the same and should be fairly straightforward to understand. The only handler that's a bit special is `createTaskHandler`, since it has to parse JSON data sent by the client in the request body. There are some nuances to JSON parsing in requests that I didn't cover - check out [this post](/blog/2023/how-to-properly-parse-a-json-request-body) for a more thorough approach.
+Phần còn lại thì cũng tương tự và dễ hiểu. Chỉ có `createTaskHandler` hơi đặc biệt, vì nó phải parse JSON data được gửi bởi client trong request body. Có một vài điểm về JSON parsing mà tôi không đề cập - hãy xem [bài viết này](/blog/2023/how-to-properly-parse-a-json-request-body) để biết chi tiết hơn.
 
 ## Making improvements
 
