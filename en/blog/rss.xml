@@ -4,10 +4,27 @@
         <title>ducnguyen96 Blog</title>
         <link>https://your-docusaurus-site.example.com/en/blog</link>
         <description>ducnguyen96 Blog</description>
-        <lastBuildDate>Wed, 13 Dec 2023 08:07:51 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 13 Dec 2023 13:11:33 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[What is REST]]></title>
+            <link>https://your-docusaurus-site.example.com/en/blog/2023/what-is-rest</link>
+            <guid>https://your-docusaurus-site.example.com/en/blog/2023/what-is-rest</guid>
+            <pubDate>Wed, 13 Dec 2023 13:11:33 GMT</pubDate>
+            <description><![CDATA[Sources]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="sources">Sources<a href="https://your-docusaurus-site.example.com/en/blog/2023/what-is-rest#sources" class="hash-link" aria-label="Direct link to Sources" title="Direct link to Sources">​</a></h2>
+<ul>
+<li><a href="https://www.codecademy.com/articles/what-is-rest" target="_blank" rel="noopener noreferrer">https://www.codecademy.com/articles/what-is-rest</a></li>
+</ul>]]></content:encoded>
+            <category>REST</category>
+            <category>API</category>
+            <category>HTTP</category>
+            <category>Web</category>
+            <category>Web Development</category>
+            <category>Web Services</category>
+        </item>
         <item>
             <title><![CDATA[On Concurrency in Go HTTP Servers]]></title>
             <link>https://your-docusaurus-site.example.com/en/blog/2019/on-concurrency-in-go-http-servers</link>

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[2963],{7161:e=>{e.exports=JSON.parse('{"label":"API","permalink":"/en/blog/tags/api","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

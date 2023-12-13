@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[7289],{8528:e=>{e.exports=JSON.parse('{"label":"Web Services","permalink":"/en/blog/tags/web-services","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);
