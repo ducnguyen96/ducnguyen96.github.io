@@ -27,7 +27,7 @@ const config: Config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "vi",
-    locales: ["vi"],
+    locales: ["vi", "en"],
   },
 
   presets: [
@@ -71,19 +71,13 @@ const config: Config = {
       items: [
         {
           type: "doc",
-          docId: "intro",
+          docId: "introduction",
           position: "left",
           label: "Docs",
         },
         { to: "/blog", label: "Blog", position: "left" },
         {
-          to: "https://github.com/ducnguyen96",
-          label: "GitHub",
-          position: "right",
-        },
-        {
-          to: "https://www.youtube.com/channel/UCCrvmlNIXLgZOMAMn9VKBeA",
-          label: "Youtube",
+          type: "localeDropdown",
           position: "right",
         },
       ],

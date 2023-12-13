@@ -1,5 +1,17 @@
 ducnguyen96:
   name: Đức Nguyễn
-  title: Developer
+  title: Developer, Translator
   url: https://github.com/ducnguyen96
   image_url: https://avatars.githubusercontent.com/u/47471616?v=4
+
+eliben:
+  name: Eli Bendersky
+  title: Developer
+  url: https://eli.thegreenplace.net
+  image_url: https://avatars.githubusercontent.com/u/1130906?v=4
+
+alexedwards:
+  name: Alex Edwards
+  title: Developer
+  url: https://www.alexedwards.net
+  image_url: https://avatars.githubusercontent.com/u/228149?v=4
