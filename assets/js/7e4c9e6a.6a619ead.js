@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[2434],{4718:u=>{u.exports=JSON.parse('{"label":"waitgroup","permalink":"/blog/tags/waitgroup","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

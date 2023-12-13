@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[6762],{563:e=>{e.exports=JSON.parse('{"label":"channel","permalink":"/blog/tags/channel","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

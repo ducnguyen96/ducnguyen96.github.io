@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[868],{4634:e=>{e.exports=JSON.parse('{"label":"semaphore","permalink":"/en/blog/tags/semaphore","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

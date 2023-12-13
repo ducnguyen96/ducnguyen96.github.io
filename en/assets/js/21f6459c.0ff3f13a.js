@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[6822],{2516:e=>{e.exports=JSON.parse('{"label":"buffered channel","permalink":"/en/blog/tags/buffered-channel","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

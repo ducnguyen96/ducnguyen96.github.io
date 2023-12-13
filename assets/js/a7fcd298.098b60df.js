@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[7662],{1557:e=>{e.exports=JSON.parse('{"label":"select","permalink":"/blog/tags/select","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

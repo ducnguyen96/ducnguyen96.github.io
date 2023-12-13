@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles.css" />
+		<title>My Todo</title>
+	</head>
+	<body>
+		<div id="root">
+			<h1 style="color: #e6c4c4; font-size: 5rem; margin-bottom: 0; text-align: center">todos</h1>
+			<div id="app">
+				<div id="top">
+					<input type="text" placeholder="Bạn cần làm gì hôm nay?" id="input" />
+				</div>
+				<div id="center"></div>
+				<div id="bottom">
+					<span id="count-active">0 item left</span>
+					<div id="filters">
+						<a href="#" id="filter-all" class="selected">All</a>
+						<a href="#" id="filter-active">Active</a>
+						<a href="#" id="filter-completed">Completed</a>
+					</div>
+					<button id="clear-completed">Clear completed</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="./scripts.js"></script>
+</html>

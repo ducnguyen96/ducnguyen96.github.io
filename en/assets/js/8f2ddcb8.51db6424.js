@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[3155],{306:s=>{s.exports=JSON.parse('{"label":"stored xss","permalink":"/en/blog/tags/stored-xss","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);
