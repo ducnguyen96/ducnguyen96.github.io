@@ -32,7 +32,10 @@ const sidebars: SidebarsConfig = {
             description: "REST Server Guides",
             keywords: ["Go", "REST Server"],
           },
-          items: ["go/rest-server/standard-library"],
+          items: [
+            "go/rest-server/standard-library",
+            "go/rest-server/using-a-router-package",
+          ],
         },
       ],
     },
