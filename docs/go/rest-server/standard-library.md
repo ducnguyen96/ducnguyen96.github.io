@@ -8,7 +8,7 @@ Một trong những câu hỏi thường gặp ở Developer lúc chuẩn bị s
 
 ## The task
 
-Đầu tiên, nếu bạn cần nhớ lại kiến thức về _REST server_ [đây là bài viết tốt](/blog/2023/what-is-rest). Phần còn lại của series này sẽ giả sử bạn biết về "path", "HTTP header", "response code", v.v.
+Đầu tiên, nếu cần check lại kiến thức về _REST server_ thì xem qua[bài viết này](/blog/2023/what-is-rest). Phần còn lại của series sẽ giả sử bạn biết về "path", "HTTP header", "response code", v.v.
 
 Server của chúng ta là một backend đơn giản cho ứng dụng quản lý công việc (tương tự Google Keep, hay các ứng dụng Todo khác); nó gồm 1 số APIs sau:
 
@@ -21,9 +21,9 @@ GET    /tag/<tagname>      :  returns list tasks chứa tag này
 GET    /due/<yy>/<mm>/<dd> :  returns list tasks với ngày hết hạn
 ```
 
-Server của chúng ta hỗ trợ `GET`, `POST` và `DELETE` requests, một số trong số đó có nhiều đường dẫn khác nhau. Các phần giữa dấu ngoặc `<...>` đề cập đến các tham số mà client cung cấp như là một phần của request; ví dụ, `GET /task/42` là một request để `GET` task với ID 42, v.v. Tasks thì duy nhất theo ID.
+Nó hỗ trợ `GET`, `POST` và `DELETE` requests, một số trong số đó có nhiều đường dẫn khác nhau. Các phần giữa dấu ngoặc `<...>` đề cập đến các tham số mà client cung cấp như là một phần của request; ví dụ, `GET /task/42` là một request để `GET` task với ID 42, v.v. Tasks thì duy nhất theo ID.
 
-Dữ liệu được mã hóa dưới dạng JSON. Trong POST `/task/` client sẽ gửi một 1 task theo format JSON. Tương tự, mọi nơi mà server "return" cái gì đó, dữ liệu trả về được mã hóa dưới dạng JSON trong body của HTTP response.
+Dữ liệu được encode dưới dạng JSON. Trong POST `/task/` client sẽ gửi một 1 task theo format JSON. Tương tự, mọi nơi mà server "return" cái gì đó, dữ liệu trả về được encode dưới dạng JSON trong body của HTTP response.
 
 ## Code
 
@@ -33,11 +33,11 @@ Phần còn lại của bài viết này sẽ giới thiệu code của server, 
 $ SERVERPORT=4112 go run .
 ```
 
-Chú ý rằng `SERVERPORT` có thể là bất kỳ port nào; đây là port `TCP` mà server local của bạn đang lắng nghe. Sau khi server chạy, bạn có thể tương tác với nó trong một terminal khác bằng cách sử dụng các lệnh `curl`, hoặc bằng bất kỳ cách nào khác mà bạn thấy phù hợp. Xem ví dụ [ở đây](https://github.com/eliben/code-for-blog/blob/master/2021/go-rest-servers/testing/manual.sh).
+Chú ý rằng `SERVERPORT` có thể là bất kỳ port nào; đây là port `TCP` mà server local của bạn đang lắng nghe. Sau khi server chạy, bạn có thể tương tác với nó trong một terminal khác bằng cách sử dụng lệnh `curl`, hoặc bằng bất kỳ cách nào khác mà bạn thấy phù hợp. Xem ví dụ [ở đây](https://github.com/eliben/code-for-blog/blob/master/2021/go-rest-servers/testing/manual.sh).
 
 ## The Model
 
-Hãy bắt đầu bằng cách thảo luận về model (hoặc "data layer") cho server của chúng ta - package `taskstore` (thư mục `internal/taskstore`). Đây là API của nó:
+Hãy bắt đầu bằng cách thảo luận về model (hoặc "data layer") cho server - package `taskstore` (thư mục `internal/taskstore`). Đây là API của nó:
 
 ```go
 package taskstore
@@ -100,7 +100,7 @@ func main() {
 }
 ```
 
-`NewTaskServer` là một constructor cho server của chúng ta, `taskServer`. Server bao gồm một `TaskStore`, có thể [truy cập đồng thời](/blog/2019/on-concurrency-in-go-http-servers) một cách an toàn.
+`NewTaskServer` là một constructor. Server bao gồm một `TaskStore`, có thể [truy cập đồng thời](/blog/2019/on-concurrency-in-go-http-servers) một cách an toàn.
 
 ```go
 type taskServer struct {
@@ -145,7 +145,7 @@ func (ts *taskServer) taskHandler(w http.ResponseWriter, req *http.Request) {
     }
 ```
 
-Chúng ta bắt đầu với exact match của path với `/task/` (nghĩa là không có `<taskid>` theo sau). Ở đây chúng ta phải xác định HTTP method nào được sử dụng, và gọi method thích hợp. Hầu hết các handler đều là các wrapper đơn giản của `TaskStore` API. Hãy xem ví dụ sau đây:
+Chúng ta bắt đầu với exact match của path với `/task/` (nghĩa là không có `<taskid>` theo sau). Ở đây ta phải xác định HTTP method nào được sử dụng, và gọi method thích hợp. Hầu hết các handler đều là các wrapper đơn giản của `TaskStore` API. Hãy xem ví dụ sau đây:
 
 ```go
 func (ts *taskServer) getAllTasksHandler(w http.ResponseWriter, req *http.Request) {
@@ -203,9 +203,9 @@ Phần còn lại thì cũng tương tự và dễ hiểu. Chỉ có `createTask
 
 ## Making improvements
 
-Now that we have the basic version of the server working, it's time to think about potential issues and improvements.
+Bây giờ chúng ta đã có một server cơ bản, hãy xem xem nó có thể có những vấn đề nào hay có thể cải thiện được chỗ nào.
 
-One obvious place we can improve is the repetitive JSON rendering in our HTTP responses, as mentioned earlier. For this, I created a separate version of the server called [stdlib-factorjson](https://github.com/eliben/code-for-blog/tree/master/2021/go-rest-servers/stdlib-factorjson). I've kept it separate to help you easily diff it vs. the original server and see what changed. The main novelty it contains is this function:
+Điều dễ nhận thấy nhất là ta có thể cải thiện phần lặp đi lặp lại render JSON vào HTTP response. Chi tiết bạn có thể xem [ở đây](https://github.com/eliben/code-for-blog/tree/master/2021/go-rest-servers/stdlib-factorjson). Dưới đây là điểm thay đổi chính:
 
 ```go
 // renderJSON renders 'v' as JSON and writes it as a response into w.
@@ -220,7 +220,7 @@ func renderJSON(w http.ResponseWriter, v interface{}) {
 }
 ```
 
-Using it, we can rewrite all our handlers to be a bit more succinct; for example, `getAllTasksHandler` now becomes:
+Sử dụng hàm này thì ta có thể viết lại tất cả các handlers một cách ngắn gọn hơn, chẳng hạn như sau:
 
 ```go
 func (ts *taskServer) getAllTasksHandler(w http.ResponseWriter, req *http.Request) {
@@ -231,13 +231,13 @@ func (ts *taskServer) getAllTasksHandler(w http.ResponseWriter, req *http.Reques
 }
 ```
 
-A more fundamental improvement is making path matching cleaner and more centralized. While the current path matching approach is simple to debug, it's not as simple to grasp at a glance because it's scattered across multiple functions. For example, let's say we're trying to figure out where a DELETE request to `/task/<taskid>` is going.
+Một điểm cải thiện khác mà ta có thể nghĩ đến là làm cho việc matching path trở nên clear, hiện tại thì nó đang không được rõ ràng cho lắm, chẳng hạn nếu muốn biết một DELETE request tới `/task/<taskid>` sẽ đi tới đâu:
 
-1. First, we find the mux in `main`, and see that the `/task/` root goes to `taskHandler`
-2. Then, in `taskHandler` have have to find the else clause that handles non-exact matches to `/task/`. There we have to read the code parsing the `<taskid>` part into an integer
-3. Finally, we look at the if statement listing the different methods supported for this route and find that DELETE is handled by `deleteTaskHandler`
+1. Đầu tiên, tìm mux trong `main` và thấy rằng `/task/` sẽ đi tới `taskHandler`
+2. Sau đó trong `taskHandler` ta phải tìm `else` khi mà route không exact match với `/task/`. Sau đó phải đọc tiếp phần code để parse `<taskid>` thành 1 integer
+3. Cuối cùng thì phải check request method mới tới được `deleteTaskHandler`
 
-Placing all of this logic in a single, easily-consumable place is something third-party HTTP router packages aim to solve. It's the focus of [part 2](/docs/go/rest-server/using-a-router-package) in this series.
+Việc đặt 3 bước trên vào 1 chỗ duy nhất sao cho dễ hiểu và trực quan nhất là mục tiêu mà các thư viện bên thứ 3 hướng tới. Chúng ta sẽ tìm hiểu về điều này ở [bài viết tiếp theo](/docs/go/rest-server/using-a-router-package).
 
 ## Sources
 
