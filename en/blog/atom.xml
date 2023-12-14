@@ -2,11 +2,32 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://your-docusaurus-site.example.com/en/blog</id>
     <title>ducnguyen96 Blog</title>
-    <updated>2023-12-13T13:11:33.000Z</updated>
+    <updated>2023-12-14T12:48:09.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://your-docusaurus-site.example.com/en/blog"/>
     <subtitle>ducnguyen96 Blog</subtitle>
     <icon>https://your-docusaurus-site.example.com/en/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Different approaches to HTTP routing in Go]]></title>
+        <id>https://your-docusaurus-site.example.com/en/blog/2023/go-routing</id>
+        <link href="https://your-docusaurus-site.example.com/en/blog/2023/go-routing"/>
+        <updated>2023-12-14T12:48:09.000Z</updated>
+        <summary type="html"><![CDATA[Sources]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="sources">Sources<a href="https://your-docusaurus-site.example.com/en/blog/2023/go-routing#sources" class="hash-link" aria-label="Direct link to Sources" title="Direct link to Sources">​</a></h2>
+<ul>
+<li><a href="https://benhoyt.com/writings/go-routing/" target="_blank" rel="noopener noreferrer">https://benhoyt.com/writings/go-routing/</a></li>
+</ul>]]></content>
+        <author>
+            <name>Ben Hoyt</name>
+            <uri>https://benhoyt.com</uri>
+        </author>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+        <category label="go" term="go"/>
+        <category label="Networking Programming" term="Networking Programming"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[What is REST]]></title>
         <id>https://your-docusaurus-site.example.com/en/blog/2023/what-is-rest</id>
