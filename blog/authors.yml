@@ -21,3 +21,9 @@ codeacademy:
   title: Company
   url: https://www.codecademy.com
   image_url: https://avatars.githubusercontent.com/u/1463944?s=200&v=4
+
+benhoyt:
+  name: Ben Hoyt
+  title: Developer
+  url: https://benhoyt.com
+  image_url: https://avatars.githubusercontent.com/u/999033?v=4
