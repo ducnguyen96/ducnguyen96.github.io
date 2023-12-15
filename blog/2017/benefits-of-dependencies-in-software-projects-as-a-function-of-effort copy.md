@@ -32,7 +32,7 @@ Chẳng hạn với phát triển web. Nếu bạn là một nhà thầu thườ
 
 Tuy nhiên, nếu công ty bạn có một web app lớn và phức tạp mà 4 kỹ sư đã phát triển trong vài năm qua (và sẽ tiếp tục phát triển trong tương lai), thì khả năng là bạn chỉ sử dụng các thư viện cơ bản nhất (ví dụ như jQuery), và phần còn lại được phát triển trong công ty.
 
-Sự khác biệt giữa các thư viện cơ bản và các thư viện khác còn là vấn đề về quy mô. Không nhiều công ty sẽ tự viết một database cho dự án của họ, nhưng nếu bạn phát triển một dự án với quy mô của Google thì việc tự viết một [database](https://en.wikipedia.org/wiki/Bigtable) là có thể hiểu được.
+Sự khác biệt giữa các thư viện cơ bản và các thư viện khác còn là vấn đề về quy mô. Không nhiều công ty sẽ tự viết một database cho dự án của họ, nhưng nếu bạn phát triển một dự án với quy mô của Google thì việc tự viết một database là có thể hiểu được.
 
 <div align="center">
  ![reinventing-the-wheel.jpg](./img/reinventing-the-wheel.jpg)
@@ -42,9 +42,9 @@ Sự khác biệt giữa các thư viện cơ bản và các thư viện khác c
 
 Một ví dụ điển hình là các nhà phát triển game 3D. Hầu hết các studio nhỏ và các nhà phát triển đều bắt đầu bằng việc sử dụng một trong các game engine có sẵn và tập trung vào nội dung của game. Tuy nhiên, sau một thời gian, nhiều studio lớn hơn lại phát triển các engine riêng để phục vụ nhu cầu của riêng họ. Công sức bỏ ra cho dự án lớn hơn, vì vậy dependencies không còn có lợi nữa.
 
-Một trong những bài viết trong nhất về chủ đề này là của Joel Spolsky's - [In Defense of Not-Invented-Here Syndrome (from 2001)](https://www.joelonsoftware.com/2001/10/14/in-defense-of-not-invented-here-syndrome/). Trong bài này thì Joel đã chỉ ra cách mà Microsoft Excel team đã phải đấu tranh để bỏ tất cả các dependencies ra khỏi dự án của họ, và tự viết riêng một C compiler. Họ không làm thế vì ngu ngốc hay kiêu ngạo mà đơn giản vì nó phù hợp cho dự án khổng lồ của họ.
+One of the best articles on this subject I'm aware of is Joel Spolsky's In Defense of Not-Invented-Here Syndrome (from 2001). In that article Joel tells how the Microsoft Excel team strove to eliminate all dependencies in their project, including having their own C compiler at some point. They didn't do it because they were stupid or conceited - they did it because it made sense for their gigantic project.
 
-Quan điểm của Joel hơi khác so với của tội - anh ấy cho rằng các tính năng cốt lõi nên tự phát triển. Điều này là đúng tuy nhiên công thức nêu trên muốn nhìn theo một góc độ khác. Khi mới bắt đầu thì framework mà bạn sử dụng không phải là tính năng cốt lõi - chỉ là một công cụ. Tuy nhiên theo thời gian thì có thể xem nó như là một tính năng cốt lõi, vì đã có rất nhiều effort đã được dành cho dự án; cái giá để loại bỏ nó được giảm bớt.
+Joel's point is slightly different from mine - he says that core functionalities are best developed in-house. This is true, but my formula tries to capture the picture from a different angle. When your project is starting, the web framework you use is not a core functionality - it's just a tool. With time, however, it makes more sense to treat it as core functionality, since so much effort was already spent on the project; the cost of extra effort to eliminate the dependency is diminished.
 
 ## Sources
 
