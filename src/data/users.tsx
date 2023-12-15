@@ -40,26 +40,10 @@ import { sortBy } from "@site/src/utils/jsUtils";
 // We'll remove inappropriate tags, but it's less likely that we add tags.
 export type TagType =
   | "favorite"
-  | "opensource"
-  | "product"
-  | "react"
   | "typescript"
   | "javascript"
   | "svelte"
-  | "nextjs"
-  | "go"
-  | "rust"
-  | "web"
-  | "backend"
-  | "frontend"
   | "firebase"
-  | "nestjs"
-  | "microservices"
-  | "linux"
-  | "postgresql"
-  | "docker"
-  | "kubernetes"
-  | "aws"
   | "php"
   | "wordpress"
   | "tailwindcss";
@@ -73,7 +57,7 @@ const Users: User[] = [
     preview: require('./showcase/tesol.jpg'),
     website: 'https://ducnguyen96.github.io/projects/tesol',
     source: null,
-    tags: ['php', 'wordpress', 'frontend', 'tailwindcss'],
+    tags: ['php', 'wordpress', 'tailwindcss'],
   },
   {
     title: 'Issues',
@@ -81,7 +65,7 @@ const Users: User[] = [
     preview: require('./showcase/issues.jpg'),
     website: 'https://issues-af52b.web.app',
     source: null,
-    tags: ['svelte', 'firebase', 'frontend', 'backend', 'typescript', 'tailwindcss'],
+    tags: ['svelte', 'firebase', 'typescript', 'tailwindcss'],
   }
 ];
 
@@ -108,33 +92,6 @@ export const Tags: { [type in TagType]: Tag } = {
       id: "showcase.tag.favorite.description",
     }),
     color: "#e9669e",
-  },
-
-  opensource: {
-    label: translate({ message: "Open-Source" }),
-    description: translate({
-      message: "Open-Source apps can be useful for inspiration!",
-      id: "showcase.tag.opensource.description",
-    }),
-    color: "#39ca30",
-  },
-
-  product: {
-    label: translate({ message: "Product" }),
-    description: translate({
-      message: "Not a toy project, but a real product!",
-      id: "showcase.tag.product.description",
-    }),
-    color: "#dfd545",
-  },
-
-  react: {
-    label: "React",
-    description: translate({
-      message: "Made with React",
-      id: "showcase.tag.react.description",
-    }),
-    color: "#61dafb",
   },
 
   typescript: {
@@ -164,60 +121,6 @@ export const Tags: { [type in TagType]: Tag } = {
     color: "#ff3e00",
   },
 
-  nextjs: {
-    label: "Next.js",
-    description: translate({
-      message: "Made with Next.js",
-      id: "showcase.tag.nextjs.description",
-    }),
-    color: "#000000",
-  },
-
-  go: {
-    label: "Go",
-    description: translate({
-      message: "Made with Go",
-      id: "showcase.tag.go.description",
-    }),
-    color: "#00add8",
-  },
-
-  rust: {
-    label: "Rust",
-    description: translate({
-      message: "Made with Rust",
-      id: "showcase.tag.rust.description",
-    }),
-    color: "#B7410E",
-  },
-
-  web: {
-    label: "Web",
-    description: translate({
-      message: "Made for the Web",
-      id: "showcase.tag.web.description",
-    }),
-    color: "#4285f4",
-  },
-
-  backend: {
-    label: "Backend",
-    description: translate({
-      message: "Made for the Backend",
-      id: "showcase.tag.backend.description",
-    }),
-    color: "#4285f4",
-  },
-
-  frontend: {
-    label: "Frontend",
-    description: translate({
-      message: "Made for the Frontend",
-      id: "showcase.tag.frontend.description",
-    }),
-    color: "#4285f4",
-  },
-
   firebase: {
     label: "Firebase",
     description: translate({
@@ -225,69 +128,6 @@ export const Tags: { [type in TagType]: Tag } = {
       id: "showcase.tag.firebase.description",
     }),
     color: "#ffa611",
-  },
-
-  nestjs: {
-    label: "NestJS",
-    description: translate({
-      message: "Made with NestJS",
-      id: "showcase.tag.nestjs.description",
-    }),
-    color: "#ea2845",
-  },
-
-  microservices: {
-    label: "Microservices",
-    description: translate({
-      message: "Made for Microservices",
-      id: "showcase.tag.microservices.description",
-    }),
-    color: "#ea2845",
-  },
-
-  linux: {
-    label: "Linux",
-    description: translate({
-      message: "Made for Linux",
-      id: "showcase.tag.linux.description",
-    }),
-    color: "#000000",
-  },
-
-  postgresql: {
-    label: "PostgreSQL",
-    description: translate({
-      message: "Made with PostgreSQL",
-      id: "showcase.tag.postgresql.description",
-    }),
-    color: "#336791",
-  },
-
-  docker: {
-    label: "Docker",
-    description: translate({
-      message: "Made with Docker",
-      id: "showcase.tag.docker.description",
-    }),
-    color: "#2496ed",
-  },
-
-  kubernetes: {
-    label: "Kubernetes",
-    description: translate({
-      message: "Made with Kubernetes",
-      id: "showcase.tag.kubernetes.description",
-    }),
-    color: "#326ce5",
-  },
-
-  aws: {
-    label: "AWS",
-    description: translate({
-      message: "Made with AWS",
-      id: "showcase.tag.aws.description",
-    }),
-    color: "#ff9900",
   },
 
   php: {
@@ -324,7 +164,7 @@ function sortUsers() {
   // Sort by site name
   result = sortBy(result, (user) => user.title.toLowerCase());
   // Sort by favorite tag, favorites first
-  result = sortBy(result, (user) => !user.tags.includes("favorite"));
+  // result = sortBy(result, (user) => !user.tags.includes("favorite"));
   return result;
 }
 
