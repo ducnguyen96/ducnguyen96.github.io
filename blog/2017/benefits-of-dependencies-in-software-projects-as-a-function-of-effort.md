@@ -1,6 +1,6 @@
 ---
-title: Benefits of dependencies in software projects as a function of effort
-description: Benefits of dependencies in software projects as a function of effort.
+title: Hàm số biểu thị mối tương quan giữa effort bỏ ra và lợi ích khi sử dụng dependencies trong các dự án phần mềm.
+description: Hàm số biểu thị mối tương quan giữa effort bỏ ra và lợi ích khi sử dụng dependencies trong các dự án phần mềm.
 authors:
   - eliben
   - ducnguyen96
@@ -8,7 +8,7 @@ tags: [Programming]
 hide_table_of_contents: false
 ---
 
-# Benefits of dependencies in software projects as a function of effort
+# Hàm số biểu thị mối tương quan giữa effort bỏ ra và lợi ích khi sử dụng dependencies trong các dự án phần mềm
 
 Một trong những tranh luận phổ biến nhất trong ngành phần mềm là dependencies tốt hay xấu. Có nên tự viết tất cả hoặc hầu hết các chức năng của dự án, hay là nên sử dụng các thư viện có sẵn để thực hiện các tác vụ con mà dự án cần thực hiện.
 
