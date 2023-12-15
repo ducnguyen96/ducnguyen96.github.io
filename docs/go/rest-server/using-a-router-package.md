@@ -1,14 +1,14 @@
 ---
-sidebar_label: Sử dụng một router package
+sidebar_label: Sử dụng router package
 ---
 
-# Sử dụng một router package
+# Sử dụng router package
 
 [Phần 1](/docs/go/rest-server/standard-library) kết thúc với 1 Go server, ta đã refactor bước render JSON thành 1 helper function.
 
-Vấn đề còn lại là path routing logic, hiện tại đang rải rác thành nhiều nơi.
+Vấn đề còn lại là path routing logic, hiện tại đang rải rác ở nhiều nơi.
 
-Đây là vấn đề mọi người gặp phải khi cố gắng viết servers mà không sử dụng dependencies. Trừ khi server có routes rất đơn giản(có 1 vài server chuyên biệt chỉ có 1 hay 2 routes), sự dài dòng và khó khăn trong việc quản lý code của router là điều sẽ dần dần hiện ra..
+Đây là vấn đề mọi người gặp phải khi cố gắng viết servers mà không sử dụng dependencies. Trừ khi server có routes rất đơn giản(có 1 vài server chuyên biệt chỉ có 1 hay 2 routes), sự dài dòng và khó khăn trong việc quản lý code của router là điều sẽ sớm được nhận thấy.
 
 ## Routing nâng cao
 

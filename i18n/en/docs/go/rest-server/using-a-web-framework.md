@@ -2,6 +2,8 @@
 sidebar_label: Using a web framework
 ---
 
+# Using a web framework
+
 ## Selecting a web framework
 
 Go has several popular web frameworks these days, and I'm sure they all have their merits. My goal is not to engage in a lengthy comparison and discussion of these frameworks; rather, I'm interested in examining how code using a framework compares to code that doesn't.

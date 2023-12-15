@@ -1,8 +1,8 @@
 ---
-sidebar_label: Standard Library
+sidebar_label: Sử dụng standard library
 ---
 
-# Standard Library
+# Sử dụng standard library
 
 Một trong những câu hỏi thường gặp ở Developer lúc chuẩn bị start 1 project nào đấy là "Nên sử dụng framework nào?". Đối với nhiều ngôn ngữ thì điều này là hoàn toàn bình thường nhưng với Go thì không phải lúc nào cũng vậy. Có nhiều ý kiến trái chiều về việc nên sử dụng frameworks hay không với Go. Mục tiêu của series này là xem xét một cách khách quan từ nhiều góc độ.
 

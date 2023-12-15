@@ -22,6 +22,7 @@ const sidebars: SidebarsConfig = {
         description: "Go Guides",
         keywords: ["Go", "Guides"],
       },
+      collapsed: false,
       items: [
         {
           type: "category",
@@ -32,9 +33,11 @@ const sidebars: SidebarsConfig = {
             description: "REST Server Guides",
             keywords: ["Go", "REST Server"],
           },
+          collapsed: false,
           items: [
             "go/rest-server/standard-library",
             "go/rest-server/using-a-router-package",
+            "go/rest-server/using-a-web-framework",
           ],
         },
       ],

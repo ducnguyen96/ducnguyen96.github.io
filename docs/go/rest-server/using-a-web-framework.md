@@ -2,6 +2,8 @@
 sidebar_label: Sử dụng framework
 ---
 
+# Sử dụng framework
+
 ## Chọn framework
 
 Go có một vài frameworks phổ biến và mỗi framework thì có điểm mạnh riêng. Chúng ta sẽ không so sánh và thảo luận về những frameworks này mà thay vào đó thì ta sẽ xem xét sự khác nhau giữa 1 bên là sử dụng framework và 1 bên không.
