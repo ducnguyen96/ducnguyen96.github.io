@@ -39,6 +39,7 @@ const sidebars: SidebarsConfig = {
             "go/rest-server/using-a-router-package",
             "go/rest-server/using-a-web-framework",
             "go/rest-server/using-openapi-and-swagger",
+            "go/rest-server/middleware",
           ],
         },
       ],
