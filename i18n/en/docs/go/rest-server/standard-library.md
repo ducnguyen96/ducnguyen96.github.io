@@ -10,7 +10,7 @@ Developers who just start using a language often ask "what framework should I us
 
 First of all, I'll assume the reader knows what a _REST server_ is. If you need a refresher, [this is a good resource](https://www.codecademy.com/articles/what-is-rest), but there are many others. The rest of the series assumes you know what I mean by a "path", "HTTP header", "response code", etc.
 
-In our case, the server is a simple backend for a task management application (think Google Keep, Todoist and the like); it presents the following REST API to clients:
+In our case, the server is a simple backend for a task management application (think Google Keep, Todoist and the like); it presents the following REST API to clients [^1]:
 
 ```js
 POST   /task/              :  create a task, returns ID
@@ -251,3 +251,5 @@ Placing all of this logic in a single, easily-consumable place is something thir
 ## Sources
 
 - https://eli.thegreenplace.net/2021/rest-servers-in-go-part-1-standard-library/
+
+[^1]: Note the ad-hoc nature of specifying the REST API for the server. We'll discuss more structured/standard ways in future parts of this series.

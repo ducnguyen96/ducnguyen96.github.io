@@ -77,7 +77,7 @@ func (ts *taskServer) getTaskHandler(w http.ResponseWriter, req *http.Request) {
 }
 ```
 
-In the route definition, the route `/task/{id:[0-9]+}/` defines the regexp to parse a path, but also assigns the identifier part to "id". This "variable" can be accessed by calling `mux.Vars` on the request.
+In the route definition, the route `/task/{id:[0-9]+}/` defines the regexp to parse a path, but also assigns the identifier part to "id". This "variable" can be accessed by calling `mux.Vars` on the request [^1].
 
 ## Comparing the approaches
 
@@ -94,3 +94,5 @@ I like using packages like `gorilla/mux`, because they are a precision tool. The
 ## Sources
 
 - https://eli.thegreenplace.net/2021/rest-servers-in-go-part-2-using-a-router-package
+
+[^1]: It's stored by `gorilla/mux` in the context of each request, and `mux.Vars` is a convenience function to fetch it from there.

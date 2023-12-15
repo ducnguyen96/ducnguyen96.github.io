@@ -77,7 +77,7 @@ func (ts *taskServer) getTaskHandler(w http.ResponseWriter, req *http.Request) {
 }
 ```
 
-Ở phần define route, route `/task/{id:[0-9]+}/` define regex để parse path và đồng thời assign một identifier cho "id". Biến này có thể được truy cập bằng cách gọi `mux.Vars` lên request.
+Ở phần define route, route `/task/{id:[0-9]+}/` define regex để parse path và đồng thời assign một identifier cho "id". Biến này có thể được truy cập bằng cách gọi `mux.Vars` lên request [^1].
 
 ## So sánh 2 cách tiếp cận
 
@@ -94,3 +94,5 @@ Mỗi route với 1 method và 1 handler cụ thể làm cho việc đọc code 
 ## Nguồn
 
 - https://eli.thegreenplace.net/2021/rest-servers-in-go-part-2-using-a-router-package
+
+[^1]: Nó được lưu lại trong context của mỗi request và ta có thể sử dụng `mux.Vars` để lấy giá trị của nó.

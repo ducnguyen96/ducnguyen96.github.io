@@ -8,7 +8,7 @@ sidebar_label: Using a web framework
 
 Go has several popular web frameworks these days, and I'm sure they all have their merits. My goal is not to engage in a lengthy comparison and discussion of these frameworks; rather, I'm interested in examining how code using a framework compares to code that doesn't.
 
-I picked Gin because it's one of the most popular projects (judging by GitHub star counts), and it seems minimal and easy to pick up and use. Gin's documentation leaves much to be desired, but the framework is so intuitive that I found it pretty easy to pick up regardless.
+I picked Gin because it's one of the most popular projects (judging by GitHub star counts), and it seems minimal and easy to pick up and use. Gin's documentation leaves much to be desired, but the framework is so intuitive that I found it pretty easy to pick up regardless [^1].
 
 What's nice about Gin is that it doesn't force any particular style of application development on you (e.g. MVC). Using Gin almost feels like writing code _without_ a framework, except that you get a lot of tools and goodies to achieve your goals with less code.
 
@@ -120,10 +120,13 @@ Any package and tool may have limitations, but frameworks make limitations more 
 
 Imagine we'd discover a limitation in Gorilla's `mux` which would be a blocker for our app. We could then replace it by another router package! While there would undoubtedly be some cost to the transition, its effects would be localized - only the routing configuration is affected.
 
-In contrast, imagine we have a large web app written with Gin and we suddenly discover that the no-regexp limitation is critical. We can't just easily replace Gin by another framework since our whole application is built upon it. The change cost is much higher.
+In contrast, imagine we have a large web app written with Gin and we suddenly discover that the no-regexp limitation is critical [^2]. We can't just easily replace Gin by another framework since our whole application is built upon it. The change cost is much higher.
 
 None of this is fatal; my goal is not to persuade or dissuade folks from using web frameworks. I'm trying to present the objective reality and describe some of the real-life challenges programmers run into when using these packages and frameworks.
 
 ## Sources
 
 - https://eli.thegreenplace.net/2021/rest-servers-in-go-part-3-using-a-web-framework/
+
+[^1]: A slightly philosophical detour: well designed and minimal frameworks have the privilege of being easy to use even without top-notch docs. Contrast this to the more complex frameworks (looking at you, [BeeGo](https://beego.wiki/)), which also have sub-par documentation and are convoluted and over-abstracted at the same time. Such frameworks really raise the barrier of entry by not investing sufficiently in great documentation.
+[^2]: This is fairly unlikely, but serves as a good example regardless.

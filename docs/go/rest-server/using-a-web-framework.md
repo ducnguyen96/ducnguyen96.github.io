@@ -8,7 +8,7 @@ sidebar_label: Sử dụng framework
 
 Go có một vài frameworks phổ biến và mỗi framework thì có điểm mạnh riêng. Chúng ta sẽ không so sánh và thảo luận về những frameworks này mà thay vào đó thì ta sẽ xem xét sự khác nhau giữa 1 bên là sử dụng framework và 1 bên không.
 
-Ta sẽ sử dụng Gin vì nó phổ biến nhất(theo số lượng Github stars), nó có vẻ khá tối giản và dễ sử dụng. Docs của Gin còn khá sơ sài tuy nhiên thì framework này khá trực quan.
+Ta sẽ sử dụng Gin vì nó phổ biến nhất(theo số lượng Github stars), nó có vẻ khá tối giản và dễ sử dụng. Docs của Gin còn khá sơ sài tuy nhiên thì framework này khá trực quan [^1].
 
 Điểm tốt ở Gin là nó không áp đặt app của bạn theo 1 style(ví dụ: MVC) cụ thể nào. Sử dụng Gin gần giống với việc viết code không theo 1 framework nào, ngoại trừ việc bạn có thêm nhiều công cụ cũng như lượng code được rút giảm.
 
@@ -118,10 +118,13 @@ Bất cứ package hay tool nào đều cũng có hạn chế, tuy nhiên sự h
 
 Nếu bạn thấy Gorilla's `mux` không đáp ứng nhu cầu của bạn thì bạn có thể thay thế bằng 1 package khác, mặc dù vẫn sẽ phải mất công để chuyển đổi tuy nhiên không quá nhiều - chỉ ảnh hưởng đến phần config router.
 
-Ngược lại thì với một ứng dụng lớn được với bằng Gin và bỗng dưng việc không hỗ trợ regex trở thành critical, ta không thể dễ dàng thay thế nó bằng 1 framework khác vì app đã được build dựa vào nó. Cái giá phải trả là cao hơn nhiều.
+Ngược lại thì với một ứng dụng lớn được với bằng Gin và bỗng dưng việc không hỗ trợ regex trở thành critical [^2], ta không thể dễ dàng thay thế nó bằng 1 framework khác vì app đã được build dựa vào nó. Cái giá phải trả là cao hơn nhiều.
 
 Ở đây thì mình không thuyết phục cũng như ngăn cản việc sử dụng framework mà chỉ cố gắng đưa ra quan điểm 1 cách khách quan nhất.
 
-## Sources
+## Nguồn
 
 - https://eli.thegreenplace.net/2021/rest-servers-in-go-part-3-using-a-web-framework/
+
+[^1]: Một số frameworks có thể nhỏ gọn, well-designed và dễ sử dụng mặc dù docs của chúng không quá tốt tuy nhiên cũng có những trường hợp trái ngược chẳng hạn như [BeeGo](https://beego.wiki/).
+[^2]: Điều này khó xảy ra nhưng dù sao cũng là một ví dụ điển hình.
