@@ -4,10 +4,35 @@
         <title>ducnguyen96 Blog</title>
         <link>https://your-docusaurus-site.example.com/blog</link>
         <description>ducnguyen96 Blog</description>
-        <lastBuildDate>Thu, 14 Dec 2023 12:48:09 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 15 Dec 2023 05:08:15 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>vi</language>
+        <item>
+            <title><![CDATA[Benefits of dependencies in software projects as a function of effort]]></title>
+            <link>https://your-docusaurus-site.example.com/blog/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort</link>
+            <guid>https://your-docusaurus-site.example.com/blog/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort</guid>
+            <pubDate>Fri, 15 Dec 2023 05:08:15 GMT</pubDate>
+            <description><![CDATA[Benefits of dependencies in software projects as a function of effort.]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="sources">Sources<a href="https://your-docusaurus-site.example.com/blog/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort#sources" class="hash-link" aria-label="Đường dẫn trực tiếp tới Sources" title="Đường dẫn trực tiếp tới Sources">​</a></h2>
+<ul>
+<li><a href="https://eli.thegreenplace.net/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort/" target="_blank" rel="noopener noreferrer">https://eli.thegreenplace.net/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort/</a></li>
+</ul>]]></content:encoded>
+            <category>Programming</category>
+        </item>
+        <item>
+            <title><![CDATA[Life of an HTTP request in a Go server]]></title>
+            <link>https://your-docusaurus-site.example.com/blog/2021/life-of-an-http-request-in-a-go-server</link>
+            <guid>https://your-docusaurus-site.example.com/blog/2021/life-of-an-http-request-in-a-go-server</guid>
+            <pubDate>Fri, 15 Dec 2023 05:08:15 GMT</pubDate>
+            <description><![CDATA[Life of an HTTP request in a Go server.]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="sources">Sources<a href="https://your-docusaurus-site.example.com/blog/2021/life-of-an-http-request-in-a-go-server#sources" class="hash-link" aria-label="Đường dẫn trực tiếp tới Sources" title="Đường dẫn trực ti��ếp tới Sources">​</a></h2>
+<ul>
+<li><a href="https://eli.thegreenplace.net/2021/life-of-an-http-request-in-a-go-server/" target="_blank" rel="noopener noreferrer">https://eli.thegreenplace.net/2021/life-of-an-http-request-in-a-go-server/</a></li>
+</ul>]]></content:encoded>
+            <category>Go</category>
+            <category>Programming</category>
+        </item>
         <item>
             <title><![CDATA[Different approaches to HTTP routing in Go]]></title>
             <link>https://your-docusaurus-site.example.com/blog/2023/go-routing</link>

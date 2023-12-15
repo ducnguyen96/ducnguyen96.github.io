@@ -2,11 +2,52 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://your-docusaurus-site.example.com/blog</id>
     <title>ducnguyen96 Blog</title>
-    <updated>2023-12-14T12:48:09.000Z</updated>
+    <updated>2023-12-15T05:08:15.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://your-docusaurus-site.example.com/blog"/>
     <subtitle>ducnguyen96 Blog</subtitle>
     <icon>https://your-docusaurus-site.example.com/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Benefits of dependencies in software projects as a function of effort]]></title>
+        <id>https://your-docusaurus-site.example.com/blog/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort</id>
+        <link href="https://your-docusaurus-site.example.com/blog/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort"/>
+        <updated>2023-12-15T05:08:15.000Z</updated>
+        <summary type="html"><![CDATA[Benefits of dependencies in software projects as a function of effort.]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="sources">Sources<a href="https://your-docusaurus-site.example.com/blog/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort#sources" class="hash-link" aria-label="Đường dẫn trực tiếp tới Sources" title="Đường dẫn trực tiếp tới Sources">​</a></h2>
+<ul>
+<li><a href="https://eli.thegreenplace.net/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort/" target="_blank" rel="noopener noreferrer">https://eli.thegreenplace.net/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort/</a></li>
+</ul>]]></content>
+        <author>
+            <name>Eli Bendersky</name>
+            <uri>https://eli.thegreenplace.net</uri>
+        </author>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+        <category label="Programming" term="Programming"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Life of an HTTP request in a Go server]]></title>
+        <id>https://your-docusaurus-site.example.com/blog/2021/life-of-an-http-request-in-a-go-server</id>
+        <link href="https://your-docusaurus-site.example.com/blog/2021/life-of-an-http-request-in-a-go-server"/>
+        <updated>2023-12-15T05:08:15.000Z</updated>
+        <summary type="html"><![CDATA[Life of an HTTP request in a Go server.]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="sources">Sources<a href="https://your-docusaurus-site.example.com/blog/2021/life-of-an-http-request-in-a-go-server#sources" class="hash-link" aria-label="Đường dẫn trực tiếp tới Sources" title="Đường dẫn trực ti��ếp tới Sources">​</a></h2>
+<ul>
+<li><a href="https://eli.thegreenplace.net/2021/life-of-an-http-request-in-a-go-server/" target="_blank" rel="noopener noreferrer">https://eli.thegreenplace.net/2021/life-of-an-http-request-in-a-go-server/</a></li>
+</ul>]]></content>
+        <author>
+            <name>Eli Bendersky</name>
+            <uri>https://eli.thegreenplace.net</uri>
+        </author>
+        <author>
+            <name>Đức Nguyễn</name>
+            <uri>https://github.com/ducnguyen96</uri>
+        </author>
+        <category label="Go" term="Go"/>
+        <category label="Programming" term="Programming"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Different approaches to HTTP routing in Go]]></title>
         <id>https://your-docusaurus-site.example.com/blog/2023/go-routing</id>
