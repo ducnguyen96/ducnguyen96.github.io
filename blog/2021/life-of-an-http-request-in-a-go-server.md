@@ -50,7 +50,7 @@ func ListenAndServe(addr string, handler Handler) error
 
 Dưới đây là một sơ đồ đơn giản về cái gì sẽ xảy ra khi hàm trên được gọi
 
-<div align="center">
+<div align="center" style={{"backgroundColor": "white"}}>
   ![http-request-listenandserve](./img/http-request-listenandserve.png)
 </div>
 
@@ -173,13 +173,13 @@ Rất khó để định nghĩa Middleware một cách chính xác vì nó mang 
 
 Đơn giản hóa sơ đồ ban đầu mà ta có, dấu đi một vài chi tiết trong `http` package ta có:
 
-<div align="center">
+<div align="center" style={{"backgroundColor": "white"}}>
   ![http-request-simplified.png](./img/http-request-simplified.png)
 </div>
 
 Bây giờ thì sau khi thêm middleware nó sẽ trở thành:
 
-<div align="center">
+<div align="center" style={{"backgroundColor": "white"}}>
   ![http-request-with-middleware.png](./img/http-request-with-middleware.png)
 </div>
 
@@ -274,7 +274,7 @@ Nhân tiện thì chính `http` package cũng sử dụng middleware đễ có t
 
 Đầu tiên về _concurrency_. Như đã đề cập ở trên thì mỗi connection được xử lý bằng 1 goroutine.
 
-Đây là một tính năng mạnh mẽ của `net/http`, nó đã tận dụng khả năng concurrency của Go, bằng cách sử dụng goroutines thì nó cung cấp một model cho HTTP handler rất clean. Một handler có thể block (chẳng hạn việc đọc dữ liệu từ database) mà không phải lo về việc hoãn lại các handlers khác mặc dù nó yêu cầu chúng ta phải cẩn thân khi viết handler có tương tác với shared data. Xem [bài viết này](../2019/on-concurrency-in-go-http-servers) để biết thêm chi tiết.
+Đây là một tính năng mạnh mẽ của `net/http`, nó đã tận dụng khả năng concurrency của Go, bằng cách sử dụng goroutines thì nó cung cấp một model cho HTTP handler rất clean. Một handler có thể block (chẳng hạn việc đọc dữ liệu từ database) mà không phải lo về việc hoãn lại các handlers khác mặc dù nó yêu cầu chúng ta phải cẩn thân khi viết handler có tương tác với shared data. Xem [bài viết này](/blog/2019/on-concurrency-in-go-http-servers) để biết thêm chi tiết.
 
 Cuối cùng là về xử lý panic. Một HTTP server điển hình thì cần phải là một process có thể chạy liên tục. Giả sử có lỗi gì đấy trong handler nào đấy của user(chẳng hạn như bug dẫn tới runtime panic). Điều này có thể gây sập toàn bộ server. Để phòng trường hợp điều này xảy ra thì bạn có thể nghĩ tới việc sử dụng `recover` ở trong `main`, nhưng nó sẽ không hiệu quả vì một vài lý do sau đây:
 

@@ -50,7 +50,7 @@ func ListenAndServe(addr string, handler Handler) error
 
 A simplified flow of what's going on when it's called is shown in this diagram:
 
-<div align="center">
+<div align="center" style={{"backgroundColor": "white"}}>
   ![http-request-listenandserve](./img/http-request-listenandserve.png)
 </div>
 
@@ -173,13 +173,13 @@ Middleware is difficult to define precisely because it means slightly different 
 
 Let's take the flow diagram from the beginning of this post and simplify it a bit, hiding the details of what the `http` package does:
 
-<div align="center">
+<div align="center" style={{"backgroundColor": "white"}}>
   ![http-request-simplified.png](./img/http-request-simplified.png)
 </div>
 
 Now, here's how the flow looks when we add middleware.
 
-<div align="center">
+<div align="center" style={{"backgroundColor": "white"}}>
   ![http-request-with-middleware.png](./img/http-request-with-middleware.png)
 </div>
 
@@ -276,7 +276,7 @@ To finish up our exploration of what an HTTP request goes through in a Go HTTP s
 
 First, _concurrency_. As I've briefly mentioned above, each connection is handled in a new goroutine by `http.Server.Serve`.
 
-This is a strong feature of Go's `net/http`, as it leverages Go's excellent concurrency capabilities, with cheap goroutines ensuring a very clean concurrency model for HTTP handlers. A handler can block (for example, by reading from a database) without worrying about stalling other handlers. This requires some care in writing handlers that have shared data, though. Read my [earlier post](https://eli.thegreenplace.net/2019/on-concurrency-in-go-http-servers) for more details.
+This is a strong feature of Go's `net/http`, as it leverages Go's excellent concurrency capabilities, with cheap goroutines ensuring a very clean concurrency model for HTTP handlers. A handler can block (for example, by reading from a database) without worrying about stalling other handlers. This requires some care in writing handlers that have shared data, though. Read my [earlier post](/blog/2019/on-concurrency-in-go-http-servers) for more details.
 
 Finally, `panic handling`. An HTTP server is typically meant to be a long-running process in the background. Suppose that something bad happens in a certain user-provided request handler, e.g. some sort of bug that leads to a runtime panic. This may crash the whole server, which isn't a great scenario. To protect yourself against this, you may consider adding a `recover` to your server's `main` function, but that won't help for a couple of reasons:
 

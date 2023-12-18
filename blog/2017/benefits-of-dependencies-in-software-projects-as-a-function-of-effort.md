@@ -46,6 +46,6 @@ Một trong những bài viết trong nhất về chủ đề này là của Joe
 
 Quan điểm của Joel hơi khác so với của tội - anh ấy cho rằng các tính năng cốt lõi nên tự phát triển. Điều này là đúng tuy nhiên công thức nêu trên muốn nhìn theo một góc độ khác. Khi mới bắt đầu thì framework mà bạn sử dụng không phải là tính năng cốt lõi - chỉ là một công cụ. Tuy nhiên theo thời gian thì có thể xem nó như là một tính năng cốt lõi, vì đã có rất nhiều effort đã được dành cho dự án; cái giá để loại bỏ nó được giảm bớt.
 
-## Sources
+## Nguồn
 
 - https://eli.thegreenplace.net/2017/benefits-of-dependencies-in-software-projects-as-a-function-of-effort/

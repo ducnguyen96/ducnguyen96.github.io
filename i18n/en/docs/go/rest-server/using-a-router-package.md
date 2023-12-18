@@ -82,10 +82,16 @@ In the route definition, the route `/task/{id:[0-9]+}/` defines the regexp to pa
 ## Comparing the approaches
 
 Here is the code-reading path one must take in order to understand how the `GET /task/<taskid>` route is handled in our original server:
-![http-route-handler](./img/http-route-handler.png)
+
+<div align="center" style={{"backgroundColor": "white"}}>
+  ![http-route-handler](./img/http-route-handler.png)
+</div>
 
 Whereas this is the path when using `gorilla/mux`:
-![gorilla-route-handler](./img/gorilla-route-handler.png)
+
+<div align="center" style={{"backgroundColor": "white"}}>
+  ![gorilla-route-handler](./img/gorilla-route-handler.png)
+</div>
 
 In addition to having fewer hoops to jump through, it's also significantly less code to read. IMHO this is very good from a code readability point of view. The path definitions using `gorilla/mux` are short and straightforward, and don't involve much magic; it's pretty clear how this works. An additional advantage is that we can now easily see all the routes in a single glance in a single place. In fact, the route configuration code now looks very similar to our informal REST API definition.
 

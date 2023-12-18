@@ -70,8 +70,7 @@ const config: Config = {
       },
       items: [
         {
-          type: "doc",
-          docId: "introduction",
+          to: "/docs/category/go",
           position: "left",
           label: "Docs",
         },

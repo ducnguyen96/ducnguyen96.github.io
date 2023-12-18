@@ -82,10 +82,16 @@ func (ts *taskServer) getTaskHandler(w http.ResponseWriter, req *http.Request) {
 ## So sánh 2 cách tiếp cận
 
 Đây là cách mà route `GET /task/<taskid>` được xử lý trong server ban đầu:
+
+<div align="center" style={{"backgroundColor": "white"}}>
 ![http-route-handler](./img/http-route-handler.png)
+</div>
 
 Còn đây là cách mà route `GET /task/<taskid>` được xử lý trong server sử dụng `gorilla/mux`:
+
+<div align="center" style={{"backgroundColor": "white"}}>
 ![gorilla-route-handler](./img/gorilla-route-handler.png)
+</div>
 
 Mỗi route với 1 method và 1 handler cụ thể làm cho việc đọc code dễ dàng hơn rất nhiều. Cách define route của `gorilla/mux` cũng ngắn gọn, trực quan và dễ hiểu. Một điểm cộng nữa là chúng ta có thể thấy tất cả các routes nằm gọn cùng 1 chỗ. Thực tế thì bây giờ nhìn nó rất giống với phần mà ta đã define sơ qua lúc đầu.
 
