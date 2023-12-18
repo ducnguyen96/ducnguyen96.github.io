@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[6105],{3238:e=>{e.exports=JSON.parse('{"title":"Go Guides","description":"Go Guides","keywords":["Go","Guides"],"slug":"/category/go","permalink":"/docs/category/go","navigation":{"next":{"title":"REST Server","permalink":"/docs/category/rest-server"}}}')}}]);
