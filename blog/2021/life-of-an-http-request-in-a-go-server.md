@@ -96,7 +96,7 @@ func (sh serverHandler) ServeHTTP(rw ResponseWriter, req *Request) {
 
 Chú ý đến những dòng đã được highlighted. Nếu `handler == nil` thì `http.DefaultServeMux` sẽ được sử dụng như 1 handler. Đây là server mux mặc định - 1 global instance của `http.ServeMux` nằm trong `http` package.
 
-Chúng ta có thể viết lại server như sau mà không sử dụng mux mặc định. Chỉ hàm `main` thay đổi nên ở đây sẽ không show `hello` và `headers` nữa nhưng bạn có thể xem full code [ở đây](https://github.com/eliben/code-for-blog/blob/master/2021/go-life-http-request/basic-server-mux-object.go) [^1].
+Chúng ta có thể viết lại server như sau mà không sử dụng mux mặc định. Chỉ hàm `main` thay đổi nên ở đây sẽ không show `hello` và `headers` nữa nhưng bạn có thể xem full code [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/blog/go-life-http-request/basic-server-mux-object.go) [^1].
 
 ```go
 func main() {

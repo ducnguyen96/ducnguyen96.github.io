@@ -144,7 +144,7 @@ Handler của chúng ta có thể chạy concurrently nhưng chúng đều đang
 
 Giải pháp đơn giản nhất là tuần tự hóa các truy cập đến map sử dụng mutex.
 
-The simplest solution is to serialize all map accesses using a mutex. Dưới đây là một đoạn code trích từ [ví dụ hoàn chỉnh](https://github.com/eliben/code-for-blog/blob/master/2019/gohttpconcurrency/mutex-server.go):
+The simplest solution is to serialize all map accesses using a mutex. Dưới đây là một đoạn code trích từ [ví dụ hoàn chỉnh](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/blog/gohttpconcurrency/mutex-server.go):
 
 ```go
 type CounterStore struct {
@@ -177,7 +177,7 @@ Chạy lại `ab` benchmark ta sẽ thấy race condition không còn nữa, ser
 
 Đối với những lập trình viên có kinh nghiệm thì việc thêm mutex để đồng bộ hóa truy cập tới `CounterStore` là một giải pháp đương nhiên. Tuy nhiên một trong những khẩu hiệu của Go là _"Chia sẻ bộ nhớ bằng cách giao tiếp, đừng giao tiếp bằng cách chia sẻ dữ liệu"_, liệu có áp dụng ở đây ?
 
-Thay vì sử dụng mutexes thì ta có thể dùng channels để đồng bộ hóa truy cập đến dữ liệu được chia sẻ. [Code mẫu này](https://github.com/eliben/code-for-blog/blob/master/2019/gohttpconcurrency/channel-manager-server.go) thay thế mutexes bằng channels. Bắt đầu bằng việc define một "counter manager" là một background goroutine truy cập tới một closure - nơi lưu trữ data.
+Thay vì sử dụng mutexes thì ta có thể dùng channels để đồng bộ hóa truy cập đến dữ liệu được chia sẻ. [Code mẫu này](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/blog/gohttpconcurrency/channel-manager-server.go) thay thế mutexes bằng channels. Bắt đầu bằng việc define một "counter manager" là một background goroutine truy cập tới một closure - nơi lưu trữ data.
 
 ```go
 type CommandType int
@@ -275,7 +275,7 @@ Thường thì mutexes được preferred hơn để bảo vệ shared state vì
 
 Ngoài vấn đề đồng bộ thì một vấn đề khác là overloading. Chẳng hạn bạn expose server cho internet và không có bất cứ biện pháp bảo vệ nào thì server của bạn rất dễ bị đánh sập bằng DoS. Điều này có cũng thể xảy ra một cách không chủ ý. Trong những trường hợp như vậy thì sập server là không thể tránh khỏi nhưng nên tránh hậu quả nghiêm trọng.
 
-Điều này rất dễ thực hiện trong Go, và cũng có nhiều cách khác nhau. Một trong những cách đơn giản nhất là rate limiting - có nghĩa là sẽ hạn chế số lượng connections đồng thời, hoặc giới hạn số connections theo đơn vị thời gian. Với cách tiếp cận thứ nhất thì ta có thể sử [middlewares](https://github.com/eliben/code-for-blog/blob/master/2019/gohttpconcurrency/mutex-server-rate-limited.go)
+Điều này rất dễ thực hiện trong Go, và cũng có nhiều cách khác nhau. Một trong những cách đơn giản nhất là rate limiting - có nghĩa là sẽ hạn chế số lượng connections đồng thời, hoặc giới hạn số connections theo đơn vị thời gian. Với cách tiếp cận thứ nhất thì ta có thể sử [middlewares](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/blog/gohttpconcurrency/mutex-server-rate-limited.go)
 
 ```go
 // limitNumClients is HTTP handling middleware that ensures no more than

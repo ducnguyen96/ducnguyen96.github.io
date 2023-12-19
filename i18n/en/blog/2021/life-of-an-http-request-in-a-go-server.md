@@ -96,7 +96,7 @@ func (sh serverHandler) ServeHTTP(rw ResponseWriter, req *Request) {
 
 Note the highlighted lines: if `handler == nil`, then `http.DefaultServeMux` is used as the handler. This is the default server mux - a global instance of the `http.ServeMux` type held in the http package. Incidentally, when our sample code registers handlers with `http.HandleFunc`, it registers them on this very same default mux.
 
-We could rewrite our sample server as follows, without using the default mux. Only the `main` function changes, so I won't show the `hello` and `headers` handlers, but you can see the full code [here](https://github.com/eliben/code-for-blog/blob/master/2021/go-life-http-request/basic-server-mux-object.go). There's no change in functionality [^1]:
+We could rewrite our sample server as follows, without using the default mux. Only the `main` function changes, so I won't show the `hello` and `headers` handlers, but you can see the full code [here](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/blog/go-life-http-request/basic-server-mux-object.go). There's no change in functionality [^1]:
 
 ```go
 func main() {

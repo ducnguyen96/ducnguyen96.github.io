@@ -10,7 +10,7 @@ hide_table_of_contents: false
 
 # Beware of copying mutexes in Go
 
-Suppose we have a `struct` that contains a map, and we want to modify the map in a method. Here's a [simple example](https://github.com/eliben/code-for-blog/tree/master/2018/go-copying-mutex):
+Suppose we have a `struct` that contains a map, and we want to modify the map in a method. Here's a [simple example](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-copying-mutex):
 
 ```go
 package main

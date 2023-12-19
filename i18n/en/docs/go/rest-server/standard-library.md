@@ -27,13 +27,13 @@ The data encoding is JSON. In POST `/task/` the client will send a JSON represen
 
 ## Code
 
-The rest of this post will present the server's code in Go, in parts. The complete code for the server can be found [here](https://github.com/eliben/code-for-blog/tree/master/2021/go-rest-servers/stdlib-basic); it's a self-contained Go module, with no dependencies. Once you clone or copy the project directory, you can run the server without installing anything:
+The rest of this post will present the server's code in Go, in parts. The complete code for the server can be found [here](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/stdlib-basic); it's a self-contained Go module, with no dependencies. Once you clone or copy the project directory, you can run the server without installing anything:
 
 ```bash
 $ SERVERPORT=4112 go run .
 ```
 
-Note that `SERVERPORT` can be any port; this is the `TCP` port your local server is listening on. Once the server is running, you can interact with it in a separate terminal by using `curl` commands, or in any other way that works for you. See [this script](https://github.com/eliben/code-for-blog/blob/master/2021/go-rest-servers/testing/manual.sh) for an example; the directory containing this script also has an automated test harness for the server.
+Note that `SERVERPORT` can be any port; this is the `TCP` port your local server is listening on. Once the server is running, you can interact with it in a separate terminal by using `curl` commands, or in any other way that works for you. See [this script](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/testing/manual.sh) for an example; the directory containing this script also has an automated test harness for the server.
 
 ## The Model
 
@@ -214,7 +214,7 @@ The rest of the code is more of the same and should be fairly straightforward to
 
 Now that we have the basic version of the server working, it's time to think about potential issues and improvements.
 
-One obvious place we can improve is the repetitive JSON rendering in our HTTP responses, as mentioned earlier. For this, I created a separate version of the server called [stdlib-factorjson](https://github.com/eliben/code-for-blog/tree/master/2021/go-rest-servers/stdlib-factorjson). I've kept it separate to help you easily diff it vs. the original server and see what changed. The main novelty it contains is this function:
+One obvious place we can improve is the repetitive JSON rendering in our HTTP responses, as mentioned earlier. For this, I created a separate version of the server called [stdlib-factorjson](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/stdlib-factorjson). I've kept it separate to help you easily diff it vs. the original server and see what changed. The main novelty it contains is this function:
 
 ```go
 // renderJSON renders 'v' as JSON and writes it as a response into w.

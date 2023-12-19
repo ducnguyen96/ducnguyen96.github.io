@@ -27,13 +27,13 @@ Dữ liệu được encode dưới dạng JSON. Trong POST `/task/` client sẽ
 
 ## Code
 
-Phần còn lại của bài viết này sẽ giới thiệu code của server, viết bằng Go, theo từng phần. Code hoàn chỉnh của server có thể tìm thấy [ở đây](https://github.com/eliben/code-for-blog/tree/master/2021/go-rest-servers/stdlib-basic); nó là một Go module độc lập, không có dependencies. Sau khi clone hoặc copy, bạn có thể chạy server mà không cần cài đặt bất cứ thứ gì:
+Phần còn lại của bài viết này sẽ giới thiệu code của server, viết bằng Go, theo từng phần. Code hoàn chỉnh của server có thể tìm thấy [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/stdlib-basic); nó là một Go module độc lập, không có dependencies. Sau khi clone hoặc copy, bạn có thể chạy server mà không cần cài đặt bất cứ thứ gì:
 
 ```bash
 $ SERVERPORT=4112 go run .
 ```
 
-Chú ý rằng `SERVERPORT` có thể là bất kỳ port nào; đây là port `TCP` mà server local của bạn đang lắng nghe. Sau khi server chạy, bạn có thể tương tác với nó trong một terminal khác bằng cách sử dụng lệnh `curl`, hoặc bằng bất kỳ cách nào khác mà bạn thấy phù hợp. Xem ví dụ [ở đây](https://github.com/eliben/code-for-blog/blob/master/2021/go-rest-servers/testing/manual.sh).
+Chú ý rằng `SERVERPORT` có thể là bất kỳ port nào; đây là port `TCP` mà server local của bạn đang lắng nghe. Sau khi server chạy, bạn có thể tương tác với nó trong một terminal khác bằng cách sử dụng lệnh `curl`, hoặc bằng bất kỳ cách nào khác mà bạn thấy phù hợp. Xem ví dụ [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/testing/manual.sh).
 
 ## The Model
 
@@ -205,7 +205,7 @@ Phần còn lại thì cũng tương tự và dễ hiểu. Chỉ có `createTask
 
 Bây giờ chúng ta đã có một server cơ bản, hãy xem xem nó có thể có những vấn đề nào hay có thể cải thiện được chỗ nào.
 
-Điều dễ nhận thấy nhất là ta có thể cải thiện phần lặp đi lặp lại render JSON vào HTTP response. Chi tiết bạn có thể xem [ở đây](https://github.com/eliben/code-for-blog/tree/master/2021/go-rest-servers/stdlib-factorjson). Dưới đây là điểm thay đổi chính:
+Điều dễ nhận thấy nhất là ta có thể cải thiện phần lặp đi lặp lại render JSON vào HTTP response. Chi tiết bạn có thể xem [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/stdlib-factorjson). Dưới đây là điểm thay đổi chính:
 
 ```go
 // renderJSON renders 'v' as JSON and writes it as a response into w.
