@@ -140,7 +140,7 @@ runtime.throw(0x6b0a5c, 0x15)
 
 Reviewing our code, the problem is apparent. The request handlers can run concurrently but they all manipulate a shared `CounterStore`. For example, the `inc` handler is being called concurrently for multiple requests and attempts to mutate the map. This leads to a race condition since in [Go, map operations are not atomic](https://golang.org/doc/faq#atomic_maps). Luckily, the Go runtime detects this and dies with a helpful message; it would be worse if data were silently corrupted.
 
-The simplest solution is to serialize all map accesses using a mutex. Here's an excerpt from a [complete code sample](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/blog/gohttpconcurrency/mutex-server.go) that implements this:
+The simplest solution is to serialize all map accesses using a mutex. Here's an excerpt from a [complete code sample](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/blog/gohttpconcurrency/mutex-server.go) that implements this:
 
 ```go
 type CounterStore struct {
@@ -173,7 +173,7 @@ If we rerun the `ab` benchmark with this fixed server, it passes; the race condi
 
 To programmers experienced in most other languages, adding a mutex to synchronize accesses to a `CounterStore` is a natural solution. One of the mottos of Go is, however, _"Share memory by communicating, don't communicate by sharing memory"_. Does this apply here?
 
-Instead of mutexes, we could use channels to synchronize access to shared data. This [code sample](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/blog/gohttpconcurrency/channel-manager-server.go) reimplements the mutex-using server to use channels instead. We start by defining a "counter manager" which is a background goroutine with access to a closure that stores the actual data:
+Instead of mutexes, we could use channels to synchronize access to shared data. This [code sample](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/blog/gohttpconcurrency/channel-manager-server.go) reimplements the mutex-using server to use channels instead. We start by defining a "counter manager" which is a background goroutine with access to a closure that stores the actual data:
 
 ```go
 type CommandType int
@@ -271,7 +271,7 @@ It then goes on to suggest that mutexes are preferable for protecting shared sta
 
 In addition to synchronization, another aspect of concurrency we have to worry about is overloading of the server. Imagine exposing a server to the internet - without any safeguards it would be fairly easy to bring it down with a denial of service (DoS) attack. That could happend even unintentionally, if we didn't provision the proper computing power behind the service. In these cases failure is unavoidable but should be graceful.
 
-It's very easy to do these things in Go, and there are many strategies. One of the simplest is rate limiting, which can mean either restricting the number of simultaneous connections, or restricting the number of connections per unit of time. For the former, we can add some middleware ([full code here](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/blog/gohttpconcurrency/mutex-server-rate-limited.go)):
+It's very easy to do these things in Go, and there are many strategies. One of the simplest is rate limiting, which can mean either restricting the number of simultaneous connections, or restricting the number of connections per unit of time. For the former, we can add some middleware ([full code here](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/blog/gohttpconcurrency/mutex-server-rate-limited.go)):
 
 ```go
 // limitNumClients is HTTP handling middleware that ensures no more than

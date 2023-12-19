@@ -10,7 +10,7 @@ hide_table_of_contents: false
 
 # Hãy chú ý khi sử dụng mutexes trong Go.
 
-Giả sử ta có một `struct chứa một map và ta muốn thay đổi map trong method của struct ấy. Xem [ví dụ sau](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/blog/go-copying-mutex):
+Giả sử ta có một `struct chứa một map và ta muốn thay đổi map trong method của struct ấy. Xem [ví dụ sau](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/blog/go-copying-mutex):
 
 ```go
 package main

@@ -37,7 +37,7 @@ Viết 1 custom router trong Go rất đơn giản, do tính "composable" HTTP h
 
 `gorilla/mux` là 1 trong những router HTTP phổ biến nhất của Go; theo [docs](https://pkg.go.dev/github.com/gorilla/mux), tên mux có nghĩa là "HTTP request multiplexer".
 
-Vì nó là 1 package với mục tiêu cụ thể duy nhất, nên cách sử dụng của nó khá đơn giản. Bạn có thể xem phiên bản task server sử dụng `gorilla/mux` cho routing [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/gorilla). Dưới đây là cách routes được defined:
+Vì nó là 1 package với mục tiêu cụ thể duy nhất, nên cách sử dụng của nó khá đơn giản. Bạn có thể xem phiên bản task server sử dụng `gorilla/mux` cho routing [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/gorilla). Dưới đây là cách routes được defined:
 
 ```go
 router := mux.NewRouter()

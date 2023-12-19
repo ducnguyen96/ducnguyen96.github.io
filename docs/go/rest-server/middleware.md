@@ -8,7 +8,7 @@ sidebar_label: Middleware
 
 ## Middleware cơ bản cho task service
 
-Ví dụ sau đây dựa vào task server cơ bản đã xây dựng ở [phần 1](./standard-library). Ta sẽ nói về cách thêm middleware cũng như một số lựa chọn khác nhau để tích hợp nó. Phần code hoàn thiện có thể xem [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/stdlib-middleware).
+Ví dụ sau đây dựa vào task server cơ bản đã xây dựng ở [phần 1](./standard-library). Ta sẽ nói về cách thêm middleware cũng như một số lựa chọn khác nhau để tích hợp nó. Phần code hoàn thiện có thể xem [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/stdlib-middleware).
 
 Server gốc của chúng ta gọi hàm `log.Printf` ở mỗi handler để log các request. Đây là một trong những vấn đề mà middleware có thể xử lý giúp code đỡ lặp hơn. Sau đây là một ví dụ:
 
@@ -125,7 +125,7 @@ Như mọi khi thì vẫn luôn nên cẩn trọng khi thêm bất cứ 1 depend
 
 `gorilla/mux` có hỗ trợ để thêm middlewares. `mux.Router` type có method `Use(...)` có thê thể được sử dụng để dễ dàng thêm chuỗi global middleware. Hơn nữa thì `gorilla/handlers` package cũng có một số handlers được làm sẵn [^2] chẳng hạn như panic-recovery và logging middleware,...
 
-Đây là [ví dụ cụ thể](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/gorilla-middleware)
+Đây là [ví dụ cụ thể](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/gorilla-middleware)
 
 ```go
 func main() {

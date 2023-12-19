@@ -37,7 +37,7 @@ Writing a custom router in Go is very simple, due to the composable nature of HT
 
 `gorilla/mux` is one of the oldest of the popular Go HTTP routers; according to [the docs](https://pkg.go.dev/github.com/gorilla/mux), the name mux stands for "HTTP request multiplexer" (the same meaning it has in the standard library).
 
-Because it's a package with a narrow, focused goal, its usage is fairly straightforward. A version of our task server that uses `gorilla/mux` for routing is [available here](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/gorilla). Here's how the routes are defined:
+Because it's a package with a narrow, focused goal, its usage is fairly straightforward. A version of our task server that uses `gorilla/mux` for routing is [available here](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/gorilla). Here's how the routes are defined:
 
 ```go
 router := mux.NewRouter()
@@ -95,7 +95,7 @@ Whereas this is the path when using `gorilla/mux`:
 
 In addition to having fewer hoops to jump through, it's also significantly less code to read. IMHO this is very good from a code readability point of view. The path definitions using `gorilla/mux` are short and straightforward, and don't involve much magic; it's pretty clear how this works. An additional advantage is that we can now easily see all the routes in a single glance in a single place. In fact, the route configuration code now looks very similar to our informal REST API definition.
 
-I like using packages like `gorilla/mux`, because they are a precision tool. They do one thing and they do it well, and they don't "infect" the whole program in a way that makes them hard to remove or replace later on. If you examine the [code of the server](https://github.com/ducnguyen96/ducnguyen96.github.io/static/code/docs/go/go-rest-servers/gorilla) for this part, you'll note that the parts using `gorilla/mux` are confined to relatively few lines of code. If we find a fatal limitation in this package later on in the lifecycle of the project, replacing it with another router (or a hand-rolled version) should be fairly straightforward.
+I like using packages like `gorilla/mux`, because they are a precision tool. They do one thing and they do it well, and they don't "infect" the whole program in a way that makes them hard to remove or replace later on. If you examine the [code of the server](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/gorilla) for this part, you'll note that the parts using `gorilla/mux` are confined to relatively few lines of code. If we find a fatal limitation in this package later on in the lifecycle of the project, replacing it with another router (or a hand-rolled version) should be fairly straightforward.
 
 ## Sources
 
