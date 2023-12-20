@@ -41,7 +41,7 @@ Chúng ta có thể hiểu OpenAPI là tên của specification còn Swagger là
 
 Ta sẽ viết lại task service sử dụng OpenAPI và Swagger.
 
-Đầu tiên thì dành 1 ít thời gian để đọc tài liệu về OpenAPI 3.0 sau đó mở [Swagger Editor](https://editor.swagger.io/) để define service của chúng ta vào 1 file [YAML](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/swagger/task.yaml).
+Đầu tiên thì dành 1 ít thời gian để đọc tài liệu về OpenAPI 3.0 sau đó mở [Swagger Editor](https://editor.swagger.io/) để define service của chúng ta vào 1 file [YAML](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/rest-server/swagger/task.yaml).
 
 Dưới đây là một ví dụ cho `GET /task/` request.
 
@@ -103,7 +103,7 @@ Ngoài ra còn có những công cụ khác như [Swagger UI](https://swagger.io
 
 `OpenAPI/Swagger` không chỉ để sử dụng cho documentation mà chúng ta còn có thể gen code cho cả client lẫn server nhờ nó.
 
-Sử dụng hướng dẫn từ [Swagger codegen project](https://github.com/swagger-api/swagger-codegen) để gen phần khung cho server. Sau đó thì hoàn thành nốt các handlers ta được kết quả như [đây](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/swagger). Các bước chi tiết có thể xem ở phần README.
+Sử dụng hướng dẫn từ [Swagger codegen project](https://github.com/swagger-api/swagger-codegen) để gen phần khung cho server. Sau đó thì hoàn thành nốt các handlers ta được kết quả như [đây](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/rest-server/swagger). Các bước chi tiết có thể xem ở phần README.
 
 Có 1 vài hạn chế khi tiếp cận theo cách này như sau:
 
@@ -132,7 +132,7 @@ Code gen bởi `go-swagger` chắc chắn là nhiều tính năng hơn code gen 
 
 `go-swagger` cũng có thể gen client code nhưng tương tự thì nó cũng đầy tính năng và rất opinionated(bạn đã dùng thì phải theo format, style của nó).
 
-**Update 2021-02-27**: Có 1 tool khác nữa là [oapi-codegen](https://github.com/deepmap/oapi-codegen), bạn có thể xem 1 phiên bản khác của task server sử dụng tool này tại [đây](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/swagger/oapi-server)
+**Update 2021-02-27**: Có 1 tool khác nữa là [oapi-codegen](https://github.com/deepmap/oapi-codegen), bạn có thể xem 1 phiên bản khác của task server sử dụng tool này tại [đây](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/rest-server/swagger/oapi-server)
 
 Phải thừa nhận thằng `oapi-codegen` generate code clean và dễ custom hơn, nó cũng hỗ trợ OpenAPI v3 nữa. Điểm trừ duy nhất là nó sử dụng 1 package bên thứ 3 để bind request params.
 
@@ -158,4 +158,4 @@ Rõ ràng là option 2 tốt hơn nhiều, tuy nhiên thì cũng nên cân nhắ
 
 - https://eli.thegreenplace.net/2021/rest-servers-in-go-part-4-using-openapi-and-swagger
 
-[^1]: Xem lại [manual.sh script](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/testing/manual.sh) từ [Phần 1](./standard-library). Script này chứa 1 vài `curl` commands để tương tác với server của chúng ta. Rõ ràng là ta có thể auto gen những commands này từ các REST API đã được tiêu chuẩn hóa(nghĩa là theo 1 format nhất định) giúp ta tiết kiệm kha khá thời gian.
+[^1]: Xem lại [manual.sh script](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/rest-server/testing/manual.sh) từ [Phần 1](./standard-library). Script này chứa 1 vài `curl` commands để tương tác với server của chúng ta. Rõ ràng là ta có thể auto gen những commands này từ các REST API đã được tiêu chuẩn hóa(nghĩa là theo 1 format nhất định) giúp ta tiết kiệm kha khá thời gian.

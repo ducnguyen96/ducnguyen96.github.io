@@ -43,6 +43,34 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Nodejs",
+      link: {
+        type: "generated-index",
+        title: "Nodejs Guides",
+        description: "Nodejs Guides",
+        keywords: ["Nodejs", "Guides"],
+      },
+      collapsed: false,
+      items: [
+        {
+          type: "category",
+          label: "REST Server",
+          link: {
+            type: "generated-index",
+            title: "REST Server Guides",
+            description: "REST Server Guides",
+            keywords: ["Nodejs", "REST Server"],
+          },
+          collapsed: false,
+          items: [
+            "nodejs/rest-server/standard-library",
+            "nodejs/rest-server/using-a-router-package",
+          ],
+        },
+      ],
+    },
   ],
 };
 

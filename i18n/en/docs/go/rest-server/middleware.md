@@ -8,7 +8,7 @@ In this part we're going to talk about _middleware_. In an earlier post on the [
 
 ## Basic middleware for our task server
 
-It's time to revisit our task server once again! The following example is based on the basic stdlib-only task server developed in [part 1](./standard-library). We'll talk about adding middleware to the server and the different options we have for integrating it with the rest of the code. The complete code for the task server discussed below is available [here](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/stdlib-middleware).
+It's time to revisit our task server once again! The following example is based on the basic stdlib-only task server developed in [part 1](./standard-library). We'll talk about adding middleware to the server and the different options we have for integrating it with the rest of the code. The complete code for the task server discussed below is available [here](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/rest-server/stdlib-middleware).
 
 Our original task server had a `log.Printf` call at the beginning of every handler to log the request being handled. This is something middleware can do with less code duplication. Here's a simple logging middleware:
 
@@ -127,7 +127,7 @@ In any case, if you're using a router package like `gorilla/mux` or a full-fledg
 
 When using the `gorilla/mux` router package, we get some support for middleware included. The `mux.Router` type has a `Use(...)` method which can be used to easily set up global middleware chains. Moreover, the `gorilla/handlers` package includes some ready-made middleware handlers [^2]. For example, a panic-recovery and a logging middleware are already included, along with a few others.
 
-Here's a concrete code sample (the full server is [available here](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/go-rest-servers/gorilla-middleware)):
+Here's a concrete code sample (the full server is [available here](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/rest-server/gorilla-middleware)):
 
 ```go
 func main() {
