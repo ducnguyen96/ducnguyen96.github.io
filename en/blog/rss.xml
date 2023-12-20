@@ -4,10 +4,19 @@
         <title>ducnguyen96 Blog</title>
         <link>https://your-docusaurus-site.example.com/en/blog</link>
         <description>ducnguyen96 Blog</description>
-        <lastBuildDate>Fri, 15 Dec 2023 11:34:06 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 20 Dec 2023 13:38:27 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[finalhandler là gì? có nên sử dụng nó?]]></title>
+            <link>https://your-docusaurus-site.example.com/en/blog/2023/what-is-finalhandler</link>
+            <guid>https://your-docusaurus-site.example.com/en/blog/2023/what-is-finalhandler</guid>
+            <pubDate>Wed, 20 Dec 2023 13:38:27 GMT</pubDate>
+            <category>nodejs</category>
+            <category>js</category>
+            <category>Networking Programming</category>
+        </item>
         <item>
             <title><![CDATA[Hãy chú ý khi sử dụng mutexes trong Go.]]></title>
             <link>https://your-docusaurus-site.example.com/en/blog/2018/beware-of-copying-mutexes-in-go</link>
