@@ -303,7 +303,7 @@ func main() {
 Nếu ta chạy server và dùng `curl` tới `/panic` thì đây là output:
 
 ```bash
-$ curl localhost:8090/panic
+curl localhost:8090/panic
 curl: (52) Empty reply from server
 ```
 

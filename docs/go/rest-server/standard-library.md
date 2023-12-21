@@ -30,7 +30,7 @@ Dữ liệu được encode dưới dạng JSON. Trong POST `/task/` client sẽ
 Phần còn lại của bài viết này sẽ giới thiệu code của server, viết bằng Go, theo từng phần. Code hoàn chỉnh của server có thể tìm thấy [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/rest-server/stdlib-basic); nó là một Go module độc lập, không có dependencies. Sau khi clone hoặc copy, bạn có thể chạy server mà không cần cài đặt bất cứ thứ gì:
 
 ```bash
-$ SERVERPORT=4112 go run .
+SERVERPORT=4112 go run .
 ```
 
 Chú ý rằng `SERVERPORT` có thể là bất kỳ port nào; đây là port `TCP` mà server local của bạn đang lắng nghe. Sau khi server chạy, bạn có thể tương tác với nó trong một terminal khác bằng cách sử dụng lệnh `curl`, hoặc bằng bất kỳ cách nào khác mà bạn thấy phù hợp. Xem ví dụ [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/rest-server/testing/manual.sh).

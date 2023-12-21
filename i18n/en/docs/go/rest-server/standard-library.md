@@ -30,7 +30,7 @@ The data encoding is JSON. In POST `/task/` the client will send a JSON represen
 The rest of this post will present the server's code in Go, in parts. The complete code for the server can be found [here](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/rest-server/stdlib-basic); it's a self-contained Go module, with no dependencies. Once you clone or copy the project directory, you can run the server without installing anything:
 
 ```bash
-$ SERVERPORT=4112 go run .
+SERVERPORT=4112 go run .
 ```
 
 Note that `SERVERPORT` can be any port; this is the `TCP` port your local server is listening on. Once the server is running, you can interact with it in a separate terminal by using `curl` commands, or in any other way that works for you. See [this script](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/go/rest-server/testing/manual.sh) for an example; the directory containing this script also has an automated test harness for the server.

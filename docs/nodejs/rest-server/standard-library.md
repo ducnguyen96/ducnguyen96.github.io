@@ -15,7 +15,7 @@ Tổng quan về server mình sẽ không nhắc lại ở đây nữa mà các 
 Phần còn lại của bài viết này sẽ giới thiệu code của server, viết bằng Javascript, theo từng phần. Code hoàn chỉnh của server có thể tìm thấy [ở đây](https://github.com/ducnguyen96/ducnguyen96.github.io/tree/master/static/code/docs/nodejs/rest-server/stdlib-basic); nó là một module độc lập, không có dependencies. Sau khi clone hoặc copy, bạn có thể chạy server mà không cần cài đặt bất cứ thứ gì:
 
 ```bash
-$ yarn start # or yarn dev if you help nodemon installed; if you don't have yarn installed then use npm run start
+yarn start # or yarn dev if you help nodemon installed; if you don't have yarn installed then use npm run start
 ```
 
 ## The Model

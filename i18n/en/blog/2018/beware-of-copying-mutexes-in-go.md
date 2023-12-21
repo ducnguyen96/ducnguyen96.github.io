@@ -125,7 +125,7 @@ Then `c` is passed by pointer into the method, and actually refers to the same i
 This is not an uncommon problem! In fact, `go vet` will warn about it:
 
 ```bash
-$ go tool vet method-mutex-value-receiver.go
+go tool vet method-mutex-value-receiver.go
 method-mutex-value-receiver.go:19: inc passes lock by value: main.Container
 ```
 

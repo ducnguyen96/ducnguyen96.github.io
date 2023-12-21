@@ -305,7 +305,7 @@ func main() {
 If we run this server and `curl` to the `/panic` path, we'll see this:
 
 ```bash
-$ curl localhost:8090/panic
+curl localhost:8090/panic
 curl: (52) Empty reply from server
 ```
 

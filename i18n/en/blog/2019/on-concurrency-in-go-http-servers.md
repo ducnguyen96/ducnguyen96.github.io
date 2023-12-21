@@ -36,13 +36,13 @@ Go's built-in `net/http` package is convenient, solid and performant, making it 
 Let's start with a very simple example of a HTTP server that implements a table of counters accessible to the user. We can create counters (or set values of existing counters) with the `set?name=N&val=V` query, get their values with the `get?name=N` query and increment them with the `inc?name=N` query. Here's a simple interaction recorded with a server running in the background on port 8000:
 
 ```bash
-$ curl "localhost:8000/set?name=x&val=0"
+curl "localhost:8000/set?name=x&val=0"
 ok
-$ curl "localhost:8000/get?name=x"
+curl "localhost:8000/get?name=x"
 x: 0
-$ curl "localhost:8000/inc?name=x"
+curl "localhost:8000/inc?name=x"
 ok
-$ curl "localhost:8000/get?name=x"
+curl "localhost:8000/get?name=x"
 x: 1
 ```
 
@@ -115,7 +115,7 @@ func main() {
 This code is simple; _too simple_, in fact, to the degree that it's wrong. Our sample `curl` session sends all its requests in a serial manner. The problems appear when concurrent connections are present, however. A good way to simulate many concurrent connections is with [ApacheBench](https://en.wikipedia.org/wiki/ApacheBench):
 
 ```bash
-$ ab -n 20000 -c 200 "127.0.0.1:8000/inc?name=i"
+ab -n 20000 -c 200 "127.0.0.1:8000/inc?name=i"
 
 Benchmarking 127.0.0.1 (be patient)
 Completed 2000 requests
