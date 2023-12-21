@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkducnguyen_96_github_io=self.webpackChunkducnguyen_96_github_io||[]).push([[5583],{9536:e=>{e.exports=JSON.parse('{"label":"Go","permalink":"/en/blog/tags/go","allTagsPath":"/en/blog/tags","count":5,"unlisted":false}')}}]);
