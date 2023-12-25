@@ -4,18 +4,10 @@ import TaskStore from "./internal/taskstore/taskstore.js";
 import Router from "router";
 import finalhandler from "finalhandler";
 
-const METHOD = {
-  GET: "GET",
-  POST: "POST",
-  DELETE: "DELETE",
-  PATCH: "PATCH",
-  PUT: "PUT",
-};
-
 /**
  * @param {http.IncomingMessage} req
  */
-function getPathName(req) {
+function getPathname(req) {
   const parsedUrl = url.parse(req.url || "", true);
   return parsedUrl.pathname || "";
 }
@@ -81,7 +73,7 @@ class TaskServer {
    * @param {() => void} done
    */
   async getAllTasksHandler(req, res, done) {
-    console.info(`handling get all tasks at ${getPathName(req)}`);
+    console.info(`handling get all tasks at ${getPathname(req)}`);
 
     const allTasks = this.store.getAllTasks();
     renderJSON(res, allTasks);
@@ -92,7 +84,7 @@ class TaskServer {
    * @param {http.ServerResponse} res
    */
   async getTaskHandler(req, res) {
-    console.info(`handling get task at ${getPathName(req)}`);
+    console.info(`handling get task at ${getPathname(req)}`);
     try {
       const task = this.store.getTask(req.params.id);
       return renderJSON(res, task);
@@ -109,7 +101,7 @@ class TaskServer {
    * @param {http.ServerResponse} res
    */
   async deleteTaskHandler(req, res) {
-    console.info(`handling delete all tasks at ${getPathName(req)}`);
+    console.info(`handling delete all tasks at ${getPathname(req)}`);
     try {
       this.store.deleteTask(req.params.id);
       return res.end();
@@ -127,7 +119,7 @@ class TaskServer {
    * @param {() => void} done
    */
   async deleteAllTasksHandler(req, res, done) {
-    console.info(`handling delete all tasks at ${getPathName(req)}`);
+    console.info(`handling delete all tasks at ${getPathname(req)}`);
     this.store.deleteAllTasks();
     res.end();
   }
@@ -138,25 +130,10 @@ class TaskServer {
    * @param {() => void} done
    */
   async tagHandler(req, res, done) {
-    const pathname = getPathName(req);
+    const pathname = getPathname(req);
     console.info(`handling tasks by tag at ${pathname}`);
 
-    if (req.method !== METHOD.GET) {
-      res.statusCode = 400;
-      res.statusMessage = `expect method GET /tag/<tag>, got ${req.method}`;
-      return res.end();
-    }
-
-    const pathParts = pathname.trim().split("/");
-    if (pathParts.length < 2) {
-      res.statusCode = 400;
-      res.statusMessage = "expect /tag/<tag> in task handler";
-      return res.end();
-    }
-
-    const tag = pathParts[2];
-
-    const tasks = this.store.getTasksByTag(tag);
+    const tasks = this.store.getTasksByTag(req.params.tag);
     renderJSON(res, tasks);
   }
 
@@ -166,20 +143,12 @@ class TaskServer {
    * @param {() => void} done
    */
   async dueHandler(req, res, done) {
-    const pathname = getPathName(req);
+    const pathname = getPathname(req);
     console.info(`handling tasks by due at ${pathname}`);
 
-    if (req.method !== METHOD.GET) {
-      res.statusCode = 400;
-      res.statusMessage = `expect method GET /due/<date>, got ${req.method}`;
-      return res.end();
-    }
-
-    const pathParts = pathname.trim().split("/");
-
-    const year = Number(pathParts[2]);
-    const month = Number(pathParts[3]);
-    const day = Number(pathParts[4]);
+    const year = Number(req.params.year);
+    const month = Number(req.params.month);
+    const day = Number(req.params.day);
     const tasks = this.store.getTasksByDueDate(year, month, day);
     renderJSON(res, tasks);
   }
