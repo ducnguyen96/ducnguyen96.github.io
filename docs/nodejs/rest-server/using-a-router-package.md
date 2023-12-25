@@ -66,7 +66,7 @@ Hãy xem (3) được giải quyết trong `getTaskHandler`:
  * @param {http.ServerResponse} res
  */
 getTaskHandler(req, res) {
-  console.info(`handling get task at ${getPathName(req)}`);
+  console.info(`handling get task at ${getPathname(req)}`);
   try {
     const task = this.store.getTask(req.params.id);
     return renderJSON(res, task);
