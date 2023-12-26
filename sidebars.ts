@@ -68,6 +68,7 @@ const sidebars: SidebarsConfig = {
           items: [
             "nodejs/rest-server/standard-library",
             "nodejs/rest-server/using-a-router-package",
+            "go/rest-server/using-a-web-framework",
           ],
         },
       ],
