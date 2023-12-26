@@ -69,6 +69,7 @@ const sidebars: SidebarsConfig = {
             "nodejs/rest-server/standard-library",
             "nodejs/rest-server/using-a-router-package",
             "nodejs/rest-server/using-a-web-framework",
+            "nodejs/rest-server/using-openapi-and-swagger",
           ],
         },
       ],
