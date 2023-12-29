@@ -108,6 +108,7 @@ const sidebars: SidebarsConfig = {
           items: [
             "nix/package-management/profiles",
             "nix/package-management/garbage-collection",
+            "nix/package-management/functions-and-imports",
           ],
         },
       ],
