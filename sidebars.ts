@@ -99,6 +99,7 @@ const sidebars: SidebarsConfig = {
             "nix/nix-language/functions-and-imports",
             "nix/nix-language/derivation",
             "nix/nix-language/nix-shell",
+            "nix/nix-language/inputs-design-pattern",
           ],
         },
         {
