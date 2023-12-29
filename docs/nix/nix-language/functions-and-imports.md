@@ -124,7 +124,7 @@ error: undefined variable `x' at /home/lethal/test.nix:1:1
 Vậy thì ta có thể truyền thông tin vào module?
 `test.nix`
 
-```bash
+```nix
 { a, b ? 3, trueMsg ? "yes", falseMsg ? "no" }:
 if a > b
   then builtins.trace trueMsg true

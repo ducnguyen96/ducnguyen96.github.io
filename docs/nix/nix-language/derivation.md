@@ -37,7 +37,7 @@ nix-repl> d
 nix derivation show /nix/store/z3hhlxbckx4g3n9sw91nnvlkjvyw754p-myname.drv --extra-experimental-features nix-command
 ```
 
-```json
+```js
 {
   "/nix/store/z3hhlxbckx4g3n9sw91nnvlkjvyw754p-myname.drv": {
     "args": [],

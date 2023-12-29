@@ -9,9 +9,10 @@ Trước khi đi vào inputs design pattern thì ta hãy tạo thêm một ví d
 ### Packaging graphviz
 
 Tái sử dụng autotools từ bài trước thì ta có thể dễ dàng tạo derivation như sau:
+
 `graphviz.nix`
 
-```
+```nix
 let
   pkgs = import <nixpkgs> {};
   mkDerivation = import ./autotools.nix pkgs;
@@ -47,7 +48,7 @@ done
 
 `graphviz.nix`
 
-```bash
+```nix
 let
   pkgs = import <nixpkgs> {};
   mkDerivation = import ./autotools.nix pkgs;
@@ -76,7 +77,7 @@ Với **inputs** pattern ta sẽ để user thay đổi **inputs** của express
 
 `graphviz.nix`
 
-```bash
+```nix
 { mkDerivation, lib, gdSupport ? true, gd, pkg-config }:
 
 mkDerivation {
@@ -95,7 +96,7 @@ mkDerivation {
 
 `default.nix`
 
-```bash
+```nix
 let
   pkgs = import <nixpkgs> {};
   mkDerivation = import ./autotools.nix pkgs;
