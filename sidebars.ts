@@ -74,6 +74,33 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Nix",
+      link: {
+        type: "generated-index",
+        title: "Nix Guides",
+        description: "Nix Guides",
+        keywords: ["Nix", "Guides"],
+      },
+      collapsed: false,
+      items: [
+        {
+          type: "category",
+          label: "Package Management",
+          link: {
+            type: "generated-index",
+            title: "Nix Package Management Guides",
+            keywords: ["Package management", "Guides"],
+          },
+          collapsed: false,
+          items: [
+            "nix/package-management/profiles",
+            "nix/package-management/garbage-collection",
+          ],
+        },
+      ],
+    },
   ],
 };
 
