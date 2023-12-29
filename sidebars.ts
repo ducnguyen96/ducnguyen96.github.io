@@ -87,6 +87,17 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: "category",
+          label: "Nix Language",
+          link: {
+            type: "generated-index",
+            title: "Nix Language Guides",
+            keywords: ["Nix Language", "Guides"],
+          },
+          collapsed: false,
+          items: ["nix/nix-language/basic"],
+        },
+        {
+          type: "category",
           label: "Package Management",
           link: {
             type: "generated-index",
