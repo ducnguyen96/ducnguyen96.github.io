@@ -94,6 +94,8 @@ class TaskServer {
    * @param {http.ServerResponse} res
    */
   async createTaskHandler(req, res) {
+    console.info(`handling create task at ${getPathName(req)}`);
+
     // Enforce a JSON Content-Type.
     const contentType = req.headers["content-type"];
     if (!contentType || contentType.toLowerCase() !== "application/json") {
