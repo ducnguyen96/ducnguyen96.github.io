@@ -8,14 +8,14 @@ sidebar_label: Functions and Imports
 
 Functions trong Nix là anonymous (lambdas), và chỉ có thể có 1 tham số.
 
-```nix
+```bash
 nix-repl> x: x*2
 «lambda»
 ```
 
 Ta có thể store function này vào một biến:
 
-```nix
+```bash
 nix-repl> double = x: x*2
 nix-repl> double
 «lambda»
@@ -25,7 +25,7 @@ nix-repl> double 3
 
 ## Multiple parameters
 
-```nix
+```bash
 nix-repl> mul = a: (b: a*b)
 nix-repl> mul
 «lambda»
@@ -37,7 +37,7 @@ nix-repl> (mul 3) 4
 
 Chúng ta có thể bỏ qua dấu ngoặc:
 
-```nix
+```bash
 nix-repl> mul = a: b: a*b
 nix-repl> mul
 «lambda»
@@ -51,7 +51,7 @@ nix-repl> mul (6+7) (8+9)
 
 ## Argument set
 
-```nix
+```bash
 nix-repl> mul = s: s.a*s.b
 nix-repl> mul { a = 3; b = 4; }
 12
@@ -64,7 +64,7 @@ nix-repl> mul { a = 3; b = 4; }
 
 ### Default values
 
-```nix
+```bash
 nix-repl> mul = { a, b ? 2 }: a*b
 nix-repl> mul { a = 3; }
 6
@@ -74,7 +74,7 @@ nix-repl> mul { a = 3; b = 4; }
 
 ### Passing more attributes than expected
 
-```nix
+```bash
 nix-repl> mul = s@{ a, b, ... }: a*b*s.c
 nix-repl> mul { a = 3; b = 4; c = 2; }
 24
@@ -84,23 +84,23 @@ nix-repl> mul { a = 3; b = 4; c = 2; }
 
 `a.nix`
 
-```nix
+```bash
 3
 ```
 
 `b.nix`
 
-```nix
+```bash
 4
 ```
 
 `mul.nix`
 
-```nix
+```bash
 a: b: a*b
 ```
 
-```nix
+```bash
 nix-repl> a = import ./a.nix
 nix-repl> b = import ./b.nix
 nix-repl> mul = import ./mul.nix
@@ -112,11 +112,11 @@ File sẽ được parsed thành expression. Tuy nhiên cần lưu ý rằng sco
 
 `test.nix`
 
-```nix
+```bash
 x
 ```
 
-```nix
+```bash
 nix-repl> let x = 5; in import ./test.nix
 error: undefined variable `x' at /home/lethal/test.nix:1:1
 ```
@@ -124,7 +124,7 @@ error: undefined variable `x' at /home/lethal/test.nix:1:1
 Vậy thì ta có thể truyền thông tin vào module?
 `test.nix`
 
-```nix
+```bash
 { a, b ? 3, trueMsg ? "yes", falseMsg ? "no" }:
 if a > b
   then builtins.trace trueMsg true
@@ -133,7 +133,7 @@ if a > b
 
 Ở đây ta truyền `{ a = 5; trueMsg = "ok"; }` như một argument vào module `test.nix`:
 
-```nix
+```bash
 nix-repl> import ./test.nix { a = 5; trueMsg = "ok"; }
 trace: ok
 true

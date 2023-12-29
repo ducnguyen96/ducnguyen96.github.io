@@ -94,7 +94,11 @@ const sidebars: SidebarsConfig = {
             keywords: ["Nix Language", "Guides"],
           },
           collapsed: false,
-          items: ["nix/nix-language/basic"],
+          items: [
+            "nix/nix-language/basic",
+            "nix/nix-language/functions-and-imports",
+            "nix/nix-language/derivation",
+          ],
         },
         {
           type: "category",
