@@ -113,6 +113,7 @@ const sidebars: SidebarsConfig = {
           collapsed: false,
           items: [
             "nix/package-management/basic-usage",
+            "nix/package-management/home-manager",
             "nix/package-management/profiles",
             "nix/package-management/garbage-collection",
           ],

@@ -33,7 +33,11 @@ nix-env --install --attr nixpkgs.subversion nixpkgs.firefox
 
 Các generations được group lại thành các profiles cho nên các users khác nhau sẽ không ảnh hưởng tới nhau nếu họ không muốn. Ví dụ:
 
-NOTE: Ở đây thì bạn có thể phân vân giữa generations và profiles. Theo hình trên thì ta thấy có nhiều profiles như `default`, `default-42-link`, `default-43-link`, `carol`, `carol-23-link`. Ở đây ta có thể hiểu là `default` và `carol` là các profiles, còn `default-42-link`, `default-43-link`, `carol-23-link` là các generations của các profiles đó.
+:::info
+
+Ở đây thì bạn có thể phân vân giữa generations và profiles. Theo hình trên thì ta thấy có nhiều profiles như `default`, `default-42-link`, `default-43-link`, `carol`, `carol-23-link`. Ở đây ta có thể hiểu là `default` và `carol` là các profiles, còn `default-42-link`, `default-43-link`, `carol-23-link` là các generations của các profiles đó.
+
+:::
 
 ```bash
 $ ls -l /nix/var/nix/profiles/
