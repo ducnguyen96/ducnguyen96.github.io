@@ -21,26 +21,49 @@ Trước khi sử dụng Home Manager thì hãy đọc cảnh báo ở [đây](h
 
 Home Manager có thể được configured cho mỗi user trong `~/.config/nixpkgs/home.nix` hoặc như một module trong `configuration.nix`.
 
-### Installation as a user
+### Cài đặt
 
 Bạn có thể follow [official guide](https://nix-community.github.io/home-manager/index.xhtml#ch-installation) để cài đặt Home Manager.
 
-Config file của Home Manager sẽ được lưu trong `~/.config/nixpkgs/home.nix`. Mỗi lần bạn modify nó, chạy `home-manager switch` để các thay đổi có hiệu lực.
+#### Dùng flakes
+
+##### Enable flake
+
+Đầu tiên bạn phải enable flake và nix-commands trong file `~/.config/nix/nix.conf`:
+
+```bash
+experimental-features = nix-command flakes
+```
+
+##### Init Home Manager
+
+Nếu bạn đang dùng bạn unstable:
+
+```bash
+nix run home-manager/master -- init --switch
+```
+
+Nếu bạn đang dùng Nixpkgs hoặc NixOS 23.11:
+
+```bash
+nix run home-manager/release-23.11 -- init --switch
+```
+
+Ta có thể kiểm tra phiên bản nixpkgs đang dùng bằng lệnh:
+
+```bash
+nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
+```
+
+Khả năng rất cao là bạn đang dùng phiên bản unstable nếu bạn cài nix multi-user từ script của nixos.org.
+
+Sau khi chạy lệnh init nó sẽ gen ra file `flake.nix` và `home.nix` trong thư mục `~/.config/home-manager` của bạn.
 
 :::info
 
-Ta phải source `~/.nix-profile/etc/profile.d/hm-session-vars.sh` để Home Manager works. Cách đơn giản nhất là để Home Manager quản lý toàn bộ shell configuration, ví dụ `programs.bash.enable = true;` hoặc `programs.zsh.enable = true;`. Nhưng trong trường hợp này, toàn bộ bashrc của bạn sẽ được quản lý bởi Home Manager, những thứ bạn đã custom trong nhiều năm sẽ phải được migrate sang Home Manager options, điều này có thể mất một thời gian. Cách nhanh và dễ dàng nhất để migrate là di chuyển bashrc của bạn sang một thư mục khác và source nó từ Home Manager:
+Quá trình init sẽ có thể gặp lỗi conflict nếu bạn đã từng cài Nix package nào đó. Hãy xem log biết cách xử lý.
 
-```bash
-{ pkgs, ...}: {
-  programs.bash = {
-    enable = true;
-    bashrcExtra = ''
-      . ~/oldbashrc
-    '';
-  };
-}
-```
+Thường thì bạn sẽ sử dụng `nix-env -q` để xem đã cài package nào. Sau đó sử dụng `nix-env -e` để xóa package đó đi.
 
 :::
 
