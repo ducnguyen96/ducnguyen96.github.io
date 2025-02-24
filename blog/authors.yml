@@ -8,16 +8,12 @@ yangshun:
     x: yangshunz
     github: yangshun
 
-slorber:
-  name: Sébastien Lorber
-  title: Docusaurus maintainer
-  url: https://sebastienlorber.com
-  image_url: https://github.com/slorber.png
-  page:
-    # customize the url of the author page at /blog/authors/<permalink>
-    permalink: '/all-sebastien-lorber-articles'
+ducnguyen:
+  name: Nguyễn Đức
+  title: Software Enginner
+  url: https://ducnguyen96.github.io
+  image_url: https://avatars.githubusercontent.com/u/47471616?s=400&u=0c97b1cfbd9f72c1fbdd2a9e2debd884993c38f7&v=4
   socials:
-    x: sebastienlorber
-    linkedin: sebastienlorber
-    github: slorber
-    newsletter: https://thisweekinreact.com
+    x: https://x.com/Ducng38
+    linkedin: https://www.linkedin.com/in/ducnguyen948/
+    github: ducnguyen96

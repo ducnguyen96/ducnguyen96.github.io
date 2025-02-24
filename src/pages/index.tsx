@@ -13,7 +13,7 @@ export default function Home(): ReactNode {
                 float: "right",
                 marginLeft: "3rem",
               }}
-              src="img/ducnguyen.png"
+              src="img/avatar.png"
               alt="avatar"
             />
           </p>
