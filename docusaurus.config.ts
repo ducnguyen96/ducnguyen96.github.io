@@ -68,7 +68,7 @@ const config: Config = {
     // Replace with your project's social card
     image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: "Nguyen Duc",
+      title: "Trang chủ",
       logo: {
         alt: "Nguyen Duc Logo",
         src: "img/avatar.png",
