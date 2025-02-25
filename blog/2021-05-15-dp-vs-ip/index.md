@@ -5,6 +5,12 @@ authors: [ducnguyen]
 tags: [declarative, imperative]
 ---
 
+import Meme from "./declarative_programming.png"
+
+<div style={{textAlign: 'center'}}>
+  <img src={Meme} height="300"/>
+</div>
+
 Trong lập trình, có hai phong cách chính thường được nhắc đến: **Imperative Programming** (lập trình tường minh) và **Declarative Programming** (lập trình khai báo). Việc hiểu rõ sự khác biệt giữa hai phong cách này không chỉ giúp bạn viết code hiệu quả hơn mà còn giúp bạn lựa chọn công nghệ phù hợp với từng bài toán cụ thể.
 
 <!-- truncate -->
