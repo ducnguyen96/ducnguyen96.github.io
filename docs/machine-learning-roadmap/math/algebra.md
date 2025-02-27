@@ -4,11 +4,9 @@ sidebar_position: 1
 
 # Đại số tuyến tính
 
-Kiến thức dưới đây là mình giản lược lại từ cuốn sách của a Tiệp, các bạn có thể tham khảo thêm [ở đây](https://github.com/tiepvupsu/tiepvupsu.github.io/blob/master/ML_math.pdf).
+Ôn tập lại một số kiến thức về chuyển vị, nhân ma trận, chuẩn
 
-## 1. Ôn tập đại số tuyến tính
-
-### 1.1. Chuyển vị
+## 1. Chuyển vị
 
 Cho $\mathbf{A} \in \mathbb{R}^{m \times n}$, ta nói $\mathbf{B} \in \mathbb{R}^{n \times m}$ là chuyển vị của $\mathbf{A}$ nếu $b_{ij} = a_{ji}, \space \forall 1 \leq i \leq n, 1 \leq j \leq m$
 
@@ -51,7 +49,7 @@ $$
 Một cách ngắn gọn, chuyển vị của một ma trận là một ma trận nhận được từ ma trận cũ
 thông qua phép phản xạ gương qua đường chéo chính của ma trận ban đầu.
 
-### 1.2. Phép nhân 2 ma trận
+## 2. Phép nhân 2 ma trận
 
 Cho $\mathbf{A} \in \mathbb{R}^{m \times n}$, $\mathbf{B} \in \mathbb{R}^{n \times p}$, tích của hai ma trận được ký hiệu là $\mathbf{C} = \mathbf{AB} \in \mathbb{R}^{m \times p}$
 trong đó phần tử ở hàng thứ $\textit{i}$, cột thứ $\textit{j}$ của ma trận kết quả được tính bởi.
@@ -81,9 +79,9 @@ $$
 c_{ij} = a_{ij}b_{ij}
 $$
 
-### 1.3. Ma trận đơn vị và ma trận nghịch đảo
+## 3. Ma trận đơn vị và ma trận nghịch đảo
 
-#### 1.3.1. Ma trận đơn vị
+### 3.1. Ma trận đơn vị
 
 Ma trận đơn vị(Identity matrix) ký hiệu là $\mathbf{I}$ là ma trận đặc biệt có các phần tử trên đường chéo chính là 1 còn lại là 0.
 
@@ -113,7 +111,7 @@ Tính chất:
 - Nếu $\mathbf{A} \in \mathbb{R}^{m \times n}$, $\mathbf{B} \in \mathbb{R}^{n \times m}$ và $\mathbf{I}$ là một ma trận đơn vị bậc $n$ thì ta có $\mathbf{AI=A}$ và $\mathbf{IB=B}$
 - Với mọi vector $\mathbf{x} \in \mathbb{R}^{n}$, ta có $\mathbf{I}_{n}\mathbf{x}=\mathbf{x}$
 
-#### 1.3.2. Ma trận nghịch đảo
+### 3.2. Ma trận nghịch đảo
 
 Cho ma trận vuông $\mathbf{A} \in \mathbb{R}^{n \times n}$ nếu tồn tại $\mathbf{B} \in \mathbb{R}^{n \times n}$ sao cho $\mathbf{AB}=\mathbf{I}_{n}$ thì ta gọi $\mathbf{A}$ là ma trận khả nghịch và $\mathbf{B}$ là ma trận nghich đảo của $\mathbf{A}$.
 
@@ -133,9 +131,9 @@ $$
 
 có nghiệm duy nhất $\mathbf{x=A^{-1}b}$
 
-### 1.4. Một vài ma trận đặc biệt khác
+## 4. Một vài ma trận đặc biệt khác
 
-#### 1.4.1. Ma trận đường chéo
+### 4.1. Ma trận đường chéo
 
 Là ma trận chỉ có các phần tử trên đường chéo chính là khác 0.
 
@@ -173,7 +171,7 @@ Tính chất:
   là khác không.
 - Nghịch đảo của một ma trận đường chéo khả nghịch cũng là một ma trận đường chéo.
 
-#### 1.4.2. Ma trận tam giác
+### 4.2. Ma trận tam giác
 
 Một ma trận <ins><b>vuông</b></ins> được gọi là ma trận tam giác <ins>trên</ins> nếu các phần tử nằm <ins>dưới</ins> đường chéo chính của nó bằng 0, tưởng tự với ma trận tam giác dưới.
 
@@ -194,7 +192,7 @@ $$
 
 Nhận thấy rằng phương trình này có thể giải mà không cần tính ma trận nghịch đảo $\mathbf{A^{-1}}$ (quá trình tính ma trận nghịch đảo thường tốn khá nhiều thời gian), thay vào đó, ta có thể giải $x_{n}$ dựa vào phương trình cuối cùng. Sau khi có $x_{n}$, ta có thể thay nó vào phương trình gần cuối để suy ra $x_{n-1}$. Tiếp tục quá trình này, ta sẽ có nghiệm cuối cùng $\mathbf{x}$. Quá trình này gọi là _back substitution_. Tương tự đối với ma trận tam giác dưới thì ta gọi là _forward substitution_.
 
-### 1.14. Chuẩn của vector và ma trận
+## 14. Chuẩn của vector và ma trận
 
 Việc đo khoảng cách giữa hai điểm dữ liệu nhiều chiều, tức hai vector, là rất cần thiết trong
 Machine Learning. Và đó chính là lý do mà khái niệm **chuẩn (norm)** ra đời. Để xác định
@@ -215,7 +213,7 @@ Một hàm số $f: \mathbb{R}^n \to \mathbb{R}$ được gọi là một norm n
 2. $f(\alpha \mathbf{x}) = |\alpha| f(\mathbf{x}), \quad \forall \alpha \in \mathbb{R}.$
 3. $f(\mathbf{x}_1) + f(\mathbf{x}_2) \geq f(\mathbf{x}_1 + \mathbf{x}_2), \quad \forall \mathbf{x}_1, \mathbf{x}_2 \in \mathbb{R}^n$
 
-#### 1.14.1. Một số chuẩn vector thường dùng
+### 14.1. Một số chuẩn vector thường dùng
 
 Độ dài Euclid của một vector $\mathbf{x} \in \mathbb{R}^{n}$ chính là một norm, norm này được gọi là ${l}_{2}$ norm hoặc
 Euclidean norm:
@@ -241,7 +239,7 @@ Có một vài giá trị của $p$ thường được dùng:
 2. Khi $p=1$ ta có $l_1$ norm là tổng các giá trị tuyệt đối của từng phẩn tử của $\mathbf{x}$.
 3. Khi $p\to\infty$, giả sử $i=\argmax_{i=1,2,...,n}|x_{j}|$, khi đó norm $l_{\infty}$ chính bằng $|x_{i}|$
 
-#### 1.14.2. Chuẩn Frobenius của ma trận
+### 14.2. Chuẩn Frobenius của ma trận
 
 Với một ma trận $\mathbf{A} \in \mathbb{R}^{m \times n}$, chuẩn thường được dùng nhất là chuẩn Frobenius, ký hiệu là $||\mathbf{A}||_{F}$ là căn bậc 2 của tổng bình phương tất cả các phần tử của ma trận đó.
 
