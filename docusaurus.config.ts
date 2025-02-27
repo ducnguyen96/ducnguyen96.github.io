@@ -1,4 +1,6 @@
 import { themes as prismThemes } from "prism-react-renderer";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
@@ -37,6 +39,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -74,12 +78,11 @@ const config: Config = {
         src: "img/avatar.png",
       },
       items: [
-        // {
-        //   type: "docSidebar",
-        //   sidebarId: "tutorialSidebar",
-        //   position: "left",
-        //   label: "Tutorial",
-        // },
+        {
+          to: "/docs/intro",
+          position: "left",
+          label: "Docs",
+        },
         { to: "/blog", label: "Blog", position: "left" },
         {
           href: "https://github.com/ducnguyen96",
@@ -91,15 +94,15 @@ const config: Config = {
     footer: {
       style: "dark",
       links: [
-        // {
-        //   title: "Docs",
-        //   items: [
-        //     {
-        //       label: "Tutorial",
-        //       to: "/docs/intro",
-        //     },
-        //   ],
-        // },
+        {
+          title: "Docs",
+          items: [
+            {
+              label: "Machine Learning Roadmap",
+              to: "/docs/category/machine-learning-roadmap",
+            },
+          ],
+        },
         {
           title: "Social",
           items: [
@@ -136,6 +139,12 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
+    stylesheets: [
+      {
+        href: "/katex/katex.min.css",
+        type: "text/css",
+      },
+    ],
   } satisfies Preset.ThemeConfig,
 };
 

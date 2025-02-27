@@ -25,3 +25,7 @@
   --ifm-color-primary-lighter: #cde1f8;
   --ifm-color-primary-lightest: #ffffff;
 }
+
+[aria-hidden="true"] {
+  display: none;
+}
