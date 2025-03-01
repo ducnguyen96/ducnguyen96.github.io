@@ -49,7 +49,8 @@ const sidebars: SidebarsConfig = {
           link: {
             type: "generated-index",
             title: "Kiến thức toán học cần thiết",
-            description: "  ",
+            description:
+              "Kiến thức dưới đây là mình giản lược lại từ cuốn sách của anh Tiệp, các bạn có thể lên trang machinelearningcoban hoặc vào github của anh Tiệp để tìm hiểu thêm nhé.",
             keywords: [
               "Math",
               "Đại số tuyến tính",
@@ -58,7 +59,10 @@ const sidebars: SidebarsConfig = {
             ],
           },
           collapsed: true,
-          items: ["machine-learning-roadmap/math/algebra"],
+          items: [
+            "machine-learning-roadmap/math/algebra",
+            "machine-learning-roadmap/math/matrix-calculus",
+          ],
         },
       ],
     },
