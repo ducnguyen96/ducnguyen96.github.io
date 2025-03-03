@@ -68,6 +68,32 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Data structures and algorithms roadmap",
+      link: {
+        type: "generated-index",
+        title: "Data structures & algorithms roadmap",
+        description:
+          "Dưới đây là lộ trình học data structures và algorithms. Nếu các bạn mới bắt đầu thì hãy học theo thứ tự từ trên xuống, nếu không thì có thể chọn bất cứ mục nào để ôn tập lại.",
+        keywords: ["data structures", "algorithms"],
+      },
+      collapsed: true,
+      items: [
+        {
+          type: "category",
+          label: "In Python",
+          link: {
+            type: "generated-index",
+            title: "Data structures & algorithms In Python",
+            description: " ",
+            keywords: ["data structures", "algorithms"],
+          },
+          collapsed: true,
+          items: ["data-structures-and-algorithms/python/setup"],
+        },
+      ],
+    },
   ],
 };
 

@@ -101,6 +101,10 @@ const config: Config = {
               label: "Machine Learning Roadmap",
               to: "/docs/category/machine-learning-roadmap",
             },
+            {
+              label: "Data Structures & Algorithms Roadmap",
+              to: "/docs/category/data-structures-and-algorithms-roadmap",
+            },
           ],
         },
         {
@@ -138,6 +142,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ["nix", "json", "bash"],
     },
     stylesheets: [
       {
