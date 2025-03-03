@@ -62,6 +62,7 @@ const sidebars: SidebarsConfig = {
           items: [
             "machine-learning-roadmap/math/algebra",
             "machine-learning-roadmap/math/matrix-calculus",
+            "machine-learning-roadmap/math/statistic",
           ],
         },
       ],
