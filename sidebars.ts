@@ -63,6 +63,7 @@ const sidebars: SidebarsConfig = {
             "machine-learning-roadmap/math/algebra",
             "machine-learning-roadmap/math/matrix-calculus",
             "machine-learning-roadmap/math/statistic",
+            "machine-learning-roadmap/math/maxium_likelihood_and_maxium_a_posteriori",
           ],
         },
       ],

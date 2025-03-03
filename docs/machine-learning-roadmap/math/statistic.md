@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-Phần này mình ôn lại cách tính xác suất, phương sai và một số phân phối thường gặp.
+# Xác suất
 
-# Ôn tập xác suất
+Phần này mình ôn lại cách tính xác suất, phương sai và một số phân phối thường gặp.
 
 ## 1. Xác suất
 
