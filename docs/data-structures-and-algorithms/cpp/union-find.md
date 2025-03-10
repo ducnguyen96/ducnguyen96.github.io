@@ -352,10 +352,11 @@ public:
 
         if (rank[rootX] < rank[rootY]) {
             parent[rootX] = rootY;
-            rank[rootY] += rank[rootX];
         } else {
             parent[rootY] = rootX;
-            rank[rootX] += rank[rootY];
+            if (rank[rootX] == rank[rootY]) {
+                rank[rootX]++;
+            }
         }
     }
 
