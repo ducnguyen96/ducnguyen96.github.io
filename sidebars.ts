@@ -80,17 +80,32 @@ const sidebars: SidebarsConfig = {
       },
       collapsed: true,
       items: [
+        // {
+        //   type: "category",
+        //   label: "In Python",
+        //   link: {
+        //     type: "generated-index",
+        //     title: "Data structures & algorithms In Python",
+        //     description: " ",
+        //     keywords: ["data structures", "algorithms"],
+        //   },
+        //   collapsed: true,
+        //   items: ["data-structures-and-algorithms/python/setup"],
+        // },
         {
           type: "category",
-          label: "In Python",
+          label: "In C++",
           link: {
             type: "generated-index",
-            title: "Data structures & algorithms In Python",
+            title: "Data structures & algorithms In C++",
             description: " ",
             keywords: ["data structures", "algorithms"],
           },
           collapsed: true,
-          items: ["data-structures-and-algorithms/python/setup"],
+          items: [
+            "data-structures-and-algorithms/cpp/setup",
+            "data-structures-and-algorithms/cpp/union-find",
+          ],
         },
       ],
     },
