@@ -420,3 +420,131 @@ public:
 };
 }
 ```
+
+### 5.2. Social network connectivity
+
+Cho một mạng xã hội gồm $n$ thành viên và log file chứa $m$ timestamps ghi lại thời điểm các cặp thành viên kết bạn, hãy thiết kế một thuật toán để xác định thời điểm sớm nhất khi tất cả các thành viên được kết nối (tức là mọi thành viên đều có thể kết bạn gián tiếp thông qua chuỗi bạn bè). Giả sử log file được sắp xếp theo thứ tự thời gian và quan hệ kết bạn là một quan hệ tương đương. Thuật toán của bạn nên có độ phức tạp thời gian là $O(m\log n)$ hoặc tốt hơn và sử dụng bộ nhớ phụ thuộc tuyến tính vào $n$.
+
+#### Phân tích bài toán
+
+- Input:
+
+  - $n$: số members(nodes) trong mạng xã hội.
+  - $m$: số timestamps trong log file(edges).
+  - log file: list gồm $m$ triples($t_i, u_i, v_i$) thể hiện thời điểm $t_i$ thành viên $u_i$ và $v_i$ kết bạn.
+
+- Goal: Tìm thời điểm sớm nhất khi tất cả các members được kết nối.
+
+#### Thuật toán
+
+**Union Find data structure**
+
+- Dùng một array `parent` size $n$ để lưu parent của mỗi thành viên.
+- Dùng một array `rank` size $n$ để lưu rank của mỗi thành viên.
+- Khởi tạo mỗi thành viên là một nhóm riêng biệt.
+- Implement hàm `find` để tìm root.
+- Implement hàm `union_cmd` để merge các nhóm.
+- Track số nhóm, bắt đầu là $n$.
+
+#### Implementation
+
+```cpp
+class UnionFind {
+private:
+  vector<int> parent;
+  vector<int> rank;
+  int numComponents;
+
+public:
+  UnionFind(int n) {
+    parent.resize(n);
+    rank.resize(n, 0);
+    numComponents = n;
+    for (int i = 0; i < n; i++) {
+      parent[i] = i;
+    };
+  }
+  int find(int x) {
+    if (parent[x] != x) {
+      parent[x] = find(parent[x]);
+    }
+
+    return parent[x];
+  }
+
+  void union_cmd(int x, int y) {
+    int rootX = find(x);
+    int rootY = find(y);
+
+    if (rootX != rootY) {
+      if (rank[rootX] < rank[rootY]) {
+        parent[rootX] = rootY;
+      } else if (rank[rootX] > rank[rootY]) {
+        parent[rootY] = rootX;
+      } else {
+        rank[rootY] = rootX;
+        rank[rootX]++;
+      }
+      numComponents--;
+    }
+  }
+
+  int getNumComponents() const { return numComponents; }
+};
+```
+
+```cpp
+int earliestConnectionTime(int n, const vector<tuple<int, int, int>> &log) {
+  if (n <= 0)
+    return -1;
+
+  UnionFind uf(n);
+
+  for (const auto &entry : log) {
+    int timestamp = get<0>(entry);
+    int u = get<1>(entry);
+    int v = get<2>(entry);
+
+    if (u < 0 || u >= n || v < 0 || v >= n) {
+      continue;
+    }
+
+    uf.union_cmd(u, v);
+
+    if (uf.getNumComponents() == 1)
+      return timestamp;
+  }
+
+  return -1;
+}
+```
+
+```cpp
+int main(int argc, char *argv[]) {
+  int n = 4;
+  vector<tuple<int, int, int>> log = {{1, 0, 1}, {2, 2, 3}, {3, 0, 3}};
+
+  int result = earliestConnectionTime(n, log);
+  if (result != -1) {
+    cout << "Earliest time all members are connected: " << result << endl;
+  } else {
+    cout << "All members never connected." << endl;
+  }
+
+  n = 3;
+  log = {{1, 0, 1}};
+  result = earliestConnectionTime(n, log);
+  if (result != -1) {
+    cout << "Earliest time all members are connected: " << result << endl;
+  } else {
+    cout << "All members never connected." << endl;
+  }
+
+  return 0;
+}
+```
+
+```bash
+Earliest time all members are connected: 3
+All members never connected.
+```
