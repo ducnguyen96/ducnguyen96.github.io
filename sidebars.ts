@@ -105,6 +105,7 @@ const sidebars: SidebarsConfig = {
           items: [
             "data-structures-and-algorithms/cpp/setup",
             "data-structures-and-algorithms/cpp/union-find",
+            "data-structures-and-algorithms/cpp/stacks-and-queues",
           ],
         },
       ],
