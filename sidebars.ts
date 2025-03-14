@@ -134,6 +134,18 @@ const sidebars: SidebarsConfig = {
           collapsed: true,
           items: ["leetcode-roadmap/array-string/merge-sorted-array"],
         },
+        {
+          type: "category",
+          label: "Two Pointers",
+          link: {
+            type: "generated-index",
+            title: "Two Pointers",
+            description: " ",
+            keywords: ["two pointers"],
+          },
+          collapsed: true,
+          items: ["leetcode-roadmap/two-pointers/valid-palindrome"],
+        },
       ],
     },
   ],
