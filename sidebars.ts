@@ -111,6 +111,31 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Leetcode roadmap",
+      link: {
+        type: "generated-index",
+        title: "Leetcode roadmap",
+        description: "Lộ trình luyện các bài code chuẩn bị cho phỏng vấn",
+        keywords: ["leetcode", "interview"],
+      },
+      collapsed: true,
+      items: [
+        {
+          type: "category",
+          label: "Array/String",
+          link: {
+            type: "generated-index",
+            title: "Array/String",
+            description: " ",
+            keywords: ["array", "string"],
+          },
+          collapsed: true,
+          items: ["leetcode-roadmap/array-string/merge-sorted-array"],
+        },
+      ],
+    },
   ],
 };
 
