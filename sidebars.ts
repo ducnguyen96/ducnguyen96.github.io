@@ -146,6 +146,18 @@ const sidebars: SidebarsConfig = {
           collapsed: true,
           items: ["leetcode-roadmap/two-pointers/valid-palindrome"],
         },
+        {
+          type: "category",
+          label: "Sliding Window",
+          link: {
+            type: "generated-index",
+            title: "Slinding Window",
+            description: " ",
+            keywords: ["sliding window"],
+          },
+          collapsed: true,
+          items: ["leetcode-roadmap/sliding-window/minimum-size-subarray-sum"],
+        },
       ],
     },
   ],
