@@ -25,7 +25,7 @@ Output: true
 - `1 <= s.length <= 2 * 10^5`
 - `s` chỉ chứa các ký tự ASCII
 
-## Phần tích
+## Phân tích
 
 - Nhận thấy rằng `palindrome` là chuỗi có tính chất đặc biệt nên ta có thể sử dụng kỹ thuật **two pointers** để giải bài toán này.
 

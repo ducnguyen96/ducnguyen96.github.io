@@ -28,7 +28,7 @@ Output: 1
 - `1 <= nums.length <= 105`
 - `1 <= nums[i] <= 104`
 
-## Phần tích
+## Phân tích
 
 Như mình có đề cập ở bài viết về [kỹ thuật two pointers](/blog/two-pointers-technique) ta có thể sử dụng kỹ thuật này để giải bài toán này.
 
