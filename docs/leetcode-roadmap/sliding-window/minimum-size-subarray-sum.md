@@ -57,7 +57,7 @@ Function minSubArrayLen(target, nums) {
 
 ## Solution
 
-import Tabs from '@ theme/Tabs';
+import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs>
