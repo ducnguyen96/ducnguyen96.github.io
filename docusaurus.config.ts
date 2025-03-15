@@ -107,6 +107,10 @@ const config: Config = {
               label: "Data Structures & Algorithms Roadmap",
               to: "/docs/category/data-structures-and-algorithms-roadmap",
             },
+            {
+              label: "Leetcode Roadmap",
+              to: "/docs/category/leetcode-roadmap",
+            },
           ],
         },
         {

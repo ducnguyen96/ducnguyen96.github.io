@@ -170,6 +170,18 @@ const sidebars: SidebarsConfig = {
           collapsed: true,
           items: ["leetcode-roadmap/matrix/valid-sudoku"],
         },
+        {
+          type: "category",
+          label: "Intervals",
+          link: {
+            type: "generated-index",
+            title: "Intervals",
+            description: " ",
+            keywords: ["intervals"],
+          },
+          collapsed: true,
+          items: ["leetcode-roadmap/intervals/summary-ranges"],
+        },
       ],
     },
   ],
