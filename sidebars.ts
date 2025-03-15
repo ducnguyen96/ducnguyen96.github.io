@@ -156,7 +156,10 @@ const sidebars: SidebarsConfig = {
             keywords: ["sliding window"],
           },
           collapsed: true,
-          items: ["leetcode-roadmap/sliding-window/minimum-size-subarray-sum"],
+          items: [
+            "leetcode-roadmap/sliding-window/minimum-size-subarray-sum",
+            "leetcode-roadmap/sliding-window/length-of-longest-sub-string",
+          ],
         },
         {
           type: "category",
