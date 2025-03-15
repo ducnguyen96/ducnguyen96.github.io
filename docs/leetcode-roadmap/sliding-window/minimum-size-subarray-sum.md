@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Minimum Size Subarray Sum
+# [M] Minimum Size Subarray Sum
 
 ## Đề bài
 
