@@ -159,6 +159,7 @@ const sidebars: SidebarsConfig = {
           items: [
             "leetcode-roadmap/sliding-window/minimum-size-subarray-sum",
             "leetcode-roadmap/sliding-window/length-of-longest-sub-string",
+            "leetcode-roadmap/sliding-window/substring-with-concatenation-of-all-words",
           ],
         },
         {
