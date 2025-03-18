@@ -125,7 +125,7 @@ Việc còn lại là chọn $\alpha$ và $\beta$
 
 import Hyperparameters from "./hyperparameters.png"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={Hyperparameters} height="300"/>
 </div>
 

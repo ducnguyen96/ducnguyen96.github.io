@@ -23,7 +23,7 @@ Ví dụ:
 
 import DC from "./images/dynamic-connectivity.png"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={DC} height="300"/>
 </div>
 
@@ -65,7 +65,7 @@ Ta vẫn tuân theo các bước để phát triển một thuật toán đượ
 
 import SD from "./images/simple-ds.png"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={SD} height="100"/>
 </div>
 
@@ -120,10 +120,10 @@ Nhận thấy rằng thuật toán này không quá hiệu quả vì nó mất t
 import UF1 from "./images/uf1.png"
 import UF2 from "./images/uf2.png"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={UF1} height="80"/>
 </div>
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={UF2} height="300"/>
 </div>
 
@@ -137,10 +137,10 @@ Với ví dụ trên sau khi thực hiện `union(3, 5)` ta sẽ được:
 import UF3 from "./images/uf3.png"
 import UF4 from "./images/uf4.png"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={UF3} height="80"/>
 </div>
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={UF4} height="300"/>
 </div>
 
@@ -198,10 +198,10 @@ Ta sẽ cải thiện thuật toán Quick Union bằng cách đảm bảo rằng
 import UF5 from "./images/uf5.png"
 import UF6 from "./images/uf6.png"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={UF5} height="300"/>
 </div>
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={UF6} height="400"/>
 </div>
 
@@ -298,7 +298,7 @@ Percolation là một mô hình thường được sử dụng trong khoa học 
 
 import UF7 from "./images/uf7.png"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={UF7} height="300"/>
 </div>
 
@@ -371,54 +371,52 @@ public:
 ```cpp
 class Percolation {
 private:
-    int N;
-    vector<bool> openSites;
-    UnionFind uf;
-    int virtualTop;
-    int virtualBottom;
+  int N;
+  vector<bool> openSites;
+  UnionFind uf;
+  int virtualTop;
+  int virtualBottom;
 
-    int xyTo1D(int row, int col) {
-        return row * N + col;
-    }
+  int xyTo1D(int row, int col) { return row * N + col; }
 
 public:
-    Percolation(int n) : N(n), openSites(n * n, false), uf(n * n + 2) {
-        virtualTop = n * n;
-        virtualBottom = n * n + 1;
+  Percolation(int n) : N(n), openSites(n * n, false), uf(n * n + 2) {
+    virtualTop = n * n;
+    virtualBottom = n * n + 1;
+  }
+
+  void open(int row, int col) {
+    if (row < 0 || row >= N || col < 0 || col >= N) {
+      cout << "Vi tri khong hop le!" << endl;
+      return;
     }
 
-    void open(int row, int col) {
-        if (row < 0 || row >= N || col < 0 || col >= N) {
-            cout << "Vi tri khong hop le!" << endl;
-            return;
+    int index = xyTo1D(row, col);
+    if (openSites[index])
+      return;
+
+    openSites[index] = true;
+
+    if (row == 0)
+      uf.union_cmd(index, virtualTop);
+    if (row == N - 1)
+      uf.union_cmd(index, virtualBottom);
+
+    int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    for (auto &dir : directions) {
+      int newRow = row + dir[0];
+      int newCol = col + dir[1];
+      if (newRow >= 0 && newRow < N && newCol >= 0 && newCol < N) {
+        int neighborIndex = xyTo1D(newRow, newCol);
+        if (openSites[neighborIndex]) {
+          uf.union_cmd(index, neighborIndex);
         }
-
-        int index = xyTo1D(row, col);
-        if (openSites[index]) return;
-
-        openSites[index] = true;
-
-        if (row == 0) uf.union_cmd(index, virtualTop);
-        if (row == N - 1) uf.union_cmd(index, virtualBottom);
-
-        int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        for (auto& dir : directions) {
-            int newRow = row + dir[0];
-            int newCol = col + dir[1];
-            if (newRow >= 0 && newRow < N && newCol >= 0 && newCol < N) {
-                int neighborIndex = xyTo1D(newRow, newCol);
-                if (openSites[neighborIndex]) {
-                    uf.union_cmd(index, neighborIndex);
-                }
-            }
-        }
+      }
     }
+  }
 
-    bool percolates() {
-        return uf.connected(virtualTop, virtualBottom);
-    }
+  bool percolates() { return uf.connected(virtualTop, virtualBottom); }
 };
-}
 ```
 
 ### 5.2. Social network connectivity

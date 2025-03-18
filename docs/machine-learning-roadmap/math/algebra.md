@@ -200,7 +200,7 @@ khoảng cách giữa hai vector $\mathbf{y}$ và $\mathbf{z}$, người ta thư
 
 import NormGraph from "./norm_graph.png"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={NormGraph} height="300"/>
 Minh họa $l_{1}$ norm và $l_{2}$ norm trong không gian hai chiều. $l_{2}$ norm chính là khoảng cách giữa hai điểm trong mặt phẳng. Trong khi đó $l_{1}$ norm là quãng đường ngắn nhất giữa hai điểm nếu chỉ được đi theo các đường song song với các trục toạ độ.
 </div>

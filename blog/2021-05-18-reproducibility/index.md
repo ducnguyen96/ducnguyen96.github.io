@@ -7,7 +7,7 @@ tags: [reproducibility, reproducible]
 
 import Meme from "./it-works-on-my-machine-meme.jpg"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={Meme} height="300"/>
 </div>
 

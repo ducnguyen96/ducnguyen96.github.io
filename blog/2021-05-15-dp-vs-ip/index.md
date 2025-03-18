@@ -7,7 +7,7 @@ tags: [declarative, imperative]
 
 import Meme from "./declarative_programming.png"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={Meme} height="300"/>
 </div>
 

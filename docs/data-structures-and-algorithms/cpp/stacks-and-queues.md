@@ -6,7 +6,7 @@ sidebar_position: 3
 
 import SAQ from "./images/stacks-and-queues.png"
 
-<div style={{textAlign: 'center'}}>
+<div style={{ 'textAlign': 'center' }}>
   <img src={SAQ} height="300"/>
 </div>
 
