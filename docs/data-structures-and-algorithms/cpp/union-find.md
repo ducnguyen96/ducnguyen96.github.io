@@ -402,7 +402,7 @@ public:
     if (row == N - 1)
       uf.union_cmd(index, virtualBottom);
 
-    int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    int directions[4][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
     for (auto &dir : directions) {
       int newRow = row + dir[0];
       int newCol = col + dir[1];
@@ -520,7 +520,7 @@ int earliestConnectionTime(int n, const vector<tuple<int, int, int>> &log) {
 ```cpp
 int main(int argc, char *argv[]) {
   int n = 4;
-  vector<tuple<int, int, int>> log = {{1, 0, 1}, {2, 2, 3}, {3, 0, 3}};
+  vector<tuple<int, int, int>> log = { {1, 0, 1}, {2, 2, 3}, {3, 0, 3} };
 
   int result = earliestConnectionTime(n, log);
   if (result != -1) {
@@ -530,7 +530,7 @@ int main(int argc, char *argv[]) {
   }
 
   n = 3;
-  log = {{1, 0, 1}};
+  log = { {1, 0, 1} };
   result = earliestConnectionTime(n, log);
   if (result != -1) {
     cout << "Earliest time all members are connected: " << result << endl;
