@@ -171,3 +171,57 @@ bool isPowerOf2(int n) {
 - Khi cần tối ưu thời gian chạy (time complexity) hoặc không gian (space complexity).
 - Khi xử lý các bài toán liên quan đến tập hợp, trạng thái, hoặc biểu diễn nhị phân.
 - Khi muốn thay thế các phép toán số học bằng cách tiếp cận thấp cấp hơn.
+
+## 5. Áp dụng cho bài toán cụ thể
+
+### [Longest Nice Subarray](https://leetcode.com/problems/longest-nice-subarray/?envType=daily-question&envId=2025-03-19)
+
+#### Quan sát
+
+- Một subarrray "nice" thì OR bitwise của tất cả các phần tử trong subarrray sẽ có số bit 1 bằng tổng số bit 1 của từng phần tử.
+- Có thể dùng sliding window để kiểm tra các subarray hợp lệ, theo dõi các bit đã sử dụng thông qua một bitmask.
+
+#### Thuận toán
+
+1. Sử dụng kỹ thuật sliding window:
+
+   - Duy trì một cửa sổ với biến `mask` là kết quả `OR` của các phần tử trong cửa sổ.
+   - `mask` đại diện cho tất cả các bit đã được "chiếm" trong cửa sổ hiện tại.
+
+2. Với mỗi phần tử mới (`nums[right]`):
+
+   - Kiểm tra xem nó có bit nào chung với `mask` không.
+   - Nếu có bit chung, thu nhỏ cửa sổ từ bên trái (left) cho đến khi không còn bit chung.
+   - Cập nhật `mask` và tính độ dài cửa sổ tối đa.
+
+3. Lặp lại cho tới khi duyệt hết mảng
+
+#### Solution
+
+```cpp
+class Solution {
+public:
+  int longestNiceSubarray(vector<int> &nums) {
+    int n = nums.size();
+
+    int left = 0;
+    int right = 0;
+    int mask = 0;
+
+    int maxLength = 0;
+    while (right < n) {
+      while ((mask & nums[right]) != 0) { // Phép AND
+        mask ^= nums[left]; // Phép XOR - unmerge, xem giải thích phía dưới
+        left++;
+      }
+      mask |= nums[right]; // Phép OR - merge, xem giải thích phía dưới
+      maxLength = std::max(maxLength, right - left + 1);
+      right++;
+    }
+
+    return maxLength;
+  };
+};
+```
+
+Như ta đã quan sát thấy ở trên thì khi 2 `num` có kết quả của phép `&` là 0. Tức là tất cả các bit của chúng đều là khác nhau. Nếu ta dùng phép `OR`(trả về 1 nếu 1 trong 2 bit là 1) lên 2 số này thì kết quả là ta trích xuất được tất cả các bit 1 của 2 số. Đồng thời thì phép `XOR`(trả về 1 nếu 2 bit khác nhau, 0 nếu giống nhau), ta sẽ đảo ngược được quá trình merge ở phía trên.
