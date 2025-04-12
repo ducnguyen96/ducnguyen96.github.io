@@ -1,0 +1,770 @@
+---
+slug: software-architect-system-design-quiz
+title: "Software Architect and System Design Quiz"
+authors: [ducnguyen]
+tags: [software architect, system design, quiz]
+---
+import MultipleChoiceQuestion from '@site/src/components/MultipleChoiceQuestion';
+
+## I. System Requirements & architectural Drivers
+
+### I.I. System Design & Requirement Types
+
+**Question 1:** We received the following requirement from the client:
+
+
+> We would like you to build a system that allows sharing of large files between users.
+>After a user uploads a file, they will get a unique link that they can share with other users. Any user with that link can download the file.
+>The link should become active no later than 1 second after the file is uploaded. Download speeds should be at least 50 Mbit/sec.
+>You have to support at least PDF and JPG file formats, as well as the following web browsers: Google Chrome, Mozilla Firefox, and Microsoft Edge.
+
+<MultipleChoiceQuestion
+  question='Which part is the functional requirement?'
+  options={
+  [
+    { id: "A", text: "After a user uploads a file they will get a unique link that they can share with other users. Any user with that link can download the file.", isCorrect: true },
+    { id: "B", text: "The link should become active no later than 1 second after the file was uploaded. Download speeds should be at least 50 Mbit/sec." },
+    { id: "C", text: "You have to support at least .PDF, and .JPG file formats, as well as the following web browsers: Google Chrome, Mozilla Firefox, Microsoft Edge." },
+    { id: "D", text: "All of it" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+**Question 2:** We received the following requirement from the client:
+
+>We would like you to build a system that allows sharing of large files between users.
+>After a user uploads a file, they will get a unique link that they can share with other users. Any user with that link can download the file.
+>The link should become active no later than 1 second after the file is uploaded. Download speeds should be at least 50 Mbit/sec.
+>You have to support at least PDF and JPG file formats, as well as the following web browsers: Google Chrome, Mozilla Firefox, and Microsoft Edge.
+
+<MultipleChoiceQuestion
+  question='Which part is the non-functional / Quality Attributes requirement?'
+  options={
+  [
+    { id: "A", text: "After a user uploads a file they will get a unique link that they can share with other users. Any user with that link can download the file." },
+    { id: "B", text: "The link should become active no later than 1 second after the file was uploaded. Download speeds should be at least 50 Mbit/sec.", isCorrect: true },
+    { id: "C", text: "You have to support at least .PDF, and .JPG file formats, as well as the following web browsers: Google Chrome, Mozilla Firefox, Microsoft Edge." },
+    { id: "D", text: "All of it" },
+
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+**Question 3:** We received the following requirement from the client:
+
+>We would like you to build a system that allows sharing of large files between users.
+>After a user uploads a file, they will get a unique link that they can share with other users. Any user with that link can download the file.
+>The link should become active no later than 1 second after the file is uploaded. Download speeds should be at least 50 Mbit/sec.
+>You have to support at least PDF and JPG file formats, as well as the following web browsers: Google Chrome, Mozilla Firefox, and Microsoft Edge.
+
+<MultipleChoiceQuestion
+  question='Which part is the System Constraints requirement?'
+  options={
+  [
+    { id: "A", text: "After a user uploads a file they will get a unique link that they can share with other users. Any user with that link can download the file." },
+    { id: "B", text: "The link should become active no later than 1 second after the file was uploaded. Download speeds should be at least 50 Mbit/sec." },
+    { id: "C", text: "You have to support at least .PDF, and .JPG file formats, as well as the following web browsers: Google Chrome, Mozilla Firefox, Microsoft Edge.", isCorrect: true },
+    { id: "D", text: "All of it" },
+
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+
+**Question 4:**
+
+<MultipleChoiceQuestion
+  question='Why is it so important to capture all the technical requirements for our system upfront before we start designing or implementing anything?'
+  options={
+  [
+    { id: "A", text: "We may build something that the client didn't actually want." },
+    { id: "B", text: "If we find out that we missed an important detail, and we have to redesign the system, we may not make it to the market in time." },
+    { id: "C", text: "We may waste a lot of engineering time, and our business' money in building the wrong thing." },
+    { id: "D", text: "All of that above", isCorrect: true },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+### I.II. Feature Requirements - Gathering Process
+
+**Question 1:**
+
+We are tasked to design a Social Media System like Facebook.
+In this system, different users can post media (text, images, videos) on their wall. Their friends can like or respond to those posts, as they see them.
+The way we're going to monetize this platform is by allowing external advertisers to place ads which we will show on users' social media walls.
+
+<MultipleChoiceQuestion
+  question='Following the three step process to gather all the functional requirements, who are the (external) actors in this system?'
+  options={
+  [
+    { id: "A", text: "Our Platform & The Social Medial Wall" },
+    { id: "B", text: "Social Media Users & Advertisers", isCorrect: true },
+    { id: "C", text: "Advertisers & Posts & Likes" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+**Question 2:**
+
+While designing an online store we created the following user flow using a sequence diagram:
+
+import Userflow from "./images/user-flow.png"
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={Userflow} height="300"/>
+</div>
+
+
+<MultipleChoiceQuestion
+  question='What is the use-case that this user-flow represents?'
+  options={
+  [
+    { id: "A", text: "A merchant adding products to our online store" },
+    { id: "B", text: "A driver making an delivery to a user" },
+    { id: "C", text: "A user purchasing a product in our store", isCorrect: true },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+### I.III. Quality Attribute Requirement
+
+**Question 1:**
+
+We have the following requirement:
+**When a user is performing a search on our system, we need to return as many results as fast as possible.**
+
+<MultipleChoiceQuestion
+  question="What is the correct statement about that requirement?"
+  options={
+  [
+    { id: "A", text: "This is a perfectly valid quality attribute requirement" },
+    { id: "B", text: "This is not a good quality attribute requirement because it is not measurable", isCorrect: true },
+    { id: "C", text: "This is not a good quality attribute requirement because it is not feasible" },
+    { id: "D", text: "This is a perfectly valid functional requirement" }
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 2:**
+
+We have the following requirement:
+**We want to offer unlimited raw, uncompressed video storage for a $1.99 annual subscription fee.**
+
+<MultipleChoiceQuestion
+  question="What is the correct statement about that requirement?"
+  options={
+  [
+    { id: "A", text: "This is a perfectly valid quality attribute requirement" },
+    { id: "B", text: "This is not a good quality attribute requirement because it is not measurable" },
+    { id: "C", text: "This is not a good quality attribute requirement because it is not feasible", isCorrect: true },
+    { id: "D", text: "This is a perfectly valid functional requirement" }
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+### I.IV. System Constraints
+
+**Question 1:**
+
+While building our Multiplayer Online Game, we want to build our own proprietary **game engine**, to provide a better performance, optimized for our use case.
+
+However, because of the strict deadline to release the game by the end of the year, we decided to go with an existing solution called Unreal Engine.
+
+<MultipleChoiceQuestion
+  question="What type of constraint made us change our original decision to build a proprietary game engine?"
+  options={
+  [
+    { id: "A", text: "Technical Constraint" },
+    { id: "B", text: "Business Constraint", isCorrect: true },
+    { id: "C", text: "Legal Constraint" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 2:**
+
+While designing our multiplayer online game we decided to use Cassandra database for storing the information about our users.
+
+However, we couldn't find any engineers in our team who know how to work with Cassandra.
+
+We later found out that all the teams in our company are using MongoDB. So we decided to use MongoDB for storing the users' information instead.
+
+<MultipleChoiceQuestion
+  question="What type of constraint made us choose MongoDB for our solution instead of Cassandra?"
+  options={
+  [
+    { id: "A", text: "Technical Constraint", isCorrect: true },
+    { id: "B", text: "Business Constraint" },
+    { id: "C", text: "Legal Constraint" },
+
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+While designing a social media platform for sharing short videos with friends, we came up with the most optimal design and architecture.
+
+However, before finalizing the design and starting the implementation we found out that **COPPA** (The Children's Online Privacy Protection Act), which is a law created to protect the privacy of children under 13, requires us to make significant changes to our design.
+
+<MultipleChoiceQuestion
+  question="What type of constraint required us to make changes in our original architecture?"
+  options={
+  [
+    { id: "A", text: "Technical Constraint" },
+    { id: "B", text: "Business Constraint" },
+    { id: "C", text: "Legal Constraint", isCorrect: true },
+
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+## II. Most Important Quality Attributes 
+
+### II.I. Performance
+
+
+import Performance1 from "./images/performance1.png"
+import Performance2 from "./images/performance2.png"
+import Performance3 from "./images/performance3.png"
+
+**Question 1:** 
+
+We measured that the response time of our system as a function of load ( measured in thousands of requests per second) and came up with the following graph:
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={Performance1} height="300"/>
+</div>
+
+
+<MultipleChoiceQuestion
+  question='What is the degradation point of our system?'
+  options={
+  [
+    { id: "A", text: "Our system's degradation point is at 2k requests/sec" },
+    { id: "B", text: "Our system's degradation point is at 10k requests/sec", isCorrect: true },
+    { id: "C", text: "Our system's degradation point is at 12k requests/sec" },
+    { id: "D", text: "Our system's degradation point is 100 ms" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+**Question 2:**
+
+We have the following response time distribution of 2 systems:
+
+**System 1:**
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={Performance2} height="300"/>
+</div>
+
+**System 2:**
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={Performance3} height="300"/>
+</div>
+
+<MultipleChoiceQuestion
+  question="Which system has a shorter/better tail latency?"
+  options={
+    [
+      { id: "A", text: "System 1" },
+      { id: "B", text: "System 2", isCorrect: true },
+      { id: "C", text: "Both Systems has same tail latency" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+
+We are tasked to design a Video Transcoding and Compression as a Service System.
+Our system will receive raw video files from clients (video streaming companies), and our job is to transcode the raw file into different video file formats for different devices as well as compress those files.
+
+<MultipleChoiceQuestion
+  question='What do you think is the most important performance metric for our system?'
+  options={
+  [
+    { id: "A", text: "Response time" },
+    { id: "B", text: "Throughput", isCorrect: true },
+    { id: "C", text: "Latency" },
+    { id: "D", text: "Scalability" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+### II.II. Scalability
+
+
+import Scalability1 from "./images/scalibility1.png"
+
+**Question 1:** 
+
+We have the following graph that illustrates the amount of work two systems can perform as a function of their resources:
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={Scalability1} height="300"/>
+</div>
+
+
+<MultipleChoiceQuestion
+  question='Which system is more scalable?'
+  options={
+  [
+    { id: "A", text: "System A", isCorrect: true },
+    { id: "B", text: "System B" },
+    { id: "C", text: "Both Systems are equally scalable" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 2:** 
+
+Currently we are running our systems as 2 instances on 2 separate computers
+
+To allow our system to take more requests from users, we decided to deploy our 2 application instances on a new type of machines that run twice as fast and have 3 times more memory.
+
+<MultipleChoiceQuestion
+  question='What type of scalability principle did we use?'
+  options={
+  [
+    { id: "A", text: "Vertical Scalability", isCorrect: true },
+    { id: "B", text: "Horizontal Scalability" },
+    { id: "C", text: "Organizational Scalability" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+Currently, our entire system runs as a single service.
+
+The codebase of that service became very large and complex, so we decided to break it into 2 separate services that we deploy as 2 separate groups of application instances.
+
+<MultipleChoiceQuestion
+  question='What scalability principle did we apply?'
+  options={
+  [
+    { id: "A", text: "Vertical Scalability" },
+    { id: "B", text: "Horizontal Scalability" },
+    { id: "C", text: "Organizational Scalability", isCorrect: true },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 4:**
+
+We are designing a Video on Demand system that is estimated to double the number of active users, using our system every 3 months.
+
+<MultipleChoiceQuestion
+  question='What is the best scalability principle we should use, to make sure we keep up with the incoming traffic, and are able to provide all our users with good performance?'
+  options={
+  [
+    { id: "A", text: "Vertical Scalability" },
+    { id: "B", text: "Horizontal Scalability", isCorrect: true },
+    { id: "C", text: "Vertical Scalability and Horizontal Scalability are equally good in the long run." },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+### II.III. Availability
+
+
+**Question 1:**
+
+In the last month (30 days), we had 2 outages in our system. 
+
+The first outage lasted for 18 hours. The second outrage lasted for 6 hours.
+
+<MultipleChoiceQuestion
+  question="What was our system's availability last month?"
+  options={
+  [
+    { id: "A", text: "3.34%" },
+    { id: "B", text: "96.67%", isCorrect: true },
+    { id: "C", text: "3.35%" },
+    { id: "D", text: "94.7%" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 2:**
+
+Our clients are asking us to design a system with "6 nines" of availability.
+
+<MultipleChoiceQuestion
+  question="How much availability do we need to provide? "
+  options={
+  [
+    { id: "A", text: "99.999999%" },
+    { id: "B", text: "99.9999%", isCorrect: true },
+    { id: "C", text: "0.999999%" },
+    { id: "D", text: "96%" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+<MultipleChoiceQuestion
+  question="What is a potential risk of a prolonged outage of our mission critical system?"
+  options={
+  [
+    { id: "A", text: "Loss of revenue" },
+    { id: "B", text: "Loss of customers" },
+    { id: "C", text: "Loss of life" },
+    { id: "D", text: "All of the above", isCorrect: true },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+## III. API Design 
+
+### III.I. Introduction 
+
+
+**Question 1:**
+
+<MultipleChoiceQuestion
+  question='Which one of those operations is NOT idempotent?'
+  options={
+  [
+    { id: "A", text: "Deleting a record with a particular ID from the database" },
+    { id: "B", text: "Resetting the user's balance to 0" },
+    { id: "C", text: "Taking the absolute value of a number" },
+    { id: "D", text: "Removing the last record from a queue.", isCorrect: true },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+**Question 2:**
+
+<MultipleChoiceQuestion
+  question='When an API is offering Pagination. What are the 2 pieces of information, the user of the API needs to provide to the server as part of the request?'
+  options={
+  [
+    { id: "A", text: "Client font size; Offset in the data set" },
+    { id: "B", text: "The size of the client company; The client display resolution" },
+    { id: "C", text: "Number of items in each response; Offset in the entire dataset", isCorrect: true },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+<MultipleChoiceQuestion
+  question='What is the problem we may run into if we do not explicitly version our external API?'
+  options={
+  [
+    { id: "A", text: "We won't be able to change the implementation of the API" },
+    { id: "B", text: "We won't be able to add features to the API" },
+    { id: "C", text: "If we need to change our API in non-backwards compatible way will won't be able to make the change without breaking existing clients", isCorrect: true },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+### III.II. Rest API 
+
+
+**Question 1:**
+
+We have the following resource in our online store:
+`/store/products/apparel/shirts/hoodie`
+
+<MultipleChoiceQuestion
+  question='What is the most correct statement?'
+  options={
+  [
+    { id: "A", text: "It can be a simple resource" },
+    { id: "B", text: "It may have a collection sub-resource called hoode-sizes" },
+    { id: "C", text: "It may have a sub-resource called description, and another sub-resource called image" },
+    { id: "D", text: "All of the above", isCorrect: true },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 2:**
+
+Our company is currently offering a REST API to our users.
+
+To reduce the overhead of authenticating a user against a database record, we are suggesting the following modification:
+
+The user will be authenticated against the database only once, on the first request, and after that, the server in our system will cache the session information about the user in memory.
+
+<MultipleChoiceQuestion
+  question='What is the most correct statement?'
+  options={
+  [
+    { id: "A", text: "Caching is one of the REST API concepts, so this solution will definitely keep our API RESTful" },
+    { id: "B", text: "Our application instances now will maintain session information about users' requests and will no longer be stateless. So our API cannot be considered RESTful anymore", isCorrect: true },
+    { id: "C", text: "This can introduce other performance issues and memory leaks. However, if we're very careful, we can avoid those problems. if we do, our API still can be considered RESTful" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+<MultipleChoiceQuestion
+  question='Which one of the following operations is NOT a standard REST API operation'
+  options={
+  [
+    { id: "A", text: "Get the list of sub-resources of a collection resource" },
+    { id: "B", text: "Update a simple resource" },
+    { id: "C", text: "Delete an existing resource" },
+    { id: "D", text: "Modify 2 simple resources in one operation", isCorrect: true },
+    { id: "E", text: "Get the state of a resource" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+
+## IV. Building Blocks
+
+**Question 1:** We are designing a highly scalable video-on-demand system where users can watch movies on their browsers.
+
+To make sure that we can support traffic from millions of users all around the world, we deployed our services in 5 different data centers. In each data center, we run multiple instances of our frontend service.
+
+
+<MultipleChoiceQuestion
+  question='What architectural building block should we use to make sure a user in India gets the home page with the catalog of all our movies from the nearest data center?'
+  options={
+  [
+    { id: "A", text: "CDN" },
+    { id: "B", text: "API Gateway" },
+    { id: "C", text: "GSLB", isCorrect: true },
+    { id: "D", text: "Message Broker" },
+  ]
+    }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+**Question 2:** We are designing a highly scalable video-on-demand system where users can watch movies on their browsers.
+
+To make sure that we can support traffic from millions of users all around the world, we deployed our services in 5 different data centers. In each data center, we run multiple instances of our frontend service.
+
+<MultipleChoiceQuestion
+  question="What architectural building block should we use to make sure that the traffic in each data center is evenly distributed among all our frontend service instances?"
+  options={
+    [
+      { id: "A", text: "CDN" },
+      { id: "B", text: "Message Broker" },
+      { id: "C", text: "Software/Hardware Load Balancer", isCorrect: true },
+      { id: "D", text: "GSLB" },
+      { id: "E", text: "API Gateway" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:** At some point, we decided to also build a dedicated mobile app that talks to our video-on-demand system through a different API.
+
+<MultipleChoiceQuestion
+  question="What architectural building block should we use to make sure we don't need to modify our internal services to support the new API?"
+  options={
+    [
+      { id: "A", text: "CDN" },
+      { id: "B", text: "API Gateway", isCorrect: true },
+      { id: "C", text: "GSLB" },
+      { id: "D", text: "Message Broker" },
+      { id: "E", text: "Software/Hardware Load Balancer" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 4:** Once the user decides on which movie they want to watch, we want to make sure that they can watch the movie smoothly with the minimum amount of buffering time. Especially for 4k movies.
+
+<MultipleChoiceQuestion
+  question="What architectural building block should we use to make it happen?"
+  options={
+    [
+      { id: "A", text: "CDN", isCorrect: true },
+      { id: "B", text: "GSLB" },
+      { id: "C", text: "Message Broker" },
+      { id: "D", text: "API Gateway" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 5:** When a user finishes watching the movie, we want to prompt them with a page that allows them to leave a review and rating for that movie.
+
+<MultipleChoiceQuestion
+  question="What architectural building block should we use to make sure that we never lose any reviews, but at the same time, the user doesn't have to wait for the review to be persisted in a database?"
+  options={
+    [
+      { id: "A", text: "CDN" },
+      { id: "B", text: "GSLB" },
+      { id: "C", text: "Software/Hardware Load Balancer" },
+      { id: "D", text: "Message Broker", isCorrect: true },
+      { id: "E", text: "API Gateway" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
