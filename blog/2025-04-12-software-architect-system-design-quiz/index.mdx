@@ -768,3 +768,221 @@ To make sure that we can support traffic from millions of users all around the w
 <br />
 <br />
 
+
+## V. Data Storage
+
+### V.I. ACID Transactions
+
+**Question 1:**
+
+<MultipleChoiceQuestion
+  question="Which principle of the ACID Transaction, guarantees that a record committed to the database as part of a successful transaction doesn't get lost?"
+  options={
+    [
+      { id: "A", text: "Atomicity" },
+      { id: "B", text: "Consistency" },
+      { id: "C", text: "Isolation" },
+      { id: "D", text: "Durability", isCorrect: true },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 2:**
+
+<MultipleChoiceQuestion
+  question="Which principle of the ACID Transaction guarantees that two transactions that operate on the same data concurrently do not interfere with each other's results?"
+  options={
+    [
+      { id: "A", text: "Atomicity" },
+      { id: "B", text: "Consistency" },
+      { id: "C", text: "Isolation", isCorrect: true },
+      { id: "D", text: "Durability" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+<MultipleChoiceQuestion
+  question="What SQL operation in a relational database allows us to analyze data from multiple tables?"
+  options={
+    [
+      { id: "A", text: "SELECT" },
+      { id: "B", text: "JOIN", isCorrect: true },
+      { id: "C", text: "WHERE" },
+      { id: "D", text: "ORDER BY" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+### V.II. Techniques to Improve Performance, Availability, Scalability
+
+**Question 1:**
+
+We are designing an Online Video Game System.
+
+According to our estimation, we are going to collect and store about 10 TB of game-related user information per week.
+
+<MultipleChoiceQuestion
+  question="What technique should we use to ensure we can keep up this incoming data rate into our system's storage?"
+  options={
+    [
+      { id: "A", text: "Database Indexing" },
+      { id: "B", text: "Database Partitioning / Database Sharding", isCorrect: true },
+      { id: "C", text: "Database Replication" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 2:**
+
+<MultipleChoiceQuestion
+  question="What is the tradeoff made when deciding whether to add database indexing or not?"
+  options={
+    [
+      { id: "A", text: "Security vs Performance" },
+      { id: "B", text: "Storage Space vs Performance", isCorrect: true },
+      { id: "C", text: "Availability vs Scalability" },
+      { id: "D", text: "Storage Space vs Scalability" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+<MultipleChoiceQuestion
+  question="What type of technique improves the fault tolerance of our database and reduces the risk of data loss?"
+  options={
+    [
+      { id: "A", text: "Database Partitioning" },
+      { id: "B", text: "Database Indexing" },
+      { id: "C", text: "Database Sharding" },
+      { id: "D", text: "Database Replication", isCorrect: true },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+### V.III. CAP Theorem
+
+**Question 1:**
+
+As part of our online bank system, we have a **CP** ( consistent and partition tolerant) distributed database that stores the account balance of all our clients.
+
+To ensure we don't lose any data, we run 3 replicas of our database on different computers.
+
+At a particular moment in time, our replicates contain the following information about a particular user:
+
+- Replica 1: Account Balance = $100
+
+- Replica 2: Account Balance = $100
+
+- Replica 3: Account Balance = $100
+
+All of a sudden, we have a thunderstorm, and one of our network switches breaks down, so **Replica 1** can no longer communicate with the rest of the replicas.
+
+<MultipleChoiceQuestion
+  question="What happens if a particular service is trying to communicate with Replica 1 to get the current user's balance?"
+  options={
+    [
+      { id: "A", text: "All the replicas contain the same data, so Replica 1 can safely respond to the calling service with the value of $100" },
+      { id: "B", text: "Since in the presence of a network partition our distributed database cannot safely guarantee consistency, it will return an error to the calling service", isCorrect: true },
+      { id: "C", text: "Since in the presence of a network partition our distributed database cannot safely guarantee consistency, it will wait until the network partition is resolved and only then respond to the calling service." },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 2:**
+
+As part of our online bank system, we have an AP (available and partition tolerant) distributed database that stores the account balance of all our clients.
+
+To ensure we don't lose any data, we run 3 replicas of our database on different computers.
+
+At a particular moment in time, our replicas contain the following information about a particular user:
+
+- Replica 1: Account Balance = $100
+
+- Replica 2: Account Balance = $100
+
+- Replica 3: Account Balance = $100
+
+All of a sudden, we have a thunderstorm, and one of our network switches breaks down, so Replica 1 can no longer communicate with the rest of the replicas. 
+Replicas 2 and 3 can continue to communicate with each other.
+While the network switch is still broken, the user deposits another $50 dollars to their account, which goes through service A to Replica 2.
+
+So the new picture of the replicas looks like this:
+- Replica 1: Account Balance = $100
+
+- Replica 2: Account Balance = $150
+
+- Replica 3: Account Balance = $150
+
+<MultipleChoiceQuestion
+  question="What happens if service B is trying to communicate with our database to get the current user's balance?"
+  options={
+    [
+      { id: "A", text: "It will definitely return the value of $100" },
+      { id: "B", text: "It will definitely return the value of $150" },
+      { id: "C", text: "It will most likely return $150 but may also return $100", isCorrect: true },
+      { id: "D", text: "It will return an error because it doesn't know the most up-to-date value." },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+<MultipleChoiceQuestion
+  question="Can we have an Available and Consistent distributed database running on 3 replicas while still guaranteeing partition tolerance?"
+  options={
+    [
+      { id: "A", text: "Yes" },
+      { id: "B", text: "No", isCorrect: true },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
