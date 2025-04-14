@@ -18,6 +18,8 @@ import MultipleChoiceQuestion from '@site/src/components/MultipleChoiceQuestion'
 >The link should become active no later than 1 second after the file is uploaded. Download speeds should be at least 50 Mbit/sec.
 >You have to support at least PDF and JPG file formats, as well as the following web browsers: Google Chrome, Mozilla Firefox, and Microsoft Edge.
 
+<!-- truncate -->
+
 <MultipleChoiceQuestion
   question='Which part is the functional requirement?'
   options={
@@ -977,6 +979,337 @@ So the new picture of the replicas looks like this:
     [
       { id: "A", text: "Yes" },
       { id: "B", text: "No", isCorrect: true },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+## VI. Software Architecture Patterns
+
+### VI.I. Multi-Tier Architecture
+
+**Question 1:**
+
+<MultipleChoiceQuestion
+  question="Which statement below is NOT a prerequisite for using the 3-tier architecture successfully?"
+  options={
+    [
+      { id: "A", text: "A small team of engineers" },
+      { id: "B", text: "The codebase of the application tier is not too big and complex." },
+      { id: "C", text: "The presentation tier should not contain any business logic." },
+      { id: "D", text: "The data we store can fit on one computer.", isCorrect: true },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 2:**
+
+<MultipleChoiceQuestion
+  question="What Architectural Building block should we use to scale the Presentation Tier?"
+  options={
+    [
+      { id: "A", text: "Load Balancer" },
+      { id: "B", text: "API Gateway" },
+      { id: "C", text: "Message Broker" },
+      { id: "D", text: "Nothing. The Presentation Tier scales on its own on the users' devices", isCorrect: true },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+import MultiTier1 from "./images/multi-tire1.png"
+
+**Question 3:**
+
+We have the following Architecture diagram of an Online News Magazine:
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={MultiTier1} height="300"/>
+</div>
+
+
+<MultipleChoiceQuestion
+  question="What is the correct statement about this architecture diagram?"
+  options={
+    [
+      { id: "A", text: "This is a well-designed 2-Tier Architecture Diagram." },
+      { id: "B", text: "This is a well-designed 3-Tier Architecture Diagram." },
+      { id: "C", text: "This diagram has an issue because it contains both files and a database in the Data Tier." },
+      { id: "D", text: "This diagram includes an anti-pattern of bi-passing the Business Tier and sending requests directly from the Presentation Tier to the Data Tier.", isCorrect: true },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+**Question 4:**
+
+<MultipleChoiceQuestion
+  question="Why is the 3-Tier Architecture referred to as Monolithic Architecture?"
+  options={
+    [
+      { id: "A", text: "Because all the business logic is concentrated in one deployable unit", isCorrect: true },
+      { id: "B", text: "Because the entire frontend code runs on a single client device" },
+      { id: "C", text: "Because we can have only one database in the Data Tier" },
+      { id: "D", text: "Because we can have only one codebase, and we can't break it into multiple libraries" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+### VI.II. Microservices Architecture
+
+**Question 1:**
+
+<MultipleChoiceQuestion
+  question="Which feature of Microservices Architecture helps new developers become productive faster than in a Monolithic Architecture?"
+  options={
+    [
+      { id: "A", text: "Building and testing are much faster with Microservices." },
+      { id: "B", text: "The codebase is smaller and much easier to reason about", isCorrect: true },
+      { id: "C", text: "The code loads faster in the IDE." },
+      { id: "D", text: "Microservices consume less memory than Monolithic applications." },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+import Microservices1 from "./images/microservices1.png"
+import Microservices2 from "./images/microservices2.png"
+import Microservices3 from "./images/microservices3.png"
+
+**Question 2:**
+
+Due to the rise in popularity of Microservices Architecture, our organization decided to migrate its 3-Tier Web Application into Microservices as follows:
+
+**Before Migration:**
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={Microservices2} height="300"/>
+</div>
+
+**After Migration:**
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={Microservices2} height="300"/>
+</div>
+
+However, after the migration, they did not see any improvement in development velocity.
+
+In fact, development actually slowed down.
+
+<MultipleChoiceQuestion
+  question="What do you think is the root cause for the adverse effect on organizational scalability after the migration?"
+  options={
+    [
+      { id: "A", text: "The API Gateway that was introduced to the architecture is now a source of contention and friction in the organization." },
+      { id: "B", text: "After the migration, all the microservices are still tightly coupled to each other because they share a database. ", isCorrect: true },
+      { id: "C", text: "There are too many microservices. Their number needs to be reduced." },
+      { id: "D", text: "Each front-end must have its own microservice. But in this architecture, all the frontends share all the microservices." },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+You are a freelance Software Architect who helps companies with scalability in Microservices Architecture.
+
+Recently, a company that offers premium, high volume Files Sharing services to businesses hired you to help them solve their problem after migration to Microservices.
+
+This is the description of their problem:
+
+"After the migration, it seems that every change that needs to be made in one microservice requires changes in other microservices...
+
+Every operation requires data from multiple microservices, which makes the system very slow and complex
+
+.. this is the opposite of what we expected after the migration from a Monolithic application.."
+
+This is the Architecture diagram they shared with you:
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={Microservices3} height="300"/>
+</div>
+
+
+<MultipleChoiceQuestion
+  question="What do you think is the cause of those problems, and what can they do to solve them?"
+  options={
+    [
+      { id: "A", text: "The root cause is the fact that the Images, Videos, and Notifications Service doesn't have its own database." },
+      { id: "B", text: "The Architecture violates the SRP (Single Responsibility Principle). Each microservice has too much responsibility, and there is no clear separation between what each microservice is supposed to do.The solution is to rearchitect the system so each microservice is responsible for only one business capability, domain, resource, or action.", isCorrect: true },
+      { id: "C", text: "In the current diagram, different microservices communicate with each other directly, which should not ever happen. They should only communicate with each other through the API Gateway." },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 4:**
+
+<MultipleChoiceQuestion
+  question="What is the problem of sharing a database among multiple microservices in a Microservice Architecture?"
+  options={
+    [
+      { id: "A", text: "A database cannot handle so much traffic from multiple microservices." },
+      { id: "B", text: "Every change in the database will require code changes in both microservices, which would require a lot of coordination, potentially among multiple teams.", isCorrect: true },
+      { id: "C", text: "If we use only one database, we limit our storage capacity, which will be a point of contention among multiple microservices." },
+      { id: "D", text: "There is no problem. We can freely share the same database among multiple microservices." },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+### VI.III. Event Driven Architecture
+
+**Question 1:**
+
+<MultipleChoiceQuestion
+  question="What is one of the purposes of the CQRS pattern in the Event-Driven Architecture?"
+  options={
+    [
+      { id: "A", text: "Decoupling microservices using a message broker" },
+      { id: "B", text: "Improving the performance of  read operations at the expense of write operations" },
+      { id: "C", text: "Merging/joining data from multiple databases belonging to different microservices", isCorrect: true },
+      { id: "D", text: "Improving the performance of write operations at the expense of read operations" },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 2:**
+
+<MultipleChoiceQuestion
+  question="Select the most correct statement that describes an event."
+  options={
+    [
+      { id: "A", text: "An event is immutable." },
+      { id: "B", text: "An event represents a new fact." },
+      { id: "C", text: "An event represents a change in our system state" },
+      { id: "D", text: "All of the above are correct", isCorrect: true },
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+
+import EventDrivent1 from "./images/event-driven-1.png"
+import EventDrivent2 from "./images/event-driven-2.png"
+import EventDrivent3 from "./images/event-driven-3.png"
+
+**Question 3:**
+
+We have the following architecture diagram:
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={EventDrivent1} height="300"/>
+</div>
+
+Definition: Service 1 depends on Service 2 if a change in the API of Service 2 requires changes in Service 1.
+
+<MultipleChoiceQuestion
+  question="Which pairs of services have a direct dependency on one another?"
+  options={
+    [
+      { id: "A", text: "", element: <>
+<span>- Service A depends on Service B</span><br/>
+<span>- Service D depends on Service B</span><br/>
+<span>- Service E depends on Service C</span><br/>
+      </> },
+      { id: "B", text: "", element: <>
+<span>- Service A depends on Service D</span><br/>
+<span>- Service B depends on Service E</span><br/>
+<span>- Service A depends on Service C</span><br/>
+      </> },
+      { id: "C", text: "", element: <>
+<span>- Service A depends on Service B</span><br/>
+<span>- Service B depends on Service E</span><br/>
+      </>, isCorrect: true },
+      { id: "D", text: "", element: <>
+<span>- Service B depends on&nbsp;Service A</span><br/>
+<span>- Service B depends on the API&nbsp;Gateway</span><br/>
+      </> },
+
+    ]
+  }
+/>
+
+<br />
+<br />
+<br />
+<br />
+
+**Question 3:**
+
+In our online banking system, we store all the transactions that happen in the user's account as a log of events as  following the Event Sourcing Pattern:
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={EventDrivent2} height="300"/>
+</div>
+
+Our Fraud Detection Service detected that Event - 2 was fraudulent, and the owner of the account did not approve that transaction:
+
+<div style={{ 'textAlign': 'center' }}>
+  <img src={EventDrivent3} height="300"/>
+</div>
+
+The Security specialist suggested removing that event from the log to correct the user's balance.
+
+<MultipleChoiceQuestion
+  question="Choose the most correct statement below:"
+  options={
+    [
+      { id: "A", text: "Before removing events, we need to verify with the store owner that the user indeed did not perform that transaction. After that is verified, we can go ahead and remove that event." },
+      { id: "B", text: "This is a correct decision. Incorrect events should be removed as soon as possible." },
+      { id: "C", text: "Events are immutable, and they should not ever be removed. However, we should add a compensating event of Remove Event 2" },
+      { id: "D", text: "Events are immutable, and they should not ever be removed. However, we should add a compensating event of a Deposit of $100 ", isCorrect: true },
     ]
   }
 />

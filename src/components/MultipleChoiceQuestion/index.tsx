@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { JSX, useState } from "react";
 
 interface Option {
   id: string;
   text: string;
+  element?: JSX.Element;
   isCorrect?: boolean;
 }
 
@@ -85,7 +86,7 @@ export default function MultipleChoiceQuestion({
                     : "normal",
               }}
             >
-              {option.text}
+              {option.element ?? option.text}
             </span>
           </button>
         ))}

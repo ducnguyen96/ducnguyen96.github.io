@@ -13,6 +13,8 @@ HAProxy là một phần mềm cân bằng tải TCP/HTTP miễn phí và mã ng
 Nó đặc biệt phù hợp với các website có lưu lượng truy cập rất lớn, và đang được sử dụng bởi nhiều trang web nổi tiếng nhất thế giới. HAProxy được xem là tiêu chuẩn mặc định của các phần mềm cân bằng tải mã nguồn mở, và có sẵn trong hầu hết các bản phân phối Linux phổ biến.
 HAProxy hỗ trợ hầu hết các hệ điều hành theo phong cách Unix.
 
+<!-- truncate -->
+
 ### [NGINX](https://www.nginx.com/)
 
 NGINX là một máy chủ HTTP và reverse proxy (cân bằng tải) mã nguồn mở, hiệu suất cao.
